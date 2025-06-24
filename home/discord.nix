@@ -1,0 +1,21 @@
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+  home.packages = with pkgs; [
+    goofcord
+  ];
+  programs.nixcord = {
+    enable = true;
+    config = {
+      #themeLinks = with config.catppuccin; [
+      #  "https://catppuccin.github.io/discord/dist/#catppuccin-${flavor}-${accent}.theme.css"
+      #];
+    };
+
+    discord.autoscroll.enable = true;
+  };
+}
