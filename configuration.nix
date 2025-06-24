@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  import-tree,
   ...
 }:
 {
@@ -10,6 +11,7 @@
     settings = {
       max-jobs = 1;
       cores = 6;
+      warn-dirty = false;
       substituters = [ "https://hyprland.cachix.org" ];
       trusted-substituters = [ "https://hyprland.cachix.org" ];
       trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
@@ -18,6 +20,7 @@
 
   imports = [
     # Include the results of the hardware scan.
+    #(import-tree ./)
     ./hardware-configuration.nix
     ./qemu_check.nix
     ./bootloader.nix

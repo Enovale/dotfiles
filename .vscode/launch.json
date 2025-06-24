@@ -14,7 +14,7 @@
             "type": "node-terminal",
             "name": "Update, Build, & Switch NixOS",
             "request": "launch",
-            "command": "rebuild-nix --update"
+            "command": "rebuild-nix update"
         }
     ]
 }

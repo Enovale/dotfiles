@@ -43,6 +43,14 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    import-tree.url = "github:vic/import-tree";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    #millennium = {
+    #  url = "github:Sk7Str1p3/Millennium/nix";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
   };
 
   outputs =
@@ -51,6 +59,7 @@
       nixpkgs,
       home-manager,
       nixos-xivlauncher-rb,
+      import-tree,
       ...
     }:
     {
