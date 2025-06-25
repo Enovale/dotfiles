@@ -10,6 +10,7 @@
     with pkgs;
     [
       nix-output-monitor
+      nodePackages.node2nix
       git
       wget
       mpv
@@ -24,7 +25,26 @@
       protontricks
       protonup-qt
       gamescope
-      kdePackages.xdg-desktop-portal-kde
+      wlx-overlay-s
+      scrcpy
+      songrec
+      avidemux
+      audacity
+      ardour
+      easytag
+      kid3-kde
+      fcast-receiver
+      qpwgraph
+      blender
+      (blender.overrideAttrs rec {
+        version = "3.3.21";
+        src = fetchzip {
+          name = "source";
+          url = "https://download.blender.org/source/blender-${version}.tar.xz";
+          hash = "sha256-H9aiBnwTMlcCn8DJOAlYD5/LtjZVVExIecNIfCmf8vQ=";
+        };
+      })
+      (callPackage ./jdownloader.nix { })
     ]
     ++ (
       if config.systemIsQemu then

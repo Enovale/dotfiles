@@ -1,12 +1,18 @@
-{ config, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
 
-  environment.systemPackages = with pkgs; [
-    #millennium
+  nixpkgs.overlays = with inputs; [
+    #millennium.overlays.default
   ];
 
+  programs.java.enable = true;
   programs.steam = {
     enable = true;
 

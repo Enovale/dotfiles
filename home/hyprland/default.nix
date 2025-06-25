@@ -7,6 +7,16 @@
     xwayland.enable = true;
 
     systemd.enable = true;
+    systemd.enableXdgAutostart = true;
+  };
+  services.hyprpolkitagent.enable = true;
+  services.hyprpaper = {
+    enable = true;
+  };
+
+  home.pointerCursor.hyprcursor = {
+    enable = true;
+    size = 32;
   };
 
   # Hint Electron apps to use Wayland:

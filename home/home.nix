@@ -40,7 +40,7 @@
     lxqt.pavucontrol-qt
     prismlauncher
     tree
-    kdePackages.kate
+    gimp3-with-plugins
     (xivlauncher-rb.override { useGameMode = true; })
   ];
 
@@ -129,7 +129,7 @@
   programs.ripgrep.enable = true;
 
   programs.direnv = {
-    enable = false;
+    enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;

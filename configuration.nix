@@ -76,7 +76,7 @@
     enable = true;
     enableQt5Integration = true;
   };
-  
+
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     konsole
     kwrited
@@ -110,10 +110,10 @@
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
+    wireplumber.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
     jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
@@ -127,7 +127,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.enova = {
     isNormalUser = true;
-    description = "enova";
+    description = "Enova";
     shell = pkgs.zsh;
     extraGroups = [
       "adbusers"
@@ -138,6 +138,23 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
+  security.polkit.enable = true;
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (
+        subject.isInGroup("users")
+          && (
+            action.id == "org.freedesktop.login1.reboot" ||
+            action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
+            action.id == "org.freedesktop.login1.power-off" ||
+            action.id == "org.freedesktop.login1.power-off-multiple-sessions"
+          )
+        )
+      {
+        return polkit.Result.YES;
+      }
+    });
+  '';
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

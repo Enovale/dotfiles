@@ -15,7 +15,11 @@
     else
       [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];
 
-  hardware.graphics.extraPackages = with pkgs; if config.systemIsQemu then [ ] else [ rocmPackages.clr.icd ];
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; if config.systemIsQemu then [ ] else [ rocmPackages.clr.icd ];
+  };
 
   environment.systemPackages = with pkgs; [
     clinfo
@@ -24,8 +28,6 @@
 
   systemd.packages = with pkgs; [ lact ];
   systemd.services.lactd.wantedBy = [ "multi-user.target" ];
-
-  hardware.graphics.enable32Bit = true;
 
   services.spice-vdagentd.enable = config.systemIsQemu;
   services.qemuGuest.enable = config.systemIsQemu;
