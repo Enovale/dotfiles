@@ -2,7 +2,6 @@
   config,
   pkgs,
   inputs,
-  import-tree,
   ...
 }:
 {
@@ -20,7 +19,6 @@
 
   imports = [
     # Include the results of the hardware scan.
-    #(import-tree ./)
     ./hardware-configuration.nix
     ./qemu_check.nix
     ./bootloader.nix
@@ -37,7 +35,7 @@
   # Use latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "crystalline"; # Define your hostname.
+  networking.hostName = "crystalline";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -73,7 +71,18 @@
     enable = true;
     wayland.enable = true;
   };
-  services.desktopManager.plasma6.enable = true;
+
+  services.desktopManager.plasma6 = {
+    enable = true;
+    enableQt5Integration = true;
+  };
+  
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    konsole
+    kwrited
+    elisa
+    khelpcenter
+  ];
 
   xdg.portal = {
     enable = true;
@@ -122,6 +131,7 @@
     shell = pkgs.zsh;
     extraGroups = [
       "adbusers"
+      config.programs.ydotool.group
       "networkmanager"
       "wheel"
     ];
@@ -133,31 +143,6 @@
   nixpkgs.config.allowUnfree = true;
 
   qt.platformTheme = "qt5ct";
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    nix-output-monitor
-    git
-    wget
-    nixfmt-rfc-style
-    gpu-screen-recorder
-    firefoxpwa
-    wineWowPackages.staging
-    wineWowPackages.waylandFull
-    winetricks
-    protontricks
-    protonup-qt
-    gamescope
-    kdePackages.xdg-desktop-portal-kde
-    #jetbrains.rider
-    #jetbrains.rust-rover
-    #jetbrains.clion
-    #jetbrains.pycharm-community
-    #android-udev-rules
-    #android-tools
-    #android-studio
-  ];
 
   nixpkgs.config.android_sdk.accept_license = true;
 
@@ -184,6 +169,11 @@
         monospace = [ "Jetbrains Mono 12pt" ];
       };
     };
+  };
+
+  programs.git = {
+    enable = true;
+    lfs.enable = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are

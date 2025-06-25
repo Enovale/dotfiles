@@ -2,6 +2,8 @@
   description = "NixOS Configuration Flake";
 
   inputs = {
+    self.submodules = true;
+
     # This is pointing to an unstable release.
     # If you prefer a stable release instead, you can this to the latest number shown here: https://nixos.org/download
     # i.e. nixos-24.11
@@ -47,10 +49,9 @@
     import-tree.url = "github:vic/import-tree";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    #millennium = {
-    #  url = "github:Sk7Str1p3/Millennium/nix";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    millennium = {
+      url = "git+https://github.com/Sk7Str1p3/Millennium";
+    };
   };
 
   outputs =
@@ -59,7 +60,7 @@
       nixpkgs,
       home-manager,
       nixos-xivlauncher-rb,
-      import-tree,
+      millennium,
       ...
     }:
     {

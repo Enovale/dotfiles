@@ -43,9 +43,12 @@
     (xivlauncher-rb.override { useGameMode = true; })
   ];
 
+  services.kdeconnect.enable = true;
+  services.kdeconnect.indicator = true;
+
   programs.zsh = {
     enable = true;
-    initContent = lib.mkAfter ''source "${./p10k.zsh}"'';
+    initContent = lib.mkAfter ''source "${./p10k.zsh}"; export ZSH_HIGHLIGHT_STYLES[comment]="fg=8"'';
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     plugins = [
@@ -125,7 +128,7 @@
   programs.ripgrep.enable = true;
 
   programs.direnv = {
-    enable = true;
+    enable = false;
     enableBashIntegration = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;

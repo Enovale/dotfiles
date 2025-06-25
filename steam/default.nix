@@ -3,6 +3,10 @@
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
 
+  environment.systemPackages = with pkgs; [
+    #millennium
+  ];
+
   programs.steam = {
     enable = true;
 
