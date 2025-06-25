@@ -7,6 +7,7 @@
 {
 
   imports = [
+    ./plasma.nix
     ./hyprland
     ./discord.nix
     ./theme.nix

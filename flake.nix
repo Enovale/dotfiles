@@ -15,6 +15,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     nix-colors.url = "github:misterio77/nix-colors";
 
     catppuccin = {
@@ -60,6 +66,7 @@
       nixpkgs,
       home-manager,
       nixos-xivlauncher-rb,
+      plasma-manager,
       millennium,
       ...
     }:
@@ -77,6 +84,7 @@
                 #inputs.catppuccin.homeModules.catppuccin
                 inputs.nixcord.homeModules.nixcord
                 inputs.nix-colors.homeManagerModules.default
+                plasma-manager.homeManagerModules.plasma-manager
               ];
 
               users.enova = import ./home/home.nix;
