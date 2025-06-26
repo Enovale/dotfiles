@@ -10,6 +10,7 @@
     partitionmanager
     kdenlive
     kcalc
+    filelight
     pkgs.kile
     pkgs.okteta
     pkgs.krita

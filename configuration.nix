@@ -20,7 +20,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./qemu_check.nix
     ./bootloader.nix
     ./hyprland.nix
     ./programs.nix
@@ -28,6 +27,14 @@
     ./graphics.nix
     ./libvirt.nix
   ];
+
+  system.activationScripts.preActivation = ''
+    if [[ -e /run/current-system ]]; then
+      echo "--- diff to current-system"
+      ${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff /run/current-system "$systemConfig"
+      echo "---"
+    fi
+  '';
 
   # Bootloader
   ellie.bootloader = "systemd-boot";
@@ -61,6 +68,8 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
+
+  programs.dconf.enable = true;
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
@@ -223,7 +232,7 @@
   swapDevices = [
     {
       device = "/swap/swapfile";
-      size = 16 * 1024; # 16 GB
+      size = if !config.systemIsQemu then (16 * 1024) else (4 * 1024);
     }
   ];
   zramSwap.enable = true; # Creates a zram block device and uses it as a swap device

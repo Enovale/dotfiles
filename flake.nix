@@ -9,6 +9,7 @@
     # i.e. nixos-24.11
     # Use `nix flake update` to update the flake to the latest revision of the chosen release channel.
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs_blender.url = "github:NixOS/nixpkgs/d09843bf11098b696fc2831f47287369745c6a56";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -73,10 +74,11 @@
     {
       nixosConfigurations.crystalline = nixpkgs.lib.nixosSystem {
         modules = [
+          ./qemu_check.nix
           ./configuration.nix
           home-manager.nixosModules.home-manager
-          {
-            home-manager = {
+          ({config, ...}: {
+              home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
 
@@ -88,9 +90,9 @@
               ];
 
               users.enova = import ./home/home.nix;
-              extraSpecialArgs = { inherit inputs; };
+              extraSpecialArgs = { inherit inputs; nixosConfig = config; };
             };
-          }
+          })
           nixos-xivlauncher-rb.nixosModules.default
         ];
         specialArgs = { inherit inputs; };

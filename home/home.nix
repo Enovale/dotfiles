@@ -2,11 +2,13 @@
   config,
   pkgs,
   lib,
+  nixosConfig,
   ...
 }:
 {
 
   imports = [
+    ./shell_scripts.nix
     ./plasma.nix
     ./hyprland
     ./discord.nix
@@ -15,34 +17,69 @@
     ./browser.nix
   ];
 
-  home.packages = with pkgs; [
-    (pkgs.writeShellScriptBin "rebuild-nix" ''
-      #!/usr/bin/env bash
-
-      if [[ $1 =~ ^(update)$ ]]; then
-        nix flake update --flake ~/nixos/
-      fi
-
-      nixos-rebuild switch --flake ~/nixos/ --sudo --log-format internal-json ''${@:2} |& nom --json
-    '')
-    acpi
-    nixd
-    feh
-    file
-    vscodium
-    signal-desktop
-    cinny-desktop
-    strawberry
-    zsh-powerlevel10k
-    libreoffice
-    lutris
-    osu-lazer-bin
-    lxqt.pavucontrol-qt
-    prismlauncher
-    tree
-    gimp3-with-plugins
-    (xivlauncher-rb.override { useGameMode = true; })
-  ];
+  home.packages =
+    with pkgs;
+    [
+      btrfs-assistant
+      wget
+      mpv
+      vlc
+      qbittorrent
+      nixfmt-rfc-style
+      gpu-screen-recorder
+      firefoxpwa
+      winetricks
+      protonup-qt
+      qpwgraph
+      acpi
+      nixd
+      feh
+      file
+      vscodium
+      signal-desktop
+      cinny-desktop
+      strawberry
+      zsh-powerlevel10k
+      lutris
+      josm
+      lxqt.pavucontrol-qt
+      prismlauncher
+      tree
+      gale
+      gamescope
+      songrec
+      avidemux
+      fcast-receiver
+      jetbrains.idea-community
+      (callPackage ./jdownloader.nix { })
+    ]
+    ++ (
+      if !nixosConfig.systemIsQemu then
+        # Don't want to include very large packages in a light env
+        [
+          audacity
+          ardour
+          easytag
+          kid3-kde
+          gimp3-with-plugins
+          libreoffice
+          wineWowPackages.waylandFull
+          blender
+          jetbrains.rider
+          jetbrains.rust-rover
+          jetbrains.clion
+          jetbrains.pycharm-community
+          android-udev-rules
+          android-tools
+          scrcpy
+          android-studio
+          osu-lazer-bin
+          wlx-overlay-s
+          (xivlauncher-rb.override { useGameMode = true; })
+        ]
+      else
+        [ ]
+    );
 
   services.kdeconnect.enable = true;
   services.kdeconnect.indicator = true;
@@ -57,6 +94,16 @@
         name = "powerlevel10k";
         src = pkgs.zsh-powerlevel10k;
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+      {
+        name = "zsh-nix-shell";
+        file = "nix-shell.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "chisui";
+          repo = "zsh-nix-shell";
+          rev = "v0.8.0";
+          sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
+        };
       }
     ];
     oh-my-zsh = {
