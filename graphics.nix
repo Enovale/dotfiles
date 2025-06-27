@@ -8,17 +8,17 @@
   services.xserver.videoDrivers = [ (if config.systemIsQemu then "qxl" else "amdgpu") ];
 
   systemd.tmpfiles.rules =
-    if config.systemIsQemu then
+    if !config.systemIsQemu then
       [
-
+        "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
       ]
     else
-      [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];
+      [ ];
 
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = with pkgs; if config.systemIsQemu then [ ] else [ rocmPackages.clr.icd ];
+    extraPackages = with pkgs; if !config.systemIsQemu then [ rocmPackages.clr.icd ] else [ ];
   };
 
   environment.systemPackages = with pkgs; [

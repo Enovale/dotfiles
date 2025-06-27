@@ -27,6 +27,7 @@
     };
     configFile = {
       "kwinrc"."Plugins"."shakecursorEnabled" = false;
+      "kdeglobals"."General"."TerminalApplication" = "kitty";
     };
   };
 }

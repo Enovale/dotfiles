@@ -8,6 +8,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    expect
     nix-output-monitor
     nvd
     nodePackages.node2nix

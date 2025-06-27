@@ -1,6 +1,9 @@
-{config, ...}:
+{ config, ... }:
 {
-  users.users.enova.extraGroups = [ "libvirtd" "kvm" ];
+  users.users.enova.extraGroups = [
+    "libvirtd"
+    "kvm"
+  ];
 
   programs.virt-manager.enable = !config.systemIsQemu;
 

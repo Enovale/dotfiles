@@ -77,22 +77,28 @@
           ./qemu_check.nix
           ./configuration.nix
           home-manager.nixosModules.home-manager
-          ({config, ...}: {
+          (
+            { config, ... }:
+            {
               home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
+                useGlobalPkgs = true;
+                useUserPackages = true;
 
-              sharedModules = [
-                #inputs.catppuccin.homeModules.catppuccin
-                inputs.nixcord.homeModules.nixcord
-                inputs.nix-colors.homeManagerModules.default
-                plasma-manager.homeManagerModules.plasma-manager
-              ];
+                sharedModules = [
+                  #inputs.catppuccin.homeModules.catppuccin
+                  inputs.nixcord.homeModules.nixcord
+                  inputs.nix-colors.homeManagerModules.default
+                  plasma-manager.homeManagerModules.plasma-manager
+                ];
 
-              users.enova = import ./home/home.nix;
-              extraSpecialArgs = { inherit inputs; nixosConfig = config; };
-            };
-          })
+                users.enova = import ./home/home.nix;
+                extraSpecialArgs = {
+                  inherit inputs;
+                  nixosConfig = config;
+                };
+              };
+            }
+          )
           nixos-xivlauncher-rb.nixosModules.default
         ];
         specialArgs = { inherit inputs; };

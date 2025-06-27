@@ -65,6 +65,7 @@
           libreoffice
           wineWowPackages.waylandFull
           blender
+          godot-mono
           jetbrains.rider
           jetbrains.rust-rover
           jetbrains.clion
@@ -118,6 +119,7 @@
     COMPLETION_WAITING_DOTS = "true";
     EDITOR = "nano";
     MOZ_USE_XINPUT2 = "1";
+    _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=lcd";
   };
 
   xdg.portal = {
