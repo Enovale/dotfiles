@@ -93,6 +93,7 @@
     enable = true;
     initContent = lib.mkAfter ''source "${./p10k.zsh}"; export ZSH_HIGHLIGHT_STYLES[comment]="fg=8"'';
     enableCompletion = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     plugins = [
       {
@@ -166,13 +167,6 @@
         ];
       };
     };
-  };
-
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "${config.home.homeDirectory}/nixos";
   };
 
   programs.bash.enable = true;

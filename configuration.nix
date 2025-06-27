@@ -12,8 +12,8 @@
     };
     gc = {
       automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
+      dates = "daily";
+      options = "--delete-older-than 4d";
     };
     extraOptions = ''
       min-free = ${toString (5 * 1024 * 1024 * 1024)}

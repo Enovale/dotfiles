@@ -22,6 +22,7 @@
     pkgs.krita
     xdg-desktop-portal-kde
     xwaylandvideobridge
+    #(pkgs.callPackage ./breezex-cursor.nix {}) # TODO
   ];
 
   programs.plasma = {
@@ -30,7 +31,7 @@
       clickItemTo = "select";
       lookAndFeel = "org.kde.breezedark.desktop";
       colorScheme = "MaterialYouDark";
-      cursor.theme = "BreezeX-Dark";
+      cursor.theme = "BreezeX-Black";
     };
     kwin = {
       effects = {
@@ -42,7 +43,28 @@
       kdeglobals.General.AccentColor = "141,0,79";
       #"kdeglobals"."KDE"."widgetStyle" = "qt6ct-style";
       kdeglobals.General.TerminalApplication = "kitty";
+      kdeglobals.UiSettings.ColorScheme = "*";
       dolphinrc.UiSettings.ColorScheme = "*";
+    };
+  };
+
+  # TODO This doesn't work
+  xdg.configFile."qt5ct/colors/MaterialYouDark.colors" = {
+    enable = true;
+    source = ./MaterialYouDark.colors;
+  };
+
+  xdg.configFile."qt6ct/colors/MaterialYouDark.colors" = {
+    enable = true;
+    source = ./MaterialYouDark.colors;
+  };
+
+  gtk = {
+    enable = true;
+
+    cursorTheme = {
+      name = "BreezeX-Black";
+      size = 32;
     };
   };
 }
