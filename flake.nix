@@ -56,6 +56,9 @@
     import-tree.url = "github:vic/import-tree";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    kidex.url = "github:Kirottu/kidex";
+    anyrun-nixos-options.url = "github:n3oney/anyrun-nixos-options";
+
     millennium = {
       url = "git+https://github.com/Sk7Str1p3/Millennium";
     };
@@ -66,9 +69,7 @@
       self,
       nixpkgs,
       home-manager,
-      nixos-xivlauncher-rb,
-      plasma-manager,
-      millennium,
+      nur,
       ...
     }:
     {
@@ -76,30 +77,27 @@
         modules = [
           ./qemu_check.nix
           ./configuration.nix
-          home-manager.nixosModules.home-manager
-          (
-            { config, ... }:
-            {
+          nur.modules.nixos.default
+          home-manager.nixosModules.home-manager {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                backupFileExtension = "hm-bak";
 
                 sharedModules = [
                   #inputs.catppuccin.homeModules.catppuccin
+                  inputs.nur.modules.homeManager.default
                   inputs.nixcord.homeModules.nixcord
                   inputs.nix-colors.homeManagerModules.default
-                  plasma-manager.homeManagerModules.plasma-manager
+                  inputs.plasma-manager.homeManagerModules.plasma-manager
+                  inputs.kidex.homeModules.kidex
                 ];
 
                 users.enova = import ./home/home.nix;
-                extraSpecialArgs = {
-                  inherit inputs;
-                  nixosConfig = config;
-                };
+                extraSpecialArgs = { inherit inputs; };
               };
-            }
-          )
-          nixos-xivlauncher-rb.nixosModules.default
+          }
+          inputs.nixos-xivlauncher-rb.nixosModules.default
         ];
         specialArgs = { inherit inputs; };
       };

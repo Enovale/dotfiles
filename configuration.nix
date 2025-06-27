@@ -7,13 +7,33 @@
 {
   nix = {
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    optimise = {
+      automatic = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+    extraOptions = ''
+      min-free = ${toString (5 * 1024 * 1024 * 1024)}
+      max-free = ${toString (10 * 1024 * 1024 * 1024)}
+    '';
     settings = {
       max-jobs = 1;
       cores = 6;
       warn-dirty = false;
-      substituters = [ "https://hyprland.cachix.org" ];
-      trusted-substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+      trusted-users = [ "@wheel" ];
+      substituters = [
+        "https://hyprland.cachix.org"
+        "https://anyrun.cachix.org"
+        "https://nix-community.cachix.org"
+      ];
+      trusted-public-keys = [
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
     };
   };
 
@@ -38,6 +58,38 @@
 
   # Bootloader
   ellie.bootloader = "systemd-boot";
+
+  boot = {
+    tmp.cleanOnBoot = true;
+
+    plymouth = {
+      enable = true;
+      theme = "blahaj";
+      themePackages = with pkgs; [
+        plymouth-blahaj-theme
+        nixos-bgrt-plymouth
+        # By default we would install all themes
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "rings" ];
+        })
+      ];
+    };
+
+    # Enable "Silent boot"
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+    ];
+    # Hide the OS choice for bootloaders.
+    # It's still possible to open the bootloader list by pressing any key
+    # It will just not appear on screen unless a key is pressed
+    loader.timeout = 0;
+  };
 
   # Use latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -79,6 +131,7 @@
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
+    theme = "sddm-astronaut-theme";
   };
 
   services.desktopManager.plasma6 = {
@@ -165,12 +218,13 @@
     });
   '';
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  qt.platformTheme = "qt5ct";
-
-  nixpkgs.config.android_sdk.accept_license = true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      android_sdk.accept_license = true;
+    };
+    overlays = [ inputs.nur.overlays.default ];
+  };
 
   environment.pathsToLink = [ "/share/zsh" ];
 

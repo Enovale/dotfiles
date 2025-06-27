@@ -8,6 +8,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    kdePackages.qtmultimedia
+    kdePackages.sddm-kcm
+    kdePackages.plymouth-kcm
+    sddm-astronaut
     expect
     nix-output-monitor
     nvd

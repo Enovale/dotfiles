@@ -1,20 +1,20 @@
 [ColorEffects:Disabled]
-Color=#ac999b
-ColorAmount=0.9
-ColorEffect=3
-ContrastAmount=0
-ContrastEffect=0
-IntensityAmount=0
-IntensityEffect=0
+Color=56,56,56
+ColorAmount=0
+ColorEffect=0
+ContrastAmount=0.65
+ContrastEffect=1
+IntensityAmount=0.1
+IntensityEffect=2
 
 [ColorEffects:Inactive]
 ChangeSelectionColor=true
-Color=#120406
+Color=112,111,110
 ColorAmount=0.025
-ColorEffect=0
+ColorEffect=2
 ContrastAmount=0.1
-ContrastEffect=0
-Enable=true
+ContrastEffect=2
+Enable=false
 IntensityAmount=0
 IntensityEffect=0
 
@@ -133,8 +133,8 @@ ForegroundPositive=#00e479
 ForegroundVisited=#ebb2ff
 
 [General]
-ColorScheme=MaterialYouDarkFixed
-Name=Material You Dark Fixed
+ColorScheme=MaterialYouDark
+Name=Material You Dark
 shadeSortColumn=true
 
 [KDE]

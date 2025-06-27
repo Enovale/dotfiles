@@ -2,18 +2,19 @@
   config,
   pkgs,
   lib,
-  nixosConfig,
+  osConfig,
   ...
 }:
 {
-
   imports = [
     ./shell_scripts.nix
     ./plasma.nix
     ./hyprland
+    ./kitty.nix
     ./discord.nix
     ./theme.nix
     ./git.nix
+    ./kidex.nix
     ./browser.nix
   ];
 
@@ -24,6 +25,8 @@
       wget
       mpv
       vlc
+      wayland-utils
+      wl-clipboard
       qbittorrent
       nixfmt-rfc-style
       gpu-screen-recorder
@@ -54,7 +57,7 @@
       (callPackage ./jdownloader.nix { })
     ]
     ++ (
-      if !nixosConfig.systemIsQemu then
+      if !osConfig.systemIsQemu then
         # Don't want to include very large packages in a light env
         [
           audacity
@@ -84,6 +87,7 @@
 
   services.kdeconnect.enable = true;
   services.kdeconnect.indicator = true;
+  services.playerctld.enable = true;
 
   programs.zsh = {
     enable = true;

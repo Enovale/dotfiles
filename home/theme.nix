@@ -7,6 +7,15 @@
 {
   home.file.".local/share/color-schemes/MaterialYouDark.colors".source = ./MaterialYouDark.colors;
 
+  qt = {
+    enable = true;
+    platformTheme.name = "qtct";
+  };
+  
+  home.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = "qt5ct";
+  };
+
   #colorScheme = nix-colors.colorSchemes.dracula;
 
   home.pointerCursor =

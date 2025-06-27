@@ -1,17 +1,143 @@
 { config, pkgs, ... }:
 {
-  programs.firefox = {
+  programs.librewolf = {
     enable = true;
-    package = pkgs.librewolf;
+    #package = pkgs.librewolf;
 
-    nativeMessagingHosts = [ pkgs.firefoxpwa ];
-    policies = {
-      DisableTelemetry = true;
-      DisableFirefoxStudies = true;
-      DisablePocket = true;
-      DisableProfileImport = true;
-      OfferToSaveLogins = false;
-      Preferences = {
+    nativeMessagingHosts = [
+      pkgs.firefoxpwa
+      pkgs.kdePackages.plasma-browser-integration
+    ];
+    profiles.default = {
+      containersForce = true;
+      bookmarks = {
+        force = true;
+        settings = [
+          {
+            # TODO Categorize?
+            name = "Misc";
+            toolbar = true;
+            bookmarks = [
+              {
+                name = "nightride";
+                tags = [
+                  "music"
+                  "radio"
+                ];
+                url = "https://nightride.fm/";
+              }
+            ];
+          }
+          "separator"
+          {
+            name = "Nix sites";
+            toolbar = true;
+            bookmarks = [
+              {
+                name = "homepage";
+                tags = [ "nix" ];
+                url = "https://nixos.org/";
+              }
+              {
+                name = "nixpkgs";
+                tags = [
+                  "packages"
+                  "nix"
+                ];
+                url = "https://search.nixos.org/";
+              }
+              {
+                name = "hm-options";
+                tags = [
+                  "packages"
+                  "nix"
+                ];
+                url = "https://home-manager-options.extranix.com/";
+              }
+              {
+                name = "nur-pkgs";
+                tags = [
+                  "packages"
+                  "nix"
+                ];
+                url = "https://nur.nix-community.org/";
+              }
+              {
+                name = "wiki";
+                tags = [
+                  "wiki"
+                  "nix"
+                ];
+                url = "https://wiki.nixos.org/";
+              }
+            ];
+          }
+        ];
+      };
+      search = {
+        force = true;
+        order = [
+          "ddg"
+          "google"
+        ];
+        engines = {
+          "Nix Packages" = {
+            urls = [
+              {
+                template = "https://search.nixos.org/packages";
+                params = [
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = [ "@np" ];
+          };
+          "Nix Options" = {
+            definedAliases = [ "@no" ];
+            urls = [
+              {
+                template = "https://search.nixos.org/options";
+                params = [
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+          };
+        };
+      };
+      extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+        plasma-integration
+        ublock-origin
+        duckduckgo-privacy-essentials
+        bitwarden
+        pronoundb
+        pwas-for-firefox
+        darkreader
+        return-youtube-dislikes
+        sponsorblock
+        dearrow
+        youtube-recommended-videos
+        ruffle_rs
+        indie-wiki-buddy
+        xkit-rewritten
+        localcdn
+        istilldontcareaboutcookies
+        cookie-quick-manager
+        proton-vpn
+        shinigami-eyes
+        widegithub
+        wayback-machine
+        twitch-auto-points
+      ];
+      settings = {
+        "extensions.autoDisableScopes" = 0;
         "cookiebanners.service.mode.privateBrowsing" = 2; # Block cookie banners in private browsing
         "cookiebanners.service.mode" = 2; # Block cookie banners
         "network.cookie.lifetimePolicy" = 0;
@@ -32,64 +158,14 @@
         "widget.use-xdg-desktop-portal.open-uri" = 1;
         "widget.use-xdg-desktop-portal.settings" = 1;
       };
-      ExtensionSettings = {
-        "jid1-ZAdIEUB7XOzOJw@jetpack" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/duckduckgo-for-firefox/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "uBlock0@raymondhill.net" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "addon@darkreader.org" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "deArrow@ajay.app" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/dearrow/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "sponsorBlocker@ajay.app" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "{6e710c58-36cc-49d6-b772-bfc3030fa56e}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/xkit-rewritten/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "{b86e4813-687a-43e6-ab65-0bde4ab75758}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/localcdn-fork-of-decentraleyes/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/return-youtube-dislikes/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "{cb31ec5d-c49a-4e5a-b240-16c767444f62}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/indie-wiki-buddy/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "firefox-addon@pronoundb.org" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/pronoundb/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "{b5501fd1-7084-45c5-9aa6-567c2fcf5dc6}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ruffle_rs/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "firefoxpwa@filips.si" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/pwas-for-firefox/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "myallychou@gmail.com" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/youtube-recommended-videos/latest.xpi";
-          installation_mode = "force_installed";
-        };
-      };
+    };
+    policies = {
+      NoDefaultBookmarks = false;
+      DisableTelemetry = true;
+      DisableFirefoxStudies = true;
+      DisablePocket = true;
+      DisableProfileImport = true;
+      OfferToSaveLogins = false;
     };
   };
 }

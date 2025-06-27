@@ -8,10 +8,6 @@
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
 
-  nixpkgs.overlays = with inputs; [
-    #millennium.overlays.default
-  ];
-
   programs.java.enable = true;
   programs.steam = {
     enable = true;
