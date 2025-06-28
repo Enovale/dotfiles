@@ -144,6 +144,7 @@
     kwrited
     elisa
     khelpcenter
+    krunner
   ];
 
   xdg.portal = {
@@ -187,7 +188,7 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.enova = {
+  users.users.${config.global.username} = {
     isNormalUser = true;
     description = "Enova";
     shell = pkgs.zsh;

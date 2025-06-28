@@ -21,7 +21,7 @@ in
 mkYarnPackage rec {
   inherit pname version src;
 
-  nativeBuildInputs = [
+  buildInputs = [
     clickgen
     python3Packages.attrs
   ];

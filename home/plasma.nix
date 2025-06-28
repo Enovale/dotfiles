@@ -47,24 +47,4 @@
       dolphinrc.UiSettings.ColorScheme = "*";
     };
   };
-
-  # TODO This doesn't work
-  xdg.configFile."qt5ct/colors/MaterialYouDark.colors" = {
-    enable = true;
-    source = ./MaterialYouDark.colors;
-  };
-
-  xdg.configFile."qt6ct/colors/MaterialYouDark.colors" = {
-    enable = true;
-    source = ./MaterialYouDark.colors;
-  };
-
-  gtk = {
-    enable = true;
-
-    cursorTheme = {
-      name = "BreezeX-Black";
-      size = 32;
-    };
-  };
 }

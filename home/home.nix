@@ -155,9 +155,10 @@
         "org.freedesktop.impl.portal.Settings" = [
           "gtk"
         ];
-        #"org.freedesktop.impl.portal.Screencast" = [
-        #  "wlr"
-        #];
+        "org.freedesktop.impl.portal.Screencast" = [
+          "hyprland"
+          "wlr"
+        ];
         "org.freedesktop.impl.portal.RemoteDesktop" = [
           "wlr"
           "luminous"
@@ -172,8 +173,12 @@
   programs.bash.enable = true;
   programs.bat.enable = true;
   programs.htop.enable = true;
-  programs.mangohud.enable = true;
   programs.ripgrep.enable = true;
+
+  programs.mangohud = {
+    enable = true;
+    enableSessionWide = true;
+  };
 
   programs.direnv = {
     enable = true;
@@ -181,6 +186,8 @@
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
+
+  home.file."${config.home.homeDirectory}/.gtkrc-2.0".force = lib.mkForce true;
 
   home.stateVersion = "25.05";
 }

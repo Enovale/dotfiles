@@ -11,9 +11,42 @@
     enable = true;
     platformTheme.name = "qtct";
   };
-  
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "breeze-dark";
+    };
+
+    iconTheme = {
+      name = "breeze-dark";
+    };
+
+    font = {
+      name = "Noto Sans";
+      package = pkgs.noto-fonts;
+      size = 12;
+    };
+
+    cursorTheme = {
+      name = "BreezeX-Black";
+      size = 32;
+    };
+
+    gtk2.extraConfig = ''
+      gtk-enable-animations=1
+      gtk-primary-button-warps-slider=1
+      gtk-toolbar-style=3
+      gtk-menu-images=1
+      gtk-button-images=1
+      gtk-cursor-blink-time=1000
+      gtk-cursor-blink=1
+      gtk-sound-theme-name="ocean"
+    '';
+  };
+
   home.sessionVariables = {
-    QT_QPA_PLATFORMTHEME = "qt5ct";
+    #QT_QPA_PLATFORMTHEME = "qt5ct";
   };
 
   #colorScheme = nix-colors.colorSchemes.dracula;
@@ -23,6 +56,7 @@
       getFrom = url: hash: name: {
         gtk.enable = true;
         x11.enable = true;
+        hyprcursor.enable = true;
         name = name;
         size = 32;
         package = pkgs.runCommand "moveUp" { } ''

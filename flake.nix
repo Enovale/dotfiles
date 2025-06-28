@@ -24,11 +24,6 @@
 
     nix-colors.url = "github:misterio77/nix-colors";
 
-    catppuccin = {
-      url = "github:catppuccin/nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     hyprland.url = "github:hyprwm/Hyprland";
 
     anyrun.url = "github:anyrun-org/anyrun";
@@ -75,17 +70,17 @@
     {
       nixosConfigurations.crystalline = nixpkgs.lib.nixosSystem {
         modules = [
+          ./globals.nix
           ./qemu_check.nix
           ./configuration.nix
           nur.modules.nixos.default
-          home-manager.nixosModules.home-manager {
-              home-manager = {
+          home-manager.nixosModules.home-manager rec {
+              home-manager = rec {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 backupFileExtension = "hm-bak";
 
                 sharedModules = [
-                  #inputs.catppuccin.homeModules.catppuccin
                   inputs.nur.modules.homeManager.default
                   inputs.nixcord.homeModules.nixcord
                   inputs.nix-colors.homeManagerModules.default
