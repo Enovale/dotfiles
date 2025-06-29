@@ -4,11 +4,6 @@
   makeWrapper,
   jre,
 }:
-let
-  desktopFile = fetchurl {
-    url = "https://aur.archlinux.org/cgit/aur.git/plain/jdownloader.desktop?h=jdownloader2";
-  };
-in
 with pkgs;
 stdenv.mkDerivation rec {
   # name of our derivation

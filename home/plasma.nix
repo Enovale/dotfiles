@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ osConfig, pkgs, ... }:
 {
   home.packages = with pkgs.kdePackages; [
     polkit-kde-agent-1
@@ -22,7 +22,6 @@
     pkgs.krita
     xdg-desktop-portal-kde
     xwaylandvideobridge
-    #(pkgs.callPackage ./breezex-cursor.nix {}) # TODO
   ];
 
   programs.plasma = {
@@ -31,7 +30,14 @@
       clickItemTo = "select";
       lookAndFeel = "org.kde.breezedark.desktop";
       colorScheme = "MaterialYouDark";
-      cursor.theme = "BreezeX-Black";
+      wallpaper = "${osConfig.global.wallpaper}";
+      cursor.theme = osConfig.global.cursorName;
+      cursor.size = osConfig.global.cursorSize;
+    };
+    hotkeys.commands."anyrun" = {
+      name = "Launch Anyrun";
+      key = "Alt+Space";
+      command = "anyrun";
     };
     kwin = {
       effects = {

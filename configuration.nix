@@ -20,19 +20,24 @@
       max-free = ${toString (10 * 1024 * 1024 * 1024)}
     '';
     settings = {
-      max-jobs = 1;
+      max-jobs = 2;
       cores = 6;
+      download-buffer-size = 524288000;
       warn-dirty = false;
       trusted-users = [ "@wheel" ];
       substituters = [
         "https://hyprland.cachix.org"
         "https://anyrun.cachix.org"
         "https://nix-community.cachix.org"
+        "https://nixpkgs-wayland.cachix.org"
+        "https://niri.cachix.org"
       ];
       trusted-public-keys = [
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+        "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       ];
     };
   };
@@ -139,9 +144,10 @@
     enableQt5Integration = true;
   };
 
+  security.pam.services.login.kwallet.enable = true;
+
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     konsole
-    kwrited
     elisa
     khelpcenter
     krunner
@@ -234,6 +240,8 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
+      font-awesome
+      roboto
       liberation_ttf
       fira-code
       fira-code-symbols

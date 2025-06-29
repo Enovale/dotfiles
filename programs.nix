@@ -8,16 +8,17 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    kdePackages.qtmultimedia
+    (sddm-astronaut.override { embeddedTheme = "hyprland_kath"; })
     kdePackages.sddm-kcm
+    kdePackages.qtmultimedia
     kdePackages.plymouth-kcm
-    sddm-astronaut
     expect
     nix-output-monitor
     nvd
     nodePackages.node2nix
     git
     btrfs-progs
+    pulseaudio
     #(inputs.nixpkgs_blender.legacyPackages."x86_64-linux".blender.overrideAttrs (finalAttrs: {
     #  version = "3.3.21";
     #  src = fetchzip {

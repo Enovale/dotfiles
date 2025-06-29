@@ -135,8 +135,10 @@
         widegithub
         wayback-machine
         twitch-auto-points
+        github-file-icons
       ];
       settings = {
+        "general.autoscroll" = true;
         "extensions.autoDisableScopes" = 0;
         "cookiebanners.service.mode.privateBrowsing" = 2; # Block cookie banners in private browsing
         "cookiebanners.service.mode" = 2; # Block cookie banners

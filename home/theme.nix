@@ -1,6 +1,6 @@
 {
   pkgs,
-  config,
+  osConfig,
   nix-colors,
   ...
 }:
@@ -12,10 +12,10 @@
     platformTheme.name = "qtct";
   };
 
-  gtk = {
+  gtk = rec {
     enable = true;
     theme = {
-      name = "breeze-dark";
+      name = "Breeze";
     };
 
     iconTheme = {
@@ -28,12 +28,8 @@
       size = 12;
     };
 
-    cursorTheme = {
-      name = "BreezeX-Black";
-      size = 32;
-    };
-
     gtk2.extraConfig = ''
+      gtk-application-prefer-dark-theme=ltrue
       gtk-enable-animations=1
       gtk-primary-button-warps-slider=1
       gtk-toolbar-style=3
@@ -43,6 +39,15 @@
       gtk-cursor-blink=1
       gtk-sound-theme-name="ocean"
     '';
+
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+      gtk-decoration-layout = "icon:minimize,maximize,close";
+      gtk-enable-animations = true;
+      gtk-primary-button-warps-slider = true;
+      gtk-sound-theme-name = "ocean";
+    };
+    gtk4.extraConfig = gtk3.extraConfig;
   };
 
   home.sessionVariables = {
@@ -51,26 +56,12 @@
 
   #colorScheme = nix-colors.colorSchemes.dracula;
 
-  home.pointerCursor =
-    let
-      getFrom = url: hash: name: {
-        gtk.enable = true;
-        x11.enable = true;
-        hyprcursor.enable = true;
-        name = name;
-        size = 32;
-        package = pkgs.runCommand "moveUp" { } ''
-          mkdir -p $out/share/icons
-          ln -s ${
-            pkgs.fetchzip {
-              url = url;
-              hash = hash;
-            }
-          } $out/share/icons/${name}
-        '';
-      };
-    in
-    getFrom "https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.1/BreezeX-Black.tar.xz"
-      "sha256-uRmCyFVpVN+47r9HXErxZQjheGdLPcGJTwc+mDvF9Os="
-      "BreezeX-Black";
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    hyprcursor.enable = true;
+    name = osConfig.global.cursorName;
+    size = osConfig.global.cursorSize;
+    package = pkgs.rose-pine-cursor;
+  };
 }

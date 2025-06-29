@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
 {
   options = {
@@ -10,6 +15,18 @@ with lib;
             type = types.str;
             readOnly = true;
           };
+          cursorName = mkOption {
+            type = types.str;
+            readOnly = true;
+          };
+          cursorSize = mkOption {
+            type = types.int;
+            readOnly = true;
+          };
+          wallpaper = mkOption {
+            type = types.package;
+            readOnly = true;
+          };
         };
       };
     };
@@ -18,6 +35,12 @@ with lib;
   config = {
     global = {
       username = "enova";
+      cursorName = "BreezeX-RosePine-Linux";
+      cursorSize = 32;
+      wallpaper = pkgs.fetchurl {
+        url = "https://raw.githubusercontent.com/rose-pine/wallpapers/main/blockwavemoon.png";
+        hash = "sha256-VenNP2aJ55hU8AfqZ4KHzTkiq+9GveHqL69vgSmRPlE=";
+      };
     };
   };
 }

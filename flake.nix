@@ -22,6 +22,31 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    flake-utils.url = "github:numtide/flake-utils";
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
+    };
+
+    # Replacement for ls
+    eza = {
+      url = "github:eza-community/eza";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        rust-overlay.follows = "rust-overlay";
+      };
+    };
+
+    # Prebuilt package index - provides comma package
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-colors.url = "github:misterio77/nix-colors";
 
     hyprland.url = "github:hyprwm/Hyprland";
@@ -55,7 +80,7 @@
     anyrun-nixos-options.url = "github:n3oney/anyrun-nixos-options";
 
     millennium = {
-      url = "git+https://github.com/Sk7Str1p3/Millennium";
+      url = "git+https://github.com/SteamClientHomebrew/Millennium";
     };
   };
 
@@ -74,23 +99,25 @@
           ./qemu_check.nix
           ./configuration.nix
           nur.modules.nixos.default
-          home-manager.nixosModules.home-manager rec {
-              home-manager = rec {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "hm-bak";
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "hm-bak";
 
-                sharedModules = [
-                  inputs.nur.modules.homeManager.default
-                  inputs.nixcord.homeModules.nixcord
-                  inputs.nix-colors.homeManagerModules.default
-                  inputs.plasma-manager.homeManagerModules.plasma-manager
-                  inputs.kidex.homeModules.kidex
-                ];
+              sharedModules = [
+                inputs.nix-index-database.hmModules.nix-index
+                inputs.nur.modules.homeManager.default
+                inputs.nixcord.homeModules.nixcord
+                inputs.nix-colors.homeManagerModules.default
+                inputs.plasma-manager.homeManagerModules.plasma-manager
+                inputs.kidex.homeModules.kidex
+              ];
 
-                users.enova = import ./home/home.nix;
-                extraSpecialArgs = { inherit inputs; };
-              };
+              users.enova = import ./home/home.nix;
+              extraSpecialArgs = { inherit inputs; };
+            };
           }
           inputs.nixos-xivlauncher-rb.nixosModules.default
         ];

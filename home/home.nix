@@ -7,7 +7,6 @@
 }:
 {
   imports = [
-    ./shell_scripts.nix
     ./plasma.nix
     ./hyprland
     ./kitty.nix
@@ -16,6 +15,7 @@
     ./git.nix
     ./kidex.nix
     ./browser.nix
+    ./shell
   ];
 
   home.packages =
@@ -24,6 +24,7 @@
       btrfs-assistant
       wget
       mpv
+      comma
       vlc
       wayland-utils
       wl-clipboard

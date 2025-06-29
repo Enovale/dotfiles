@@ -1,7 +1,14 @@
-{ config, pkgs, ... }:
+{ config, osConfig, pkgs, ... }:
 {
   imports = [
     ./anyrun.nix
+    ./waybar.nix
+  ];
+
+  home.packages = with pkgs; [
+    grimblast
+    slurp
+    wl-clip-persist
   ];
 
   wayland.windowManager.hyprland = {
@@ -9,57 +16,32 @@
     package = pkgs.hyprland;
     xwayland.enable = true;
 
-    systemd.enable = true;
-    systemd.enableXdgAutostart = true;
+    systemd = {
+      enable = true;
+      enableXdgAutostart = true;
+      variables = [ "--all" ];
+    };
+    extraConfig = builtins.readFile ./hyprland.conf;
   };
+
   services.hyprpolkitagent.enable = true;
+
+  home.file."${config.home.homeDirectory}/hypr/xdph.conf".text = ''
+    screencopy {
+      allow_token_by_default = true
+    }
+  '';
+
   services.hyprpaper = {
     enable = true;
-  };
-
-  home.pointerCursor.hyprcursor = {
-    enable = true;
-    size = 32;
-  };
-
-  programs.waybar = {
-    enable = true;
     settings = {
-      mainBar = {
-        layer = "top";
-        position = "top";
-        height = 30;
-        modules-left = [
-          "hyprland/workspaces"
-          "sway/workspaces"
-        ];
-        modules-center = [
-          "mpris"
-        ];
-        modules-right = [
-          "tray"
-          "custom/notification"
-          "pulseaudio"
-          "cpu"
-          "memory"
-          "clock"
-        ];
-        "custom/notification" = {
-          tooltip = false;
-          format = "{} {icon}";
-          # TODO
-          format-icons = {
-            notification = "n";
-          };
-          return-type = "json";
-          exec-if = "which swaync-client";
-          exec = "swaync-client -swb";
-          on-click = "swaync-client -t -sw";
-          on-click-right = "swaync-client -d -sw";
-          on-click-middle = "swaync-client -C -sw";
-          escape = true;
-        };
-      };
+      ipc = "on";
+      splash = true;
+      splash_offset = 2.0;
+
+      preload = [ "${osConfig.global.wallpaper}" ];
+
+      wallpaper = [ ",${osConfig.global.wallpaper}" ];
     };
   };
 
@@ -131,16 +113,8 @@
               command = "systemctl reboot";
             }
             {
-              label = "";
-              command = "nautilus";
-            }
-            {
               label = "";
               command = "pavucontrol";
-            }
-            {
-              label = "";
-              command = "spotify";
             }
             {
               label = "󰕾";
@@ -159,6 +133,4 @@
 
   # Hint Electron apps to use Wayland:
   home.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  wayland.windowManager.hyprland.extraConfig = builtins.readFile ./hyprland.conf;
 }
