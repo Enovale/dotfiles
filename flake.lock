@@ -333,24 +333,6 @@
         "type": "github"
       }
     },
-    "flake-utils_2": {
-      "inputs": {
-        "systems": "systems_3"
-      },
-      "locked": {
-        "lastModified": 1731533236,
-        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -503,7 +485,7 @@
         "hyprwayland-scanner": "hyprwayland-scanner",
         "nixpkgs": "nixpkgs_3",
         "pre-commit-hooks": "pre-commit-hooks_2",
-        "systems": "systems_4",
+        "systems": "systems_3",
         "xdph": "xdph"
       },
       "locked": {
@@ -733,11 +715,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1751138707,
-        "narHash": "sha256-UcQGELZsjCkHYlpjB+Fmfm9QqviLJhOLfZrcgEzSxzs=",
+        "lastModified": 1751169982,
+        "narHash": "sha256-+js52/fhfwHLnWVsB5qdRXBjvt4fB4pQQDfuRR1PdLg=",
         "ref": "refs/heads/main",
-        "rev": "90d879ad4290507b0045b99337f8210aeaea0ad8",
-        "revCount": 1848,
+        "rev": "1379db1eceb558821f9324abe583aeb9b705c2d2",
+        "revCount": 1849,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/SteamClientHomebrew/Millennium"
@@ -1076,11 +1058,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1751169113,
-        "narHash": "sha256-4/9HjtMOeyelDV0VtJU1DOn1dMhHDcDtMblyv8UWJbI=",
+        "lastModified": 1751197556,
+        "narHash": "sha256-EP7/Z1tE/hZ9pA7LbNhH1AsYngtFi4AliwjRQiPlJSM=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "4b671644b36fa8ca91ebf90f10e8e36079d5af61",
+        "rev": "e09520e37a86ea686290b09107c3cf6af8dc4888",
         "type": "github"
       },
       "original": {
@@ -1201,7 +1183,6 @@
         "anyrun-nixos-options": "anyrun-nixos-options",
         "eza": "eza",
         "flake-parts": "flake-parts_3",
-        "flake-utils": "flake-utils_2",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "import-tree": "import-tree",
@@ -1270,21 +1251,6 @@
       }
     },
     "systems_3": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
-    "systems_4": {
       "locked": {
         "lastModified": 1689347949,
         "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",

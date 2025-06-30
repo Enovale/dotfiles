@@ -8,8 +8,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    (sddm-astronaut.override { embeddedTheme = "hyprland_kath"; })
-    kdePackages.sddm-kcm
     kdePackages.qtmultimedia
     kdePackages.plymouth-kcm
     expect

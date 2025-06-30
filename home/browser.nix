@@ -149,6 +149,8 @@
         "privacy.resistFingerprinting" = true;
         "privacy.clearOnShutdown.history" = false;
         "privacy.clearOnShutdown.cookies" = false;
+        "privacy.clearOnShutdown_v2.cache" = false;
+        "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
         "privacy.trackingprotection.emailtracking.enabled" = true;
         "privacy.trackingprotection.enabled" = true;
         "privacy.trackingprotection.fingerprinting.enabled" = true;

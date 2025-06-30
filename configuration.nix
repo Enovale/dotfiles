@@ -46,6 +46,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./bootloader.nix
+    ./sddm.nix
     ./hyprland.nix
     ./programs.nix
     ./steam
@@ -72,11 +73,6 @@
       theme = "blahaj";
       themePackages = with pkgs; [
         plymouth-blahaj-theme
-        nixos-bgrt-plymouth
-        # By default we would install all themes
-        (adi1090x-plymouth-themes.override {
-          selected_themes = [ "rings" ];
-        })
       ];
     };
 
@@ -133,12 +129,6 @@
   services.xserver.enable = false;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    theme = "sddm-astronaut-theme";
-  };
-
   services.desktopManager.plasma6 = {
     enable = true;
     enableQt5Integration = true;

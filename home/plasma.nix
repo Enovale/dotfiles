@@ -1,4 +1,4 @@
-{ osConfig, pkgs, ... }:
+{ osConfig, pkgs, lib, ... }:
 {
   home.packages = with pkgs.kdePackages; [
     polkit-kde-agent-1
@@ -23,6 +23,10 @@
     xdg-desktop-portal-kde
     xwaylandvideobridge
   ];
+
+  home.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = lib.mkForce "plasma-integration";
+  };
 
   programs.plasma = {
     enable = true;

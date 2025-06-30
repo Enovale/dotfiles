@@ -50,10 +50,6 @@
     gtk4.extraConfig = gtk3.extraConfig;
   };
 
-  home.sessionVariables = {
-    #QT_QPA_PLATFORMTHEME = "qt5ct";
-  };
-
   #colorScheme = nix-colors.colorSchemes.dracula;
 
   home.pointerCursor = {
