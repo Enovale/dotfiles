@@ -21,6 +21,8 @@
     extraPackages = with pkgs; if !config.systemIsQemu then [ rocmPackages.clr.icd ] else [ ];
   };
 
+  hardware.amdgpu.overdrive.enable = !config.systemIsQemu;
+
   environment.systemPackages = with pkgs; [
     clinfo
     lact

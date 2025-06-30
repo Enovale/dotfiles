@@ -5,19 +5,6 @@
   osConfig,
   ...
 }:
-let 
-  flags = ''
-    --enable-zero-copy
-    --ignore-gpu-blocklist
-    --enable-native-gpu-memory-buffers
-    --enable-gpu-resterization
-    --enable-features=VaapiVideoDecode,VaapiIgnoreDriverChecks,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder
-    --enable-raw-draw
-    --enable-unsafe-webgpu
-    --enable-blink-features=MiddleClickAutoscroll
-    --password-store="kwallet6"
-  '';
-in
 {
   imports = [
     ./plasma.nix
@@ -67,7 +54,6 @@ in
       avidemux
       fcast-receiver
       linux-wallpaperengine
-      jetbrains.idea-community
       (callPackage ./jdownloader.nix { })
     ]
     ++ (
@@ -79,7 +65,11 @@ in
           easytag
           kid3-kde
           gimp3-with-plugins
+          inkscape
+          scanmem
+          iaito
           libreoffice
+          libresprite
           wineWowPackages.waylandFull
           blender
           godot-mono
@@ -87,11 +77,13 @@ in
           jetbrains.rust-rover
           jetbrains.clion
           jetbrains.pycharm-community
+          jetbrains.idea-community
           android-udev-rules
           android-tools
           scrcpy
           android-studio
           osu-lazer-bin
+          vintagestory
           wlx-overlay-s
           (xivlauncher-rb.override { useGameMode = true; })
         ]
@@ -114,15 +106,6 @@ in
     MOZ_USE_XINPUT2 = "1";
     _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=lcd";
   };
-
-  # TODO This should probably be in browser.nix
-  xdg.configFile."electron-flags.conf".text = flags;
-  xdg.configFile."discord-flags.conf".text = flags;
-  xdg.configFile."chromium-flags.conf".text = flags;
-  xdg.configFile."element-flags.conf".text = flags;
-  xdg.configFile."goofcord-flags.conf".text = flags;
-  xdg.configFile."vesktop-flags.conf".text = flags;
-  xdg.configFile."equibop-flags.conf".text = flags;
 
   xdg.portal = {
     enable = true;

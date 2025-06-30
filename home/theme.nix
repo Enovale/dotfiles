@@ -52,8 +52,21 @@
 
   #colorScheme = nix-colors.colorSchemes.dracula;
 
+  services.hyprpaper = {
+    enable = false;
+    settings = {
+      ipc = "on";
+      splash = true;
+      splash_offset = 2.0;
+
+      preload = [ "${osConfig.global.wallpaper}" ];
+
+      wallpaper = [ ",${osConfig.global.wallpaper}" ];
+    };
+  };
+
   programs.mpvpaper = {
-    enable = true;
+    enable = false;
     package = pkgs.mpvpaper;
     pauseList = ''obs'';
     stopList = ''obs'';
@@ -65,7 +78,34 @@
 
   home.packages = with pkgs; [
     waypaper
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-emoji
+    noto-fonts-monochrome-emoji
+    nerd-fonts.noto
+    font-awesome
+    roboto
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    jetbrains-mono
   ];
+
+  fonts = {
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        serif = [
+          "Noto Serif 12pt"
+        ];
+        sansSerif = [
+          "Noto Sans 12pt"
+        ];
+        monospace = [ "Jetbrains Mono 12pt" ];
+        emoji = [ "Noto Monochrome Emoji ${osConfig.global.fontSize}"];
+      };
+    };
+  };
 
   home.pointerCursor = {
     gtk.enable = true;

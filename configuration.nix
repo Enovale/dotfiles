@@ -5,6 +5,19 @@
   ...
 }:
 {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./bootloader.nix
+    ./sddm.nix
+    ./hyprland.nix
+    ./programs.nix
+    ./steam
+    ./slskd.nix
+    ./graphics.nix
+    ./libvirt.nix
+  ];
+
   nix = {
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     optimise = {
@@ -41,18 +54,6 @@
       ];
     };
   };
-
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    ./bootloader.nix
-    ./sddm.nix
-    ./hyprland.nix
-    ./programs.nix
-    ./steam
-    ./graphics.nix
-    ./libvirt.nix
-  ];
 
   system.activationScripts.preActivation = ''
     if [[ -e /run/current-system ]]; then
@@ -190,6 +191,7 @@
     shell = pkgs.zsh;
     extraGroups = [
       "adbusers"
+      "corectrl"
       config.programs.ydotool.group
       "networkmanager"
       "wheel"
@@ -226,33 +228,17 @@
   environment.pathsToLink = [ "/share/zsh" ];
 
   fonts = {
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      font-awesome
-      roboto
-      liberation_ttf
-      fira-code
-      fira-code-symbols
-      jetbrains-mono
-    ];
-    fontconfig = {
-      defaultFonts = {
-        serif = [
-          "Noto Serif 12pt"
-        ];
-        sansSerif = [
-          "Noto Sans 12pt"
-        ];
-        monospace = [ "Jetbrains Mono 12pt" ];
-      };
-    };
+    enableDefaultPackages = true;
+    enableGhostscriptFonts = true;
   };
 
   programs.git = {
     enable = true;
     lfs.enable = true;
+  };
+
+  programs.corectrl = {
+    enable = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are

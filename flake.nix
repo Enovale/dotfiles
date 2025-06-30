@@ -15,6 +15,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    erosanix.url = "github:emmanuelrosa/erosanix";
 
     plasma-manager = {
       url = "github:nix-community/plasma-manager";

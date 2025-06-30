@@ -32,19 +32,6 @@
     }
   '';
 
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      ipc = "on";
-      splash = true;
-      splash_offset = 2.0;
-
-      preload = [ "${osConfig.global.wallpaper}" ];
-
-      wallpaper = [ ",${osConfig.global.wallpaper}" ];
-    };
-  };
-
   services.swaync = {
     enable = true;
     settings = {

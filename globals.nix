@@ -27,6 +27,10 @@ with lib;
             type = types.package;
             readOnly = true;
           };
+          fontSize = mkOption {
+            type = types.str;
+            readOnly = true;
+          };
         };
       };
     };
@@ -41,6 +45,7 @@ with lib;
         url = "https://raw.githubusercontent.com/rose-pine/wallpapers/main/blockwavemoon.png";
         hash = "sha256-VenNP2aJ55hU8AfqZ4KHzTkiq+9GveHqL69vgSmRPlE=";
       };
+      fontSize = "12pt";
     };
   };
 }
