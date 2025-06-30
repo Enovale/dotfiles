@@ -52,6 +52,21 @@
 
   #colorScheme = nix-colors.colorSchemes.dracula;
 
+  programs.mpvpaper = {
+    enable = true;
+    package = pkgs.mpvpaper;
+    pauseList = ''obs'';
+    stopList = ''obs'';
+  };
+
+  services.swww = {
+    enable = true;
+  };
+
+  home.packages = with pkgs; [
+    waypaper
+  ];
+
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;

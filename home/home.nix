@@ -5,6 +5,19 @@
   osConfig,
   ...
 }:
+let 
+  flags = ''
+    --enable-zero-copy
+    --ignore-gpu-blocklist
+    --enable-native-gpu-memory-buffers
+    --enable-gpu-resterization
+    --enable-features=VaapiVideoDecode,VaapiIgnoreDriverChecks,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder
+    --enable-raw-draw
+    --enable-unsafe-webgpu
+    --enable-blink-features=MiddleClickAutoscroll
+    --password-store="kwallet6"
+  '';
+in
 {
   imports = [
     ./plasma.nix
@@ -53,6 +66,7 @@
       songrec
       avidemux
       fcast-receiver
+      linux-wallpaperengine
       jetbrains.idea-community
       (callPackage ./jdownloader.nix { })
     ]
@@ -100,6 +114,15 @@
     MOZ_USE_XINPUT2 = "1";
     _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=lcd";
   };
+
+  # TODO This should probably be in browser.nix
+  xdg.configFile."electron-flags.conf".text = flags;
+  xdg.configFile."discord-flags.conf".text = flags;
+  xdg.configFile."chromium-flags.conf".text = flags;
+  xdg.configFile."element-flags.conf".text = flags;
+  xdg.configFile."goofcord-flags.conf".text = flags;
+  xdg.configFile."vesktop-flags.conf".text = flags;
+  xdg.configFile."equibop-flags.conf".text = flags;
 
   xdg.portal = {
     enable = true;
