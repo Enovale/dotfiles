@@ -11,6 +11,7 @@
     ./hyprland
     ./kitty.nix
     ./discord.nix
+    ./default_apps.nix
     ./theme.nix
     ./git.nix
     ./kidex.nix

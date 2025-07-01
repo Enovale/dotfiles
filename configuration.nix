@@ -7,7 +7,7 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    "${builtins.getEnv "PWD"}/hardware-configuration.nix"
     ./bootloader.nix
     ./sddm.nix
     ./hyprland.nix
@@ -68,6 +68,7 @@
 
   boot = {
     tmp.cleanOnBoot = true;
+    kernelPackages = pkgs.linuxPackages_zen;
 
     plymouth = {
       enable = true;
@@ -93,17 +94,23 @@
     loader.timeout = 0;
   };
 
-  # Use latest kernel
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-
-  networking.hostName = "crystalline";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking = {
+    hostName = "crystalline";
+    firewall.enable = false;
+    # These options are unnecessary when managing DNS ourselves
+    useDHCP = false;
+    dhcpcd.enable = false;
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+      "8.8.8.8"
+      "8.0.0.8"
+    ];
+    networkmanager = {
+      enable = true;
+      dns = "none";
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -257,12 +264,6 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = false;
 
   nix.settings.experimental-features = [
     "nix-command"

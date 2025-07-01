@@ -15,7 +15,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     erosanix.url = "github:emmanuelrosa/erosanix";
 
     plasma-manager = {
@@ -119,10 +119,13 @@
             };
           }
           inputs.nixos-xivlauncher-rb.nixosModules.default
-          ({ pkgs, ... }: {
-            nixpkgs.overlays = [ inputs.rust-overlay.overlays.default ];
-            #environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
-          })
+          (
+            { pkgs, ... }:
+            {
+              nixpkgs.overlays = [ inputs.rust-overlay.overlays.default ];
+              #environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
+            }
+          )
         ];
         specialArgs = { inherit inputs; };
       };

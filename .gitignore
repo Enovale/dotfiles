@@ -4,3 +4,7 @@ result-*
 
 # Ignore automatically generated direnv output
 .direnv
+
+# Ignore auto-generated hardware configurations
+# Make sure to nixos-rebuild with --impure for proper evaluation of this file
+hardware-configuration.nix
