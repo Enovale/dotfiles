@@ -273,7 +273,7 @@
   swapDevices = [
     {
       device = "/swap/swapfile";
-      size = if !config.systemIsQemu then (16 * 1024) else (4 * 1024);
+      size = if !config.systemIsQemu then (32 * 1024) else (4 * 1024);
     }
   ];
   zramSwap.enable = true; # Creates a zram block device and uses it as a swap device
