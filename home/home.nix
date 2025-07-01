@@ -37,6 +37,8 @@
       qpwgraph
       acpi
       nixd
+      schismtracker
+      renoise
       feh
       file
       signal-desktop
