@@ -3,6 +3,7 @@
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
+    enableHidpi = true;
     theme = "sddm-astronaut-theme";
     settings = {
       General = {
@@ -138,6 +139,7 @@
 
         VirtualKeyboardPosition = "center";
         # Default: left, Options: left, center, right.
+        InputMethod = pkgs.maliit-keyboard.pname;
 
         #################### Interface Behavior ####################
 

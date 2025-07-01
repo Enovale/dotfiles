@@ -36,8 +36,6 @@ stdenv.mkDerivation rec {
   startScript = writeShellApplication {
     name = name;
     text = ''
-      #!/usr/bin/env bash
-
       function isRoot() {
       	if [ "$(id -u)" -eq "0" ]; then
       		return 0

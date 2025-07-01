@@ -1,7 +1,7 @@
 { config, lib, ... }:
 {
   options = {
-    ellie.bootloader = lib.mkOption {
+    enova.bootloader = lib.mkOption {
       type = lib.types.enum [
         "systemd-boot"
         "grub"
@@ -11,22 +11,22 @@
   };
 
   config = lib.mkMerge [
-    (lib.mkIf (config.ellie.bootloader == "systemd-boot") {
+    (lib.mkIf (config.enova.bootloader == "systemd-boot") {
       boot.loader = {
         efi = {
           canTouchEfiVariables = true;
-          efiSysMountPoint = "/boot"; # ← use the same mount point here.
+          efiSysMountPoint = "/efi"; # ← use the same mount point here.
         };
         systemd-boot = {
           enable = true;
         };
       };
     })
-    (lib.mkIf (config.ellie.bootloader == "grub") {
+    (lib.mkIf (config.enova.bootloader == "grub") {
       boot.loader = {
         efi = {
           canTouchEfiVariables = true;
-          efiSysMountPoint = "/boot"; # ← use the same mount point here.
+          efiSysMountPoint = "/efi"; # ← use the same mount point here.
         };
         grub = {
           enable = true;
@@ -43,6 +43,15 @@
                 halt
             }
           '';
+          mirroredBoots =
+            with config.boot.loader;
+            lib.mkForce [
+              {
+                path = "/nix/state/booloader";
+                devices = if grub.device != "" then [ grub.device ] else grub.devices;
+                inherit (config.boot.loader.efi) efiSysMountPoint;
+              }
+            ];
         };
       };
     })

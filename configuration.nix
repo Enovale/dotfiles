@@ -64,7 +64,7 @@
   '';
 
   # Bootloader
-  ellie.bootloader = "systemd-boot";
+  enova.bootloader = "grub";
 
   boot = {
     tmp.cleanOnBoot = true;
@@ -94,7 +94,7 @@
   };
 
   # Use latest kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   networking.hostName = "crystalline";
 
@@ -221,6 +221,7 @@
     config = {
       allowUnfree = true;
       android_sdk.accept_license = true;
+      permittedInsecurePackages = [ "dotnet-runtime-7.0.20" ];
     };
     overlays = [ inputs.nur.overlays.default ];
   };

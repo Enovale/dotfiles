@@ -1,6 +1,7 @@
 { osConfig, pkgs, lib, ... }:
 {
   home.packages = with pkgs.kdePackages; [
+    knewstuff
     polkit-kde-agent-1
     kimageformats # avif, xcf, jxl
     kdegraphics-thumbnailers # PS, PDF, RAW, mobi, blender

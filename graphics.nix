@@ -5,6 +5,7 @@
   ...
 }:
 {
+  boot.initrd.kernelModules = [ (if !config.systemIsQemu then "amdgpu" else "") ];
   services.xserver.videoDrivers = [ (if config.systemIsQemu then "qxl" else "amdgpu") ];
 
   systemd.tmpfiles.rules =

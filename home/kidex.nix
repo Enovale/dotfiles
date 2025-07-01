@@ -1,7 +1,7 @@
 { ... }:
 {
   services.kidex = {
-    enable = true;
+    enable = false;
     settings = {
       ignored = [ ];
       directories = [
