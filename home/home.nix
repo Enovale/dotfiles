@@ -175,5 +175,16 @@
 
   home.file."${config.home.homeDirectory}/.gtkrc-2.0".force = lib.mkForce true;
 
+  home.file.".config/wireplumber/main.lua.d/99-stop-microphone-auto-adjust.lua".text = ''
+    table.insert (default_access.rules,{
+        matches = {
+            {
+                { "application.process.binary", "=", "electron" }
+            }
+        },
+        default_permissions = "rx",
+    })
+  '';
+
   home.stateVersion = "25.05";
 }

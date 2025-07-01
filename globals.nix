@@ -27,7 +27,19 @@ with lib;
             type = types.package;
             readOnly = true;
           };
+          fontFamily = mkOption {
+            type = types.str;
+            readOnly = true;
+          };
+          fixedFontFamily = mkOption {
+            type = types.str;
+            readOnly = true;
+          };
           fontSize = mkOption {
+            type = types.int;
+            readOnly = true;
+          };
+          fontSizeStr = mkOption {
             type = types.str;
             readOnly = true;
           };
@@ -37,7 +49,7 @@ with lib;
   };
 
   config = {
-    global = {
+    global = rec {
       username = "enova";
       cursorName = "BreezeX-RosePine-Linux";
       cursorSize = 32;
@@ -45,7 +57,10 @@ with lib;
         url = "https://raw.githubusercontent.com/rose-pine/wallpapers/main/blockwavemoon.png";
         hash = "sha256-VenNP2aJ55hU8AfqZ4KHzTkiq+9GveHqL69vgSmRPlE=";
       };
-      fontSize = "12pt";
+      fontFamily = "Noto Sans";
+      fixedFontFamily = "Jetbrains Mono";
+      fontSize = 12;
+      fontSizeStr = toString fontSize;
     };
   };
 }

@@ -38,6 +38,23 @@
       cursor.theme = osConfig.global.cursorName;
       cursor.size = osConfig.global.cursorSize;
     };
+    fonts = rec {
+      general = {
+        family = osConfig.global.fontFamily;
+        pointSize = osConfig.global.fontSize;
+      };
+      fixedWidth = {
+        family = osConfig.global.fixedFontFamily;
+        pointSize = osConfig.global.fontSize;
+      };
+      small = {
+        family = general.family;
+        pointSize = osConfig.global.fontSize - 2;
+      };
+      toolbar = general;
+      windowTitle = general;
+      menu = general;
+    };
     hotkeys.commands."anyrun" = {
       name = "Launch Anyrun";
       key = "Alt+Space";
@@ -53,8 +70,8 @@
     };
     configFile = {
       # TODO Figure out if this can become global for all mice
-      "kcminputrc"."Libinput/9639/64007/Compx 2.4G Wireless Receiver"."PointerAcceleration" = 0.400;
-      "kcminputrc"."Libinput/9639/64007/Compx 2.4G Wireless Receiver"."PointerAccelerationProfile" = 1;
+      kcminputrc."Libinput/9639/64007/Compx 2.4G Wireless Receiver".PointerAcceleration = 0.400;
+      kcminputrc."Libinput/9639/64007/Compx 2.4G Wireless Receiver".PointerAccelerationProfile = 1;
       kwinrc.Wayland."InputMethod[$e]" = "/run/current-system/sw/share/applications/com.github.maliit.keyboard.desktop";
       kdeglobals.KDE.SingleClick = false;
       kwinrc.EdgeBarrier.CornerBarrier = false;

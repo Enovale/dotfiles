@@ -25,44 +25,92 @@
     --default-time: 250ms;
     --default-animation: cubic-bezier(0.4,0,0.2,1);
 
+    --brand-260: hsl(var(--brand-260-hsl)) !important;
     --brand-260-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 86.2%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(88.6% * var(--dark-lightness)), 98.6%) !important;
+    --brand-360: hsl(var(--brand-360-hsl)) !important;
     --brand-360-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 86.1%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(77.5% * var(--dark-lightness)), 87.5%) !important;
+    --brand-500: hsl(var(--brand-500-hsl)) !important;
     --brand-500-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 85.6%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(64.7% * var(--dark-lightness)), 74.7%) !important;
+    --brand-560: hsl(var(--brand-560-hsl)) !important;
     --brand-560-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 51.4%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(52.4% * var(--dark-lightness)), 42.4%) !important;
+    --brand-600: hsl(var(--brand-600-hsl)) !important;
     --brand-600-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 46.7%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(44.1% * var(--dark-lightness)), 34.1%) !important;
 
     /* changes the color of clickable links */
+    --blue-330: hsl(var(--blue-330-hsl)) !important;
     --blue-330-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 100% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(59% * var(--myc-link-lightness)), 99%) !important;
+    --blue-345: hsl(var(--blue-345-hsl)) !important;
     --blue-345-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 100% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(49.4% * var(--myc-link-lightness)), 89.4%) !important;
+    --blue-430: hsl(var(--blue-430-hsl)) !important;
     --blue-430-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 100% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(45.3% * var(--myc-link-lightness)), 85.3%) !important;
 
+    --blue-new-42: var(--green-400) !important;
+    --blue-new-42-hsl: var(--green-400-hsl) !important;
+
+    --green-new-40: var(--green-400) !important;
+    --green-new-40-hsl: var(--green-400-hsl) !important;
+
+    --blurple-41: var(--green-400) !important;
+    --blurple-41-hsl: var(--green-400-hsl) !important;
+
+    --plum-17: var(--green-160) !important;
+    --plum-17-hsl: var(--green-160-hsl) !important;
+
+    --green-100: hsl(var(--green-100-hsl)) !important;
     --green-100-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 90% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(96.1% * var(--myc-link-lightness)), 99%) !important;
+    --green-130: hsl(var(--green-130-hsl)) !important;
     --green-130-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 94.1% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(93.3% * var(--myc-link-lightness)), 99%) !important;
+    --green-160: hsl(var(--green-160-hsl)) !important;
     --green-160-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 91.3% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(86.5% * var(--myc-link-lightness)), 99%) !important;
+    --green-200: hsl(var(--green-200-hsl)) !important;
     --green-200-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 93.5% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(75.9% * var(--myc-link-lightness)), 99%) !important;
+    --green-230: hsl(var(--green-230-hsl)) !important;
     --green-230-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 86.6% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(64.9% * var(--myc-link-lightness)), 99%) !important;
+    --green-260: hsl(var(--green-260-hsl)) !important;
     --green-260-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 75.1% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(59% * var(--myc-link-lightness)), 99%) !important;
+    --green-300: hsl(var(--green-300-hsl)) !important;
     --green-300-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 65.4% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(53.5% * var(--myc-link-lightness)), 99%) !important;
+    --green-330: hsl(var(--green-330-hsl)) !important;
     --green-330-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 63.1% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(59% * var(--myc-link-lightness)), 99%) !important;
+    --green-345: hsl(var(--green-345-hsl)) !important;
     --green-345-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 65.9% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(43.7% * var(--myc-link-lightness)), 99%) !important;
+    --green-360: hsl(var(--green-360-hsl)) !important;
     --green-360-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 65% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(39.2% * var(--myc-link-lightness)), 99%) !important;
+    --green-400: hsl(var(--green-400-hsl)) !important;
     --green-400-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 60.7% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(35.9% * var(--myc-link-lightness)), 99%) !important;
+    --green-430: hsl(var(--green-430-hsl)) !important;
     --green-430-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 56.1% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(32.2% * var(--myc-link-lightness)), 99%) !important;
+    --green-460: hsl(var(--green-460-hsl)) !important;
     --green-460-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 56.6% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(28% * var(--myc-link-lightness)), 99%) !important;
+    --green-500: hsl(var(--green-500-hsl)) !important;
     --green-500-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 58.4% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(24.5% * var(--myc-link-lightness)), 99%) !important;
+    --green-530: hsl(var(--green-530-hsl)) !important;
     --green-530-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 60.7% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(21% * var(--myc-link-lightness)), 99%) !important;
+    --green-560: hsl(var(--green-560-hsl)) !important;
     --green-560-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 61.7% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(18.4% * var(--myc-link-lightness)), 99%) !important;
+    --green-600: hsl(var(--green-600-hsl)) !important;
     --green-600-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 65.4% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(15.9% * var(--myc-link-lightness)), 99%) !important;
+    --green-630: hsl(var(--green-630-hsl)) !important;
     --green-630-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 66.7% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(14.1% * var(--myc-link-lightness)), 99%) !important;
+    --green-660: hsl(var(--green-660-hsl)) !important;
     --green-660-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 68.8% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(12.5% * var(--myc-link-lightness)), 99%) !important;
+    --green-700: hsl(var(--green-700-hsl)) !important;
     --green-700-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 74.1% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(10.6% * var(--myc-link-lightness)), 99%) !important;
+    --green-730: hsl(var(--green-730-hsl)) !important;
     --green-730-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 78.3% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(9% * var(--myc-link-lightness)), 99%) !important;
+    --green-760: hsl(var(--green-760-hsl)) !important;
     --green-760-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 84.6% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(7.6% * var(--myc-link-lightness)), 99%) !important;
+    --green-800: hsl(var(--green-800-hsl)) !important;
     --green-800-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 82.4% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(6.7% * var(--myc-link-lightness)), 99%) !important;
+    --green-830: hsl(var(--green-830-hsl)) !important;
     --green-830-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 80% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(5.9% * var(--myc-link-lightness)), 99%) !important;
+    --green-860: hsl(var(--green-860-hsl)) !important;
     --green-860-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 70.4% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(5.3% * var(--myc-link-lightness)), 99%) !important;
+    --green-900: hsl(var(--green-900-hsl)) !important;
     --green-900-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 58.3% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(4.7% * var(--myc-link-lightness)), 99%) !important;
 
+    --text-feedback-positive: var(--green-300);
+    --text-link: var(--green-300);
     --switch-slider-color: hsl(240,1%,20%);
     --switch-slider-color-modal: var(--switch-slider-color);
     --switch-slider-checked: hsl(var(--dark-accent-hsl));

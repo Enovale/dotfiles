@@ -96,13 +96,13 @@
       enable = true;
       defaultFonts = {
         serif = [
-          "Noto Serif ${osConfig.global.fontSize}"
+          "Noto Serif ${osConfig.global.fontSizeStr}pt"
         ];
         sansSerif = [
-          "Noto Sans ${osConfig.global.fontSize}"
+          "${osConfig.global.fontFamily} ${toString osConfig.global.fontSizeStr}pt"
         ];
-        monospace = [ "Jetbrains Mono ${osConfig.global.fontSize}" ];
-        emoji = [ "Noto Emoji ${osConfig.global.fontSize}"];
+        monospace = [ "${osConfig.global.fixedFontFamily} ${osConfig.global.fontSizeStr}pt" ];
+        emoji = [ "Noto Emoji ${osConfig.global.fontSizeStr}pt"];
       };
     };
   };

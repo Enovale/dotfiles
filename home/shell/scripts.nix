@@ -8,9 +8,9 @@
         extraArgs=''${@:2}
       fi
 
-      pushd ~/nixos/
+      pushd ~/nixos/ >& /dev/null
       nixos-rebuild switch --flake ~/nixos/ --sudo --impure --log-format internal-json $extraArgs |& nom --json
-      popd
+      popd >& /dev/null
     '')
     (writeShellScriptBin "inspect-nix" ''
       nix repl ~/nixos/#nixosConfigurations.crystalline
