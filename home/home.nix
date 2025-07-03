@@ -17,6 +17,7 @@
     ./kidex.nix
     ./browser.nix
     ./shell
+    ./override_electron_flags.nix
   ];
 
   home.packages =

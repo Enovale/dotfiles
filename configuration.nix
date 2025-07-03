@@ -143,6 +143,7 @@
     enableQt5Integration = true;
   };
 
+  security.pam.services.sudo.nodelay = true;
   security.pam.services.login.kwallet.enable = true;
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
