@@ -15,9 +15,9 @@
   libX11,
   libXrandr,
   libXext,
+  hyprland,
   wayland,
   wayland-scanner,
-  wrapperDir ? "/run/wrappers/bin",
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -47,23 +47,16 @@ stdenv.mkDerivation (finalAttrs: {
     wayland
   ];
 
-  preFixup =
-    let
-      gpu-screen-recorder-wrapped = gpu-screen-recorder.override {
-        inherit wrapperDir;
-      };
-    in
-    ''
-      wrapProgram $out/bin/gsr-notify \
-      --prefix PATH : ${wrapperDir} \
-      --suffix PATH : ${lib.makeBinPath [ gpu-screen-recorder-wrapped ]} \
-      --prefix LD_LIBRARY_PATH : ${
-        lib.makeLibraryPath [
-          libglvnd
-          addDriverRunpath.driverLink
-        ]
-      }
-    '';
+  preFixup = ''
+    wrapProgram $out/bin/gsr-notify \
+    --prefix PATH : ${hyprland} \
+    --prefix LD_LIBRARY_PATH : ${
+      lib.makeLibraryPath [
+        libglvnd
+        addDriverRunpath.driverLink
+      ]
+    }
+  '';
 
   meta = {
     #changelog = "https://git.dec05eba.com/gpu-screen-recorder-ui/tree/com.dec05eba.gpu_screen_recorder.appdata.xml#n82";

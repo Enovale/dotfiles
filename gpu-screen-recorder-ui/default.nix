@@ -9,6 +9,7 @@ let
   cfg = config.programs.gpu-screen-recorder.ui;
   package = cfg.package.override {
     inherit (config.security) wrapperDir;
+    notify = cfg.notificationPackage;
   };
 in
 {
@@ -56,6 +57,12 @@ in
     systemd = {
       packages = [ package ];
       user.services.gpu-screen-recorder-ui.wantedBy = [ cfg.systemd.target ];
+      user.services.gpu-screen-recorder-ui.serviceConfig = {
+        ExecStart = [
+          ""
+          "${package}/bin/gsr-ui launch-daemon"
+        ];
+      };
     };
   };
 

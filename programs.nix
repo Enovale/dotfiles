@@ -5,8 +5,11 @@
   ...
 }:
 {
-  imports = [ ./gpu-screen-recorder-ui];
- 
+  imports = [
+    ./gpu-screen-recorder-ui
+    ./electron_flags.nix
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [

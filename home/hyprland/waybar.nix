@@ -9,8 +9,8 @@
     systemd.enable = true;
     systemd.target = "hyprland-session.target";
     style = builtins.readFile ./waybar.css;
-    settings = {
-      mainBar = {
+    settings = [
+      {
         mode = "dock";
         layer = "top";
         position = "top";
@@ -298,7 +298,7 @@
           escape = true;
           exec = "$HOME/.config/waybar/mediaplayer.py 2> /dev/null";
         };
-      };
-    };
+      }
+    ];
   };
 }

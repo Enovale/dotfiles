@@ -21,6 +21,8 @@
   libXext,
   libXi,
   libcap,
+  hyprland,
+  notify,
   wayland,
   wayland-scanner,
   wrapperDir ? "/run/wrappers/bin",
@@ -65,16 +67,27 @@ stdenv.mkDerivation (finalAttrs: {
       };
     in
     ''
-      wrapProgram $out/bin/gsr-ui \
-      --prefix PATH : ${wrapperDir} \
-      --suffix PATH : ${lib.makeBinPath [ gpu-screen-recorder-wrapped ]} \
-      --prefix LD_LIBRARY_PATH : ${
-        lib.makeLibraryPath [
-          libglvnd
-          addDriverRunpath.driverLink
-        ]
-      }
+      wrapProgram "$out/bin/gsr-ui" \
+        --prefix PATH : ${wrapperDir} \
+        --suffix PATH : ${
+          lib.makeBinPath [
+            hyprland
+            notify
+            gpu-screen-recorder-wrapped
+          ]
+        } \
+        --prefix LD_LIBRARY_PATH : ${
+          lib.makeLibraryPath [
+            libglvnd
+            addDriverRunpath.driverLink
+          ]
+        }
     '';
+
+  #postInstall = ''
+  #  substituteInPlace $out/lib/systemd/user/gpu-screen-recorder-ui.service \
+  #    --replace-fail "gsr-ui" "$out/bin/gsr-ui"
+  #'';
 
   meta = {
     #changelog = "https://git.dec05eba.com/gpu-screen-recorder-ui/tree/com.dec05eba.gpu_screen_recorder.appdata.xml#n82";

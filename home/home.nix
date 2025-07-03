@@ -17,7 +17,6 @@
     ./kidex.nix
     ./browser.nix
     ./shell
-    ./override_electron_flags.nix
   ];
 
   home.packages =
@@ -105,7 +104,7 @@
 
   home.sessionVariables = {
     COMPLETION_WAITING_DOTS = "true";
-    EDITOR = "nano";
+    EDITOR = "kate";
     MOZ_USE_XINPUT2 = "1";
     _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=lcd";
   };

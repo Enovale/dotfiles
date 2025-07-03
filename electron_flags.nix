@@ -1,21 +1,31 @@
 {
   lib,
-  packagesToOverride,
   ...
 }:
+let
+  chromiumFlags = ''
+    --enable-zero-copy
+    --ignore-gpu-blocklist
+    --enable-native-gpu-memory-buffers
+    --enable-gpu-rasterization
+    --enable-features=VaapiVideoDecode,VaapiIgnoreDriverChecks,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,WebMachineLearningNeuralNetwork
+    --enable-raw-draw
+    --enable-unsafe-webgpu
+    --enable-blink-features=MiddleClickAutoscroll
+    --password-store="kwallet6"
+  '';
+in
 {
-  overriden = builtins.map (
-    x:
-    let
-      args = builtins.attrNames x.override.__functionArgs;
-      hasCmdArgs = builtins.any (y: y == "commandLineArgs") args;
-      isElectron = builtins.any (z: (lib.hasPrefix "electron" z)) args;
-    in
-    if (hasCmdArgs && isElectron) then
-      x.override {
-        commandLineArgs = "--password-store=kwallet6";
-      }
-    else
-      x
-  ) packagesToOverride;
+  nixpkgs.overlays = [
+    (final: prev: {
+      #goofcord = prev.goofcord.override { commandLineArgs = chromiumFlags; };
+      #legcord = prev.legcord.override { commandLineArgs = chromiumFlags; };
+      vscodium = prev.vscodium.override { commandLineArgs = chromiumFlags; };
+      signal-desktop = prev.signal-desktop.override { commandLineArgs = chromiumFlags; };
+      #cinny-desktop = prev.cinny-desktop.override { commandLineArgs = chromiumFlags; };
+      vesktop = prev.vesktop.override { commandLineArgs = chromiumFlags; };
+      element-desktop = prev.element-desktop.override { commandLineArgs = chromiumFlags; };
+      #electron = prev.electron.override { commandLineArgs = chromiumFlags; };
+    })
+  ];
 }
