@@ -172,6 +172,8 @@
     nix-direnv.enable = true;
   };
 
+  home.file."${config.home.homeDirectory}/gpu-screen-recorder/config_ui".source = ./gsr-ui.conf;
+
   home.file."${config.home.homeDirectory}/.gtkrc-2.0".force = lib.mkForce true;
 
   home.file.".config/wireplumber/main.lua.d/99-stop-microphone-auto-adjust.lua".text = ''

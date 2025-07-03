@@ -81,6 +81,7 @@
       kdeglobals.General.TerminalApplication = "kitty";
       kdeglobals.UiSettings.ColorScheme = "*";
       dolphinrc.UiSettings.ColorScheme = "*";
+      katerc.General."Show Url Nav Bar" = true;
     };
   };
 }

@@ -32,5 +32,9 @@
     (writeShellScriptBin "clean-nix" ''
       nix-store --gc
     '')
+    (writeShellScriptBin "rc2nix" ''
+      nix run github:nix-community/plasma-manager > ~/Downloads/plasma-manager.nix
+      $EDITOR ~/Downloads/plasma-manager.nix
+    '')
   ];
 }
