@@ -853,11 +853,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1751454584,
-        "narHash": "sha256-uwCt/ETfhc2U623LXMV4V1NehwZGkpC73oMDWLmdYnY=",
+        "lastModified": 1751540986,
+        "narHash": "sha256-5qWcgv0O12dOy2Cebo2U5HZ6aJ0QSSxE6elwjPRTr9A=",
         "owner": "ProverbialPennance",
         "repo": "nixos-xivlauncher-rb",
-        "rev": "9cfa8da76796081f7045a73018a89f7de9debbbb",
+        "rev": "2ba15298a9f3b1ef54b8bbb69e607fe7d347d659",
         "type": "github"
       },
       "original": {

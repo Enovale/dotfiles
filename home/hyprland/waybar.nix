@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home.packages = with pkgs; [
     waybar-mpris
@@ -296,7 +296,7 @@
             default = "🎜";
           };
           escape = true;
-          exec = "$HOME/.config/waybar/mediaplayer.py 2> /dev/null";
+          exec = "${config.home.homeDirectory}/waybar/mediaplayer.py 2> /dev/null";
         };
       }
     ];

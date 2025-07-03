@@ -9,6 +9,9 @@
       General = {
         InputMethod = pkgs.maliit-keyboard.pname;
       };
+      Users = {
+        RememberLastSession = true;
+      };
     };
   };
 

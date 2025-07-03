@@ -114,6 +114,7 @@
       };
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         plasma-integration
+        canvasblocker
         ublock-origin
         duckduckgo-privacy-essentials
         bitwarden
@@ -139,6 +140,7 @@
       ];
       settings = {
         "general.autoscroll" = true;
+        "browser.tabs.inTitlebar" = 0;
         "extensions.autoDisableScopes" = 0;
         "cookiebanners.service.mode.privateBrowsing" = 2; # Block cookie banners in private browsing
         "cookiebanners.service.mode" = 2; # Block cookie banners
@@ -161,6 +163,7 @@
         "widget.use-xdg-desktop-portal.mime-handler" = 1;
         "widget.use-xdg-desktop-portal.open-uri" = 1;
         "widget.use-xdg-desktop-portal.settings" = 1;
+        "browser.cache.disk.parent_directory" = "/run/user/1000/librewolf";
       };
     };
     policies = {
