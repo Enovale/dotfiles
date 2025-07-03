@@ -11,7 +11,7 @@
   programs.appimage.binfmt = true;
 
   nixpkgs.overlays = with inputs; [
-    millennium.overlays.default
+    #millennium.overlays.default
   ];
 
   programs.java.enable = true;

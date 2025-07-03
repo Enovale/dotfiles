@@ -5,13 +5,22 @@
   ...
 }:
 {
-  boot.initrd.kernelModules = [ (if !config.systemIsQemu then "amdgpu" else "") ];
   services.xserver.videoDrivers = [ (if config.systemIsQemu then "qxl" else "amdgpu") ];
 
   systemd.tmpfiles.rules =
     if !config.systemIsQemu then
+      let
+        rocmEnv = pkgs.symlinkJoin {
+          name = "rocm-combined";
+          paths = with pkgs.rocmPackages; [
+            rocblas
+            hipblas
+            clr
+          ];
+        };
+      in
       [
-        "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+        "L+    /opt/rocm   -    -    -     -    ${rocmEnv}"
       ]
     else
       [ ];
@@ -19,10 +28,30 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = with pkgs; if !config.systemIsQemu then [ rocmPackages.clr.icd ] else [ ];
+    extraPackages =
+      with pkgs;
+      if !config.systemIsQemu then
+        [
+          libvdpau-va-gl
+        ]
+      else
+        [ ];
   };
 
-  hardware.amdgpu.overdrive.enable = !config.systemIsQemu;
+  programs.gamemode = {
+    enable = true;
+  };
+
+  hardware.amdgpu =
+    if !config.systemIsQemu then
+      {
+        initrd.enable = true;
+        overdrive.enable = true;
+        opencl.enable = true;
+        amdvlk.enable = false;
+      }
+    else
+      { };
 
   environment.systemPackages = with pkgs; [
     clinfo

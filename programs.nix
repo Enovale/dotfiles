@@ -5,6 +5,8 @@
   ...
 }:
 {
+  imports = [ ./gpu-screen-recorder-ui];
+ 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -29,6 +31,13 @@
     #  postFixup = builtins.replaceStrings ["/bin/blender"] ["/bin/blender-3.3"] finalAttrs.postFixup;
     #}))
   ];
+
+  programs.gpu-screen-recorder = {
+    enable = true;
+    ui = {
+      enable = true;
+    };
+  };
 
   services.mullvad-vpn = {
     enable = true;

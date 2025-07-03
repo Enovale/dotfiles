@@ -134,7 +134,8 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = false;
+  # DO NOT disable if you need accelerated XWayland support
+  services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.desktopManager.plasma6 = {

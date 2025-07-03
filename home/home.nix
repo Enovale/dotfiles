@@ -31,7 +31,6 @@
       wl-clipboard
       qbittorrent
       nixfmt-rfc-style
-      gpu-screen-recorder
       firefoxpwa
       winetricks
       protonup-qt
