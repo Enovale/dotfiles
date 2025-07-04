@@ -3,7 +3,7 @@
   ...
 }:
 let
-  chromiumFlags = ''\
+  chromiumFlags = ''
     --enable-zero-copy \
     --ignore-gpu-blocklist \
     --enable-native-gpu-memory-buffers \
@@ -14,18 +14,98 @@ let
     --enable-blink-features=MiddleClickAutoscroll \
     --password-store="kwallet6" \
   '';
+  justAttrNames =
+    path: value:
+    let
+      attempt =
+        if
+          lib.isDerivation value
+          &&
+            # in some places we have *derivations* with jobsets as subattributes, ugh
+            !(value.__recurseIntoDerivationForReleaseJobs or false)
+        then
+          [ path ]
+
+        # Even wackier case: we have meta.broken==true jobs with
+        # !meta.broken jobs as subattributes with license=unfree, and
+        # check-meta.nix won't throw an "unfree" failure because the
+        # enclosing derivation is marked broken.  Yeah.  Bonkers.
+        # We should just forbid jobsets enclosed by derivations.
+        else if lib.isDerivation value && !value.meta.available then
+          [ ]
+
+        else if !(lib.isAttrs value) then
+          [ ]
+        else if (value.__attrsFailEvaluation or false) then
+          [ ]
+        else
+          lib.pipe value [
+            (lib.attrsets.filterAttrs (
+              name: value:
+              true
+              #builtins.hasAttr "override" value
+              #builtins.elem "commandLineArgs" (builtins.attrNames value.override.__functionArgs)
+            ))
+            (builtins.mapAttrs (
+              name: value:
+              builtins.addErrorContext "while evaluating package set attribute path '${
+                lib.showAttrPath (path ++ [ value ])
+              }'" (justAttrNames (path ++ [ name ]) value)
+            ))
+            /*
+            (builtins.mapAttrs (
+              name: value:
+              builtins.addErrorContext "while evaluating package set attribute path '${
+                lib.showAttrPath (path ++ [ name ])
+              }'" (justAttrNames (path ++ [ name ]) value)
+            ))
+            */
+            builtins.attrValues
+            builtins.concatLists
+          ];
+
+      seq = builtins.deepSeq attempt attempt;
+      tried = builtins.tryEval seq;
+
+      result = if tried.success then tried.value else [ ];
+    in
+    result;
+
+  releaseOutpaths =
+    import
+      /nix/var/nix/profiles/per-user/root/channels/nixos/nixpkgs/pkgs/top-level/release-outpaths.nix
+      {
+        checkMeta = true;
+        attrNamesOnly = true;
+        path = /nix/var/nix/profiles/per-user/root/channels/nixos/nixpkgs;
+      };
 in
 {
   nixpkgs.overlays = [
     (final: prev: {
-      #goofcord = prev.goofcord.override { commandLineArgs = chromiumFlags; };
-      #legcord = prev.legcord.override { commandLineArgs = chromiumFlags; };
-      vscodium = prev.vscodium.override { commandLineArgs = chromiumFlags; };
-      signal-desktop = prev.signal-desktop.override { commandLineArgs = chromiumFlags; };
-      #cinny-desktop = prev.cinny-desktop.override { commandLineArgs = chromiumFlags; };
-      vesktop = prev.vesktop.override { commandLineArgs = chromiumFlags; };
-      element-desktop = prev.element-desktop.override { commandLineArgs = chromiumFlags; };
-      #electron = prev.electron.override { commandLineArgs = chromiumFlags; };
-    })
+      test2 = releaseOutpaths;
+      test = justAttrNames [ ] releaseOutpaths;
+    }
+    /*
+      builtins.mapAttrs
+        (p: v: {
+          name = p;
+          value = v.override { commandLineArgs = chromiumFlags; };
+        })
+        (
+          lib.attrsets.filterAttrs (
+            p: v:
+            let
+              tried = builtins.tryEval v;
+              args = builtins.attrNames v.override.__functionArgs;
+              hasCmdArgs = builtins.elem "commandLineArgs" args;
+              isElectron = builtins.any (z: (lib.hasPrefix "electron" z)) args;
+              isPackage = lib.isDerivation v;
+            in
+            (tried.success && isPackage && hasCmdArgs && isElectron)
+          ) pkgs
+        )
+    */
+    )
   ];
 }
