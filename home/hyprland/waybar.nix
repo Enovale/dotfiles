@@ -296,7 +296,7 @@
             default = "🎜";
           };
           escape = true;
-          exec = "${config.home.homeDirectory}/waybar/mediaplayer.py 2> /dev/null";
+          exec = "${config.xdg.configHome}/waybar/mediaplayer.py 2> /dev/null";
         };
       }
     ];

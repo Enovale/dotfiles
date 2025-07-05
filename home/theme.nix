@@ -5,7 +5,7 @@
   ...
 }:
 {
-  home.file.".local/share/color-schemes/MaterialYouDark.colors".source = ./MaterialYouDark.colors;
+  xdg.dataFile."color-schemes/MaterialYouDark.colors".source = ./MaterialYouDark.colors;
 
   qt = {
     enable = true;

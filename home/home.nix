@@ -172,11 +172,11 @@
     nix-direnv.enable = true;
   };
 
-  home.file."${config.home.homeDirectory}/gpu-screen-recorder/config_ui".source = ./gsr-ui.conf;
+  xdg.configFile."gpu-screen-recorder/config_ui".source = ./gsr-ui.conf;
 
-  home.file."${config.home.homeDirectory}/.gtkrc-2.0".force = lib.mkForce true;
+  #xdg.configFile.".gtkrc-2.0".force = lib.mkForce true;
 
-  home.file."${config.home.homeDirectory}/wireplumber/main.lua.d/99-stop-microphone-auto-adjust.lua".text = ''
+  xdg.configFile."wireplumber/main.lua.d/99-stop-microphone-auto-adjust.lua".text = ''
     table.insert (default_access.rules,{
         matches = {
             {

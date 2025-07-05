@@ -15,7 +15,7 @@
     })
   ];
 
-  home.file."${config.home.homeDirectory}/discord/settings.json".text = ''
+  xdg.configFile."discord/settings.json".text = ''
     {
       "SKIP_HOST_UPDATE": true,
       "openasar": {
@@ -34,7 +34,9 @@
         "--enable-blink-features=MiddleClickAutoscroll",
         "--password-store="kwallet6"
       ],
-      "DANGEROUS_ENABLE_DEVTOOLS_ONLY_ENABLE_IF_YOU_KNOW_WHAT_YOURE_DOING": true
+      "DANGEROUS_ENABLE_DEVTOOLS_ONLY_ENABLE_IF_YOU_KNOW_WHAT_YOURE_DOING": true,
+      "IS_MAXIMIZED": true,
+      "IS_MINIMIZED": false
     }
   '';
 }
