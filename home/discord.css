@@ -29,6 +29,8 @@
     --brand-260-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 86.2%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(88.6% * var(--dark-lightness)), 98.6%) !important;
     --brand-300: hsl(var(--brand-300-hsl)) !important;
     --brand-300-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 86.1%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(77.5% * var(--dark-lightness)), 87.5%) !important;
+    --brand-330: hsl(var(--brand-300-hsl)) !important;
+    --brand-330-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 86.1%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(77.5% * var(--dark-lightness)), 87.5%) !important;
     --brand-360: hsl(var(--brand-360-hsl)) !important;
     --brand-360-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 86.1%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(77.5% * var(--dark-lightness)), 87.5%) !important;
     --brand-400: hsl(var(--brand-400-hsl)) !important;
@@ -48,8 +50,10 @@
     --blue-430: hsl(var(--blue-430-hsl)) !important;
     --blue-430-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 100% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(45.3% * var(--myc-link-lightness)), 85.3%) !important;
 
+    --blue-new-16: var(--green-160) !important;
     --blue-new-42: var(--green-300) !important;
     --blue-new-42-hsl: var(--green-300-hsl) !important;
+    --blue-new-94: var(--green-900) !important;
 
     --green-new-40: var(--green-300) !important;
     --green-new-40-hsl: var(--green-300-hsl) !important;
@@ -61,6 +65,7 @@
     --green-new-56-hsl: var(--brand-460-hsl) !important;
     --green-new-57: var(--brand-500) !important;
     --green-new-57-hsl: var(--brand-500-hsl) !important;
+    --green-new-94: var(--green-900) !important;
 
     --blurple-26: var(--green-260) !important;
     --blurple-26-hsl: var(--green-260-hsl) !important;
@@ -74,7 +79,14 @@
     --plum-17-hsl: var(--green-160-hsl) !important;
     */
 
-    --red-400: var(--green-300) !important;
+    --red-400: var(--brand-300) !important;
+    --red-430: var(--brand-330) !important;
+
+    --red-new-16: var(--green-160) !important;
+    --red-new-94: var(--green-900) !important;
+
+    --yellow-new-16: var(--green-160) !important;
+    --yellow-new-94: var(--green-900) !important;
 
     --green-100: hsl(var(--green-100-hsl)) !important;
     --green-100-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 90% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(96.1% * var(--myc-link-lightness)), 99%) !important;
@@ -129,7 +141,8 @@
     --green-900: hsl(var(--green-900-hsl)) !important;
     --green-900-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 58.3% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(4.7% * var(--myc-link-lightness)), 99%) !important;
 
-    --mention-background: var(--brand-500);
+    --mention-background: hsl(var(--mention-background-hsl)) !important;
+    --mention-background-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 85.7%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(64.7% * var(--dark-lightness)), 10.7%) !important;
 
     --switch-slider-color: hsl(240,1%,20%);
     --switch-slider-color-modal: var(--switch-slider-color);

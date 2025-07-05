@@ -23,7 +23,7 @@
     btrfs-progs
     pulseaudio
     inputs.erosanix.packages.${system}.foobar2000
-    #(inputs.nixpkgs_blender.legacyPackages."x86_64-linux".blender.overrideAttrs (finalAttrs: {
+    #(inputs.nixpkgs_blender.legacyPackages.${pkgs.stdenv.hostPlatform.system}.blender.overrideAttrs (finalAttrs: {
     #  version = "3.3.21";
     #  src = fetchzip {
     #   name = "source";

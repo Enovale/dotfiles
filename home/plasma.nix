@@ -1,4 +1,9 @@
-{ osConfig, pkgs, lib, ... }:
+{
+  osConfig,
+  pkgs,
+  lib,
+  ...
+}:
 {
   home.packages = with pkgs.kdePackages; [
     knewstuff
@@ -24,8 +29,10 @@
     xwaylandvideobridge
   ];
 
+  # Programs need to be run with plasma-integration to not have broken disabled colors
+  # But this doesn't work when not actually running plasma. Only fix is qt6ct-kde.
   home.sessionVariables = {
-    QT_QPA_PLATFORMTHEME = lib.mkForce "plasma-integration";
+    #QT_QPA_PLATFORMTHEME = lib.mkForce "plasma-integration";
   };
 
   programs.plasma = {
@@ -72,7 +79,8 @@
       # TODO Figure out if this can become global for all mice
       kcminputrc."Libinput/9639/64007/Compx 2.4G Wireless Receiver".PointerAcceleration = 0.400;
       kcminputrc."Libinput/9639/64007/Compx 2.4G Wireless Receiver".PointerAccelerationProfile = 1;
-      kwinrc.Wayland."InputMethod[$e]" = "/run/current-system/sw/share/applications/com.github.maliit.keyboard.desktop";
+      kwinrc.Wayland."InputMethod[$e]" =
+        "/run/current-system/sw/share/applications/com.github.maliit.keyboard.desktop";
       kdeglobals.KDE.SingleClick = false;
       kwinrc.EdgeBarrier.CornerBarrier = false;
       kwinrc.EdgeBarrier.EdgeBarrier = 0;

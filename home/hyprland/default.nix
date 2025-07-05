@@ -1,4 +1,9 @@
-{ config, osConfig, pkgs, ... }:
+{
+  config,
+  osConfig,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./anyrun.nix
@@ -9,6 +14,9 @@
     grimblast
     slurp
     wl-clip-persist
+    hyprsysteminfo
+    hyprls
+    hyprpicker
   ];
 
   wayland.windowManager.hyprland = {
@@ -117,7 +125,4 @@
     };
     #style = (builtins.readFile ./style.css);
   };
-
-  # Hint Electron apps to use Wayland:
-  home.sessionVariables.NIXOS_OZONE_WL = "1";
 }

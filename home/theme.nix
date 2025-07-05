@@ -102,7 +102,7 @@
           "${osConfig.global.fontFamily} ${toString osConfig.global.fontSizeStr}pt"
         ];
         monospace = [ "${osConfig.global.fixedFontFamily} ${osConfig.global.fontSizeStr}pt" ];
-        emoji = [ "Noto Emoji ${osConfig.global.fontSizeStr}pt"];
+        emoji = [ "Noto Emoji ${osConfig.global.fontSizeStr}pt" ];
       };
     };
   };

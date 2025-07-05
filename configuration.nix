@@ -63,6 +63,12 @@
     fi
   '';
 
+  system.userActivationScripts.preActivation = ''
+    if [[ -e /run/current-system ]]; then
+      ${pkgs.libnotify}/bin/notify-send -i nix-snowflake-white -a "NixOS" "Activating new config..." "$systemConfig"
+    fi
+  '';
+
   # Bootloader
   enova.bootloader = "grub";
 

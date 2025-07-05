@@ -172,6 +172,12 @@
     nix-direnv.enable = true;
   };
 
+  # Hint Electron apps to use Wayland:
+  home.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  # Hint video encoding to use radeon
+  home.sessionVariables.VDPAU_DRIVER = "radeonsi";
+
   xdg.configFile."gpu-screen-recorder/config_ui".source = ./gsr-ui.conf;
 
   #xdg.configFile.".gtkrc-2.0".force = lib.mkForce true;

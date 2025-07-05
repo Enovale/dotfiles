@@ -24,7 +24,12 @@ stdenv.mkDerivation rec {
     name = name;
     desktopName = "JDownloader";
     comment = "JDownloader download manager";
-    categories = [ "Network" "FileTransfer" "Graphics" "Utility" ];
+    categories = [
+      "Network"
+      "FileTransfer"
+      "Graphics"
+      "Utility"
+    ];
     icon = fetchurl {
       url = "https://aur.archlinux.org/cgit/aur.git/plain/jdownloader256.png?h=jdownloader2";
       hash = "sha256-bHoo7HLIYn6b8GpY1/a/7QdWMqZ0PhyAh9wPoGUmFQQ=";

@@ -3,13 +3,12 @@
   ...
 }:
 let
-  chromiumFlags = ''\
+  chromiumFlags = ''
     --enable-zero-copy \
     --ignore-gpu-blocklist \
     --enable-native-gpu-memory-buffers \
     --enable-gpu-rasterization \
-    --enable-features=VaapiVideoDecode,VaapiIgnoreDriverChecks,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,WebMachineLearningNeuralNetwork \
-    --enable-raw-draw \
+    --enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,AcceleratedVideoEncoder,Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo,WebMachineLearningNeuralNetwork \
     --enable-unsafe-webgpu \
     --enable-blink-features=MiddleClickAutoscroll \
     --password-store="kwallet6" \
