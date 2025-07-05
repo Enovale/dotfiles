@@ -6,15 +6,15 @@
     "configurations": [
         {
             "type": "node-terminal",
-            "name": "Build and Switch NixOS",
+            "name": "Test NixOS",
             "request": "launch",
-            "command": "rebuild-nix"
+            "command": "test-nix"
         },
         {
             "type": "node-terminal",
             "name": "Update, Build, & Switch NixOS",
             "request": "launch",
-            "command": "rebuild-nix update"
+            "command": "update-switch-nix"
         }
     ]
 }

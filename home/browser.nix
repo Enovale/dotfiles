@@ -137,6 +137,10 @@
         wayback-machine
         twitch-auto-points
         github-file-icons
+        theater-mode-for-youtube
+        tweaks-for-youtube
+        youtube-nonstop
+        youtube-screenshot-button
       ];
       settings = {
         "general.autoscroll" = true;
@@ -163,7 +167,7 @@
         "widget.use-xdg-desktop-portal.mime-handler" = 1;
         "widget.use-xdg-desktop-portal.open-uri" = 1;
         "widget.use-xdg-desktop-portal.settings" = 1;
-        "browser.cache.disk.parent_directory" = "/run/user/1000/librewolf";
+        #"browser.cache.disk.parent_directory" = "/run/user/1000/librewolf";
       };
     };
     policies = {
