@@ -27,10 +27,14 @@
 
     --brand-260: hsl(var(--brand-260-hsl)) !important;
     --brand-260-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 86.2%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(88.6% * var(--dark-lightness)), 98.6%) !important;
+    --brand-300: hsl(var(--brand-300-hsl)) !important;
+    --brand-300-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 86.1%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(77.5% * var(--dark-lightness)), 87.5%) !important;
     --brand-360: hsl(var(--brand-360-hsl)) !important;
     --brand-360-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 86.1%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(77.5% * var(--dark-lightness)), 87.5%) !important;
+    --brand-400: hsl(var(--brand-400-hsl)) !important;
+    --brand-400-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 85.7%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(64.7% * var(--dark-lightness)), 74.7%) !important;
     --brand-500: hsl(var(--brand-500-hsl)) !important;
-    --brand-500-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 85.6%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(64.7% * var(--dark-lightness)), 74.7%) !important;
+    --brand-500-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 85.7%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(64.7% * var(--dark-lightness)), 74.7%) !important;
     --brand-560: hsl(var(--brand-560-hsl)) !important;
     --brand-560-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 51.4%*calc(1 / calc(var(--dark-lightness) + 0.5))) min(calc(52.4% * var(--dark-lightness)), 42.4%) !important;
     --brand-600: hsl(var(--brand-600-hsl)) !important;
@@ -44,17 +48,33 @@
     --blue-430: hsl(var(--blue-430-hsl)) !important;
     --blue-430-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 100% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(45.3% * var(--myc-link-lightness)), 85.3%) !important;
 
-    --blue-new-42: var(--green-400) !important;
-    --blue-new-42-hsl: var(--green-400-hsl) !important;
+    --blue-new-42: var(--green-300) !important;
+    --blue-new-42-hsl: var(--green-300-hsl) !important;
 
-    --green-new-40: var(--green-400) !important;
-    --green-new-40-hsl: var(--green-400-hsl) !important;
+    --green-new-40: var(--green-300) !important;
+    --green-new-40-hsl: var(--green-300-hsl) !important;
+    --green-new-50: var(--brand-400) !important;
+    --green-new-50-hsl: var(--brand-400-hsl) !important;
+    --green-new-53: var(--brand-430) !important;
+    --green-new-53-hsl: var(--brand-430-hsl) !important;
+    --green-new-56: var(--brand-460) !important;
+    --green-new-56-hsl: var(--brand-460-hsl) !important;
+    --green-new-57: var(--brand-500) !important;
+    --green-new-57-hsl: var(--brand-500-hsl) !important;
 
-    --blurple-41: var(--green-400) !important;
-    --blurple-41-hsl: var(--green-400-hsl) !important;
+    --blurple-26: var(--green-260) !important;
+    --blurple-26-hsl: var(--green-260-hsl) !important;
+    --blurple-41: var(--green-300) !important;
+    --blurple-41-hsl: var(--green-300-hsl) !important;
+    --blurple-50: var(--brand-500) !important;
+    --blurple-50-hsl: var(--brand-500-hsl) !important;
 
+    /*
     --plum-17: var(--green-160) !important;
     --plum-17-hsl: var(--green-160-hsl) !important;
+    */
+
+    --red-400: var(--green-300) !important;
 
     --green-100: hsl(var(--green-100-hsl)) !important;
     --green-100-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 90% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(96.1% * var(--myc-link-lightness)), 99%) !important;
@@ -108,9 +128,6 @@
     --green-860-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 70.4% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(5.3% * var(--myc-link-lightness)), 99%) !important;
     --green-900: hsl(var(--green-900-hsl)) !important;
     --green-900-hsl: var(--accent-hue) calc(var(--saturation-factor, 1) * 58.3% * calc(1 / calc(var(--myc-link-lightness) + 0.5))) min(calc(4.7% * var(--myc-link-lightness)), 99%) !important;
-
-    --text-feedback-positive: var(--green-300);
-    --text-link: var(--green-300);
 
     --mention-background: var(--brand-500);
 

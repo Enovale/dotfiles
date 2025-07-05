@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    ungoogled-chromium
+  ];
+
   programs.librewolf = {
     enable = true;
     #package = pkgs.librewolf;
