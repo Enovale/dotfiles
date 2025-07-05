@@ -238,7 +238,29 @@
       android_sdk.accept_license = true;
       permittedInsecurePackages = [ "dotnet-runtime-7.0.20" ];
     };
-    overlays = [ inputs.nur.overlays.default ];
+    overlays = [
+      inputs.nur.overlays.default
+      # qt6ct-kde
+      (final: prev: {
+        qt6Packages = prev.qt6Packages // {
+          qt6ct = prev.qt6Packages.qt6ct.overrideAttrs (finalAttrs: {
+            src = final.fetchFromGitHub {
+              owner = "ilya-fedin";
+              repo = "qt6ct";
+              rev = finalAttrs.version;
+              hash = "sha256-ePY+BEpEcAq11+pUMjQ4XG358x3bXFQWwI1UAi+KmLo=";
+            };
+
+            buildInputs = with final.kdePackages; [
+              kcolorscheme
+              kconfig
+              kiconthemes
+              qtutilities
+            ];
+          });
+        };
+      })
+    ];
   };
 
   environment.pathsToLink = [ "/share/zsh" ];
