@@ -2,6 +2,7 @@
   config,
   inputs,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -11,13 +12,13 @@
   programs.appimage.binfmt = true;
 
   nixpkgs.overlays = with inputs; [
-    #millennium.overlays.default
+    millennium.overlays.default
   ];
 
   programs.java.enable = true;
   programs.steam = {
     enable = true;
-    #package = pkgs.millennium;
+    package = pkgs.steam-millennium;
     protontricks.enable = true;
 
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play

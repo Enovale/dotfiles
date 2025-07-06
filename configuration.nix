@@ -255,10 +255,23 @@
               kcolorscheme
               kconfig
               kiconthemes
-              qtutilities
+              qqc2-desktop-style
+              qtdeclarative
             ];
           });
         };
+      })
+      # Moonlight nightly
+      (final: prev: {
+        moonlight = prev.moonlight.overrideAttrs (finalAttrs: {
+          src = prev.fetchFromGitHub {
+            owner = "moonlight-mod";
+            repo = "moonlight";
+            #branch = "develop";
+            rev = "bd40423122af3114f7f9943774d0cb6da8a45807";
+            hash = "sha256-PgD2vrpM8MDLkpcdFHbdSMGJhoEgHlVIg0N/5B5TkUg=";
+          };
+        });
       })
     ];
   };
