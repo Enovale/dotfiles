@@ -15,6 +15,7 @@
   environment.systemPackages = with pkgs; [
     kdePackages.qtmultimedia
     kdePackages.plymouth-kcm
+    kdePackages.krdp
     expect
     nix-output-monitor
     nvd

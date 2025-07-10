@@ -28,6 +28,7 @@
       size = 12;
     };
 
+    gtk2.force = true;
     gtk2.extraConfig = ''
       gtk-application-prefer-dark-theme=ltrue
       gtk-enable-animations=1

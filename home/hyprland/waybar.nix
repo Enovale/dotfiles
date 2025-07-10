@@ -77,6 +77,8 @@
             mpv = "🎵";
             spotify = "";
             strawberry = "🍓";
+            firefox = "";
+            librewolf = "";
           };
           status-icons = {
             paused = "⏸";

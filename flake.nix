@@ -79,8 +79,8 @@
     anyrun-nixos-options.url = "github:n3oney/anyrun-nixos-options";
 
     millennium = {
-      #url = "git+https://github.com/SteamClientHomebrew/Millennium?ref=refs/pull/406/head";
-      url = "git+https://github.com/Enovale/Millennium?ref=refs/heads/next";
+      url = "git+https://github.com/SteamClientHomebrew/Millennium?ref=refs/heads/next";
+      #url = "git+https://github.com/Enovale/Millennium?ref=refs/heads/next";
     };
   };
 

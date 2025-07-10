@@ -165,6 +165,10 @@
     xdgOpenUsePortal = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
+      xdg-desktop-portal-shana
+      xdg-desktop-portal-luminous
+      xdg-desktop-portal-wlr
+      (callPackage ./home/xdg-desktop-portal-hypr-remote.nix { })
       kdePackages.xdg-desktop-portal-kde
     ];
   };
@@ -240,6 +244,21 @@
     };
     overlays = [
       inputs.nur.overlays.default
+      (final: prev: {
+        xdg-desktop-portal-wlr = (
+          prev.xdg-desktop-portal-wlr.overrideAttrs (finalAttrs: {
+            src = final.fetchFromGitHub {
+              owner = "David96";
+              repo = "xdg-desktop-portal-wlr";
+              rev = "remotedesktop";
+              sha256 = "sha256-yokK0DyZOx13eHBc+dbJhouKp/xcR7NlHON3jSd5o+E=";
+            };
+            buildInputs = [
+              final.libxkbcommon
+            ] ++ finalAttrs.buildInputs;
+          })
+        );
+      })
       # qt6ct-kde
       (final: prev: {
         qt6Packages = prev.qt6Packages // {
@@ -261,6 +280,7 @@
           });
         };
       })
+      /*
       # Moonlight nightly
       (final: prev: {
         moonlight = prev.moonlight.overrideAttrs (finalAttrs: {
@@ -273,6 +293,7 @@
           };
         });
       })
+      */
     ];
   };
 

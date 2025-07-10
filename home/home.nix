@@ -57,6 +57,7 @@
       fcast-receiver
       linux-wallpaperengine
       (callPackage ./jdownloader.nix { })
+      (callPackage ./media-fetcher.nix { })
     ]
     ++ (
       if !osConfig.systemIsQemu then
@@ -115,8 +116,8 @@
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
       xdg-desktop-portal-wlr
-      xdg-desktop-portal-shana
       xdg-desktop-portal-luminous
+      (callPackage ./xdg-desktop-portal-hypr-remote.nix { })
       kdePackages.xdg-desktop-portal-kde
     ];
     config = {
@@ -128,22 +129,22 @@
       };
       hyprland = {
         default = [
-          "shana"
           "hyprland"
           "wlr"
           "kde"
           "gtk"
+          "hypr-remote"
         ];
         "org.freedesktop.impl.portal.Settings" = [
-          "gtk"
+          "kde"
         ];
         "org.freedesktop.impl.portal.Screencast" = [
           "hyprland"
-          "wlr"
         ];
         "org.freedesktop.impl.portal.RemoteDesktop" = [
           "wlr"
-          "luminous"
+          #"hypr-remote"
+          #"luminous"
         ];
         "org.freedesktop.impl.portal.FileChooser" = [
           "kde"
@@ -177,13 +178,13 @@
 
   xdg.configFile."gpu-screen-recorder/config_ui".source = ./gsr-ui.conf;
 
-  #xdg.configFile.".gtkrc-2.0".force = lib.mkForce true;
-
   xdg.configFile."wireplumber/main.lua.d/99-stop-microphone-auto-adjust.lua".text = ''
     table.insert (default_access.rules,{
         matches = {
             {
-                { "application.process.binary", "=", "electron" }
+                { "application.process.binary", "=", "electron" },
+                { "application.process.binary", "=", "chromium" },
+                { "application.process.binary", "=", "discord" }
             }
         },
         default_permissions = "rx",

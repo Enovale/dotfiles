@@ -20,6 +20,7 @@ in
       #goofcord = prev.goofcord.override { commandLineArgs = chromiumFlags; };
       #legcord = prev.legcord.override { commandLineArgs = chromiumFlags; };
       vscodium = prev.vscodium.override { commandLineArgs = chromiumFlags; };
+      chromium = prev.chromium.override { commandLineArgs = chromiumFlags; };
       signal-desktop = prev.signal-desktop.override { commandLineArgs = chromiumFlags; };
       #cinny-desktop = prev.cinny-desktop.override { commandLineArgs = chromiumFlags; };
       vesktop = prev.vesktop.override { commandLineArgs = chromiumFlags; };
