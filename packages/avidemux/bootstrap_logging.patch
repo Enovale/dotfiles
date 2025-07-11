@@ -1,0 +1,17 @@
+diff --git a/bootStrap.bash b/bootStrap.bash
+index 68055cdfa..72d861410 100644
+--- a/bootStrap.bash
++++ b/bootStrap.bash
+@@ -88,10 +88,10 @@ Process() {
+     $ASAN \
+     $DEBUG \
+     -G "$BUILDER" \
+-    "$SOURCEDIR" >&/tmp/logCmake$BASE || fail "cmake,result in /tmp/logCmake$BASE"
++    "$SOURCEDIR"
+   $ADATE
+   echo "   $BASE:Build started..."
+-  ${MAKER} >&/tmp/log$BASE || fail "${MAKER}, result in /tmp/log$BASE"
++  ${MAKER}
+   if [ "x$PKG" != "x" ]; then
+     DESTDIR="${FAKEROOT_DIR}/tmp" $FAKEROOT_COMMAND ${MAKER} package || fail "packaging"
+   fi

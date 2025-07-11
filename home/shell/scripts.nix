@@ -1,18 +1,21 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
+    (writeShellScriptBin "install-bootloader" ''
+      sudo NIXOS_INSTALL_BOOTLOADER=1 /nix/var/nix/profiles/system/bin/switch-to-configuration boot
+    '')
     (writeShellScriptBin "switch-nix" ''
-      build-nix switch
+      build-nix switch $@
     '')
     (writeShellScriptBin "test-nix" ''
-      build-nix test
+      build-nix test $@
     '')
     (writeShellScriptBin "boot-nix" ''
-      build-nix boot
+      build-nix boot $@
     '')
     (writeShellScriptBin "update-switch-nix" ''
       update-nix
-      build-nix switch
+      build-nix switch $@
     '')
     (writeShellScriptBin "update-nix" ''
       pushd ~/nixos/ >& /dev/null
@@ -26,15 +29,20 @@
     '')
     (writeShellScriptBin "inspect-nix" ''
       pushd ~/nixos/ >& /dev/null
-      nix repl ~/nixos/#nixosConfigurations.crystalline
+      nix repl ~/nixos/#nixosConfigurations.crystalline $@
       popd >& /dev/null
     '')
     (writeShellScriptBin "clean-nix" ''
-      nix-store --gc
+      nix-store --gc $@
     '')
     (writeShellScriptBin "rc2nix" ''
-      nix run github:nix-community/plasma-manager > ~/Downloads/plasma-manager.nix
+      nix run github:nix-community/plasma-manager $@ > ~/Downloads/plasma-manager.nix
       $EDITOR ~/Downloads/plasma-manager.nix
+    '')
+    (writeShellScriptBin "reboot-windows" ''
+      b=$(efibootmgr | grep Windows)
+      sudo ${efibootmgr}/bin/efibootmgr -n ${b:4:4} 
+      reboot
     '')
   ];
 }

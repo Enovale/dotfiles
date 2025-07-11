@@ -10,5 +10,10 @@
       co = "checkout";
       s = "status";
     };
+    extraConfig = {
+      core = {
+        autocrlf = "input";
+      };
+    };
   };
 }

@@ -54,6 +54,7 @@
       gamescope
       songrec
       avidemux
+      #(callPackage ../packages/avidemux {})
       fcast-receiver
       linux-wallpaperengine
       (callPackage ./jdownloader.nix { })

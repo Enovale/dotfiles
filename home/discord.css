@@ -19,7 +19,7 @@ a[href="/store"],
 /* Get rid of top bar */
 .visual-refresh {
     div[class^="base_"] {
-        grid-template-rows: auto;
+        /* grid-template-rows: auto; */
         & > div[class^="bar_"] {
             display: none;
         }
@@ -30,6 +30,7 @@ a[href="/store"],
 }
 
 :root {
+    --custom-app-top-bar-height: 0px !important;
     --__spoiler-background-color--hidden: #111111;
     --__spoiler-background-color--hidden--hover: #222222;
     --theme-l: 0%;
