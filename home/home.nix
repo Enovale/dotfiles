@@ -23,6 +23,7 @@
     with pkgs;
     [
       btrfs-assistant
+      ripsecrets
       wget
       mpv
       comma

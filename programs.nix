@@ -19,6 +19,7 @@
     expect
     nix-output-monitor
     nvd
+    unrar
     nodePackages.node2nix
     git
     btrfs-progs

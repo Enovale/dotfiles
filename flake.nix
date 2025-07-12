@@ -82,6 +82,11 @@
       url = "git+https://github.com/SteamClientHomebrew/Millennium?ref=refs/heads/next";
       #url = "git+https://github.com/Enovale/Millennium?ref=refs/heads/next";
     };
+
+    moonlight = {
+      url = "github:moonlight-mod/moonlight/develop"; # Add `/develop` to the flake URL to use nightly.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -113,6 +118,7 @@
                 inputs.nix-colors.homeManagerModules.default
                 inputs.plasma-manager.homeManagerModules.plasma-manager
                 inputs.kidex.homeModules.kidex
+                inputs.moonlight.homeModules.default
               ];
 
               users.enova = import ./home/home.nix;

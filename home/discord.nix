@@ -2,8 +2,6 @@
   config,
   pkgs,
   inputs,
-  vulkan-headers,
-  vulkan-loader,
   ...
 }:
 {
@@ -27,11 +25,7 @@
         IS_MAXIMIZED = true;
         IS_MINIMIZED = false;
       };
-      package = (
-        pkgs.discord.override {
-          withMoonlight = true;
-        }
-      );
+      package = pkgs.discord;
     };
   };
 }

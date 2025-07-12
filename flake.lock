@@ -368,6 +368,24 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_4"
+      },
+      "locked": {
+        "lastModified": 1701680307,
+        "narHash": "sha256-kAuep2h5ajznlPMD9rnQyffWG8EM/C73lejGofXvdM8=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "4022d587cbbfd70fe950c1e2083a02621806a725",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -763,6 +781,28 @@
         "ref": "refs/heads/next",
         "type": "git",
         "url": "https://github.com/SteamClientHomebrew/Millennium"
+      }
+    },
+    "moonlight": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1752099881,
+        "narHash": "sha256-mn6f4ci5C2jkyxgmBHQ4dI9V0/20DlyS6EbQz4w7znc=",
+        "owner": "moonlight-mod",
+        "repo": "moonlight",
+        "rev": "dbef0c38e1c0066de5ec35a4d4219026b1bd7010",
+        "type": "github"
+      },
+      "original": {
+        "owner": "moonlight-mod",
+        "ref": "develop",
+        "repo": "moonlight",
+        "type": "github"
       }
     },
     "naersk": {
@@ -1240,6 +1280,7 @@
         "import-tree": "import-tree",
         "kidex": "kidex",
         "millennium": "millennium",
+        "moonlight": "moonlight",
         "nix-colors": "nix-colors",
         "nix-index-database": "nix-index-database",
         "nixcord": "nixcord",
@@ -1314,6 +1355,21 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "systems_4": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
         "type": "github"
       }
     },
