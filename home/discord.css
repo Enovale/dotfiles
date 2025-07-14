@@ -4,25 +4,13 @@
 .artContainer_a55fdc,
 .nativePickerGuide_afdbcd,
 .headerImage__08bd2,
+.art__4ad81,
 button[aria-label="Send a gift"],
 button[aria-label="Start An Activity"],
 a[href="/shop"],
 a[href="/store"],
 .channelAppLauncher_e6e74f {
     display: none !important;
-}
-
-/* Get rid of top bar */
-.visual-refresh {
-    div[class^="base_"] {
-        /* grid-template-rows: auto; */
-        & > div[class^="bar_"] {
-            display: none;
-        }
-    }
-    ul[data-list-id="guildsnav"] > div[class^="itemsContainer_"] {
-        margin-top: 16px;
-    }
 }
 
 :root {
@@ -80,10 +68,14 @@ a[href="/store"],
     --green-new-50-hsl: var(--brand-400-hsl) !important;
     --green-new-53: var(--brand-430) !important;
     --green-new-53-hsl: var(--brand-430-hsl) !important;
+    --green-new-55: var(--brand-560) !important;
+    --green-new-55-hsl: var(--brand-560-hsl) !important;
     --green-new-56: var(--brand-460) !important;
     --green-new-56-hsl: var(--brand-460-hsl) !important;
     --green-new-57: var(--brand-500) !important;
     --green-new-57-hsl: var(--brand-500-hsl) !important;
+    --green-new-62: var(--brand-600) !important;
+    --green-new-62-hsl: var(--brand-600-hsl) !important;
     --green-new-94: var(--green-900) !important;
 
     --blurple-26: var(--green-260) !important;
@@ -92,6 +84,10 @@ a[href="/store"],
     --blurple-41-hsl: var(--green-300-hsl) !important;
     --blurple-50: var(--brand-500) !important;
     --blurple-50-hsl: var(--brand-500-hsl) !important;
+    --blurple-60: var(--brand-600) !important;
+    --blurple-60-hsl: var(--brand-600-hsl) !important;
+    --blurple-65: var(--green-700) !important;
+    --blurple-65-hsl: var(--green-700-hsl) !important;
 
     /*
     --plum-17: var(--green-160) !important;
@@ -170,6 +166,11 @@ a[href="/store"],
     --switch-knob-color: hsl(0, 0%, 47%);
     --switch-knob-color-modal: hsl(0, 0%, 56%);
     --switch-knob-checked: var(--accent-text-color);
+}
+
+/* Staff tags plugin */
+.staffTags-tag-icon path {
+    fill: var(--brand-300);
 }
 
 /* Gif picker images before they are loaded */

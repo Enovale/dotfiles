@@ -66,6 +66,7 @@
         # Don't want to include very large packages in a light env
         [
           audacity
+          teamspeak6-client
           ardour
           easytag
           kid3-kde
