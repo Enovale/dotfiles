@@ -244,7 +244,6 @@
     };
     overlays = [
       inputs.nur.overlays.default
-      inputs.moonlight.overlays.default
       (final: prev: {
         xdg-desktop-portal-wlr = (
           prev.xdg-desktop-portal-wlr.overrideAttrs (finalAttrs: {

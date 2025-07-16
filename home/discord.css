@@ -30,6 +30,7 @@ a[href="/store"],
     --default-time: 250ms;
     --default-animation: cubic-bezier(0.4, 0, 0.2, 1);
 
+    --neutral-62: #111111 !important;
     --neutral-64: #111111 !important;
 
     --brand-260: hsl(var(--brand-260-hsl)) !important;
@@ -89,10 +90,8 @@ a[href="/store"],
     --blurple-65: var(--green-700) !important;
     --blurple-65-hsl: var(--green-700-hsl) !important;
 
-    /*
-    --plum-17: var(--green-160) !important;
-    --plum-17-hsl: var(--green-160-hsl) !important;
-    */
+    --plum-17: var(--neutral-64) !important;
+    --plum-17-hsl: var(--neutral-64-hsl) !important;
 
     --red-400: var(--brand-300) !important;
     --red-430: var(--brand-330) !important;

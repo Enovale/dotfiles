@@ -15,7 +15,12 @@
     millennium.overlays.default
   ];
 
-  programs.java.enable = true;
+  programs.java = {
+    enable = true;
+    package = pkgs.jdk;
+    binfmt = true;
+  };
+
   programs.steam = {
     enable = true;
     package = pkgs.steam-millennium;

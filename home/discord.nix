@@ -25,7 +25,10 @@
         IS_MAXIMIZED = true;
         IS_MINIMIZED = false;
       };
-      package = pkgs.discord;
+      package = pkgs.discord.override {
+        withMoonlight = true;
+        moonlight = inputs.moonlight.packages.${pkgs.system}.moonlight;
+      };
     };
   };
 }
