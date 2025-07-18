@@ -37,6 +37,8 @@
     #}))
   ];
 
+  environment.localBinInPath = true;
+
   services.flatpak.enable = true;
   systemd.services.flatpak-repo = {
     wantedBy = [ "multi-user.target" ];
@@ -45,6 +47,8 @@
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     '';
   };
+
+  programs.nix-ld.enable = true;
 
   programs.gpu-screen-recorder = {
     enable = true;

@@ -44,12 +44,12 @@
       file
       signal-desktop
       cinny-desktop
-      strawberry
+      #strawberry
+      #tauon
       zsh-powerlevel10k
       lutris
       josm
       lxqt.pavucontrol-qt
-      prismlauncher
       tree
       gale
       gamescope
@@ -72,22 +72,23 @@
           kid3-kde
           gimp3-with-plugins
           inkscape
-          scanmem
+          #scanmem
           iaito
+          #(prismlauncher.override { jdks = [ jdk8 jdk17 jdk21 jdk ]; })
           libreoffice
           libresprite
           wineWowPackages.waylandFull
           blender
           godot-mono
-          jetbrains.rider
-          jetbrains.rust-rover
-          jetbrains.clion
-          jetbrains.pycharm-community
-          jetbrains.idea-community
+          #jetbrains.rider
+          #jetbrains.rust-rover
+          #jetbrains.clion
+          #jetbrains.pycharm-community
+          #jetbrains.idea-community
+          #android-studio
           android-udev-rules
           android-tools
           scrcpy
-          android-studio
           osu-lazer-bin
           vintagestory
           wlx-overlay-s
@@ -167,13 +168,6 @@
     settings = {
       no_display = true;
     };
-  };
-
-  programs.direnv = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    nix-direnv.enable = true;
   };
 
   # Hint Electron apps to use Wayland:
