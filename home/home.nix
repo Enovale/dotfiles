@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
@@ -51,15 +52,14 @@
       josm
       lxqt.pavucontrol-qt
       tree
-      gale
+      #gale
       gamescope
       songrec
       avidemux
-      #(callPackage ../packages/avidemux {})
       fcast-receiver
       linux-wallpaperengine
-      (callPackage ./jdownloader.nix { })
-      (callPackage ./media-fetcher.nix { })
+      jdownloader2
+      media-fetcher
     ]
     ++ (
       if !osConfig.systemIsQemu then
@@ -121,7 +121,7 @@
       xdg-desktop-portal-gtk
       xdg-desktop-portal-wlr
       xdg-desktop-portal-luminous
-      (callPackage ./xdg-desktop-portal-hypr-remote.nix { })
+      xdg-desktop-portal-hypr-remote
       kdePackages.xdg-desktop-portal-kde
     ];
     config = {

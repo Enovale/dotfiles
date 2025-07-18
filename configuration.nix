@@ -44,6 +44,7 @@
         "https://nix-community.cachix.org"
         "https://nixpkgs-wayland.cachix.org"
         "https://niri.cachix.org"
+        "https://cache.tgirl.cloud/tgirlcloud"
       ];
       trusted-public-keys = [
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
@@ -51,6 +52,7 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
         "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+        "tgirlcloud:vcV9oxS9pLXyeu1dVnBabLalLlw0yJzu6PakQM372t0="
       ];
     };
   };
@@ -168,7 +170,7 @@
       xdg-desktop-portal-shana
       xdg-desktop-portal-luminous
       xdg-desktop-portal-wlr
-      (callPackage ./home/xdg-desktop-portal-hypr-remote.nix { })
+      xdg-desktop-portal-hypr-remote
       kdePackages.xdg-desktop-portal-kde
     ];
   };
@@ -243,6 +245,8 @@
       permittedInsecurePackages = [ "dotnet-runtime-7.0.20" ];
     };
     overlays = [
+      inputs.self.overlays.default
+      inputs.tgirlpkgs.overlays.default
       inputs.nur.overlays.default
       (final: prev: {
         xdg-desktop-portal-wlr = (

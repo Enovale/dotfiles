@@ -87,6 +87,15 @@
       url = "github:moonlight-mod/moonlight/develop"; # Add `/develop` to the flake URL to use nightly.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    tgirlpkgs = {
+      url = "github:tgirlcloud/pkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        # flakes users don't need to track flake-compact
+        flake-compact.follows = "";
+      };
+    };
   };
 
   outputs =
@@ -97,12 +106,57 @@
       nur,
       ...
     }:
+    let
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+      customPkgs = import ./packages { inherit (pkgs) callPackage; };
+    in
     {
+      packages."x86_64-linux" = customPkgs;
+
+      overlays.default = final: prev: customPkgs;
+
+      # taken and slightly modified from
+      # https://github.com/lilyinstarlight/nixos-cosmic/blob/0b0e62252fb3b4e6b0a763190413513be499c026/flake.nix#L81
+      apps."x86_64-linux" = with nixpkgs; {
+        update = {
+          type = "app";
+          program = lib.getExe (
+            pkgs.writeShellApplication {
+              name = "update";
+
+              text = lib.concatStringsSep "\n" (
+                lib.mapAttrsToList (
+                  name: pkg:
+                  if pkg ? updateScript && (lib.isList pkg.updateScript) && (lib.length pkg.updateScript) > 0 then
+                    lib.escapeShellArgs (
+                      if (lib.match "nix-update|.*/nix-update" (lib.head pkg.updateScript) != null) then
+                        [ (lib.getExe pkgs.nix-update) ]
+                        ++ (lib.tail pkg.updateScript)
+                        ++ [
+                          "--commit"
+                          name
+                        ]
+                      else
+                        pkg.updateScript
+                    )
+                  else
+                    builtins.toString pkg.updateScript or ""
+                ) self.packages.${pkgs.stdenv.hostPlatform.system}
+              );
+            }
+          );
+        };
+      };
+
       nixosConfigurations.crystalline = nixpkgs.lib.nixosSystem {
         modules = [
           ./globals.nix
           ./qemu_check.nix
           ./configuration.nix
+          inputs.tgirlpkgs.nixosModules.default
           nur.modules.nixos.default
           home-manager.nixosModules.home-manager
           {
@@ -119,6 +173,7 @@
                 inputs.plasma-manager.homeManagerModules.plasma-manager
                 inputs.kidex.homeModules.kidex
                 inputs.moonlight.homeModules.default
+                inputs.tgirlpkgs.homeManagerModules.default
               ];
 
               users.enova = import ./home/home.nix;
