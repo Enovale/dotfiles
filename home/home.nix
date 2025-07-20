@@ -74,7 +74,7 @@
           inkscape
           #scanmem
           iaito
-          #(prismlauncher.override { jdks = [ jdk8 jdk17 jdk21 jdk ]; })
+          (prismlauncher.override { jdks = [ jdk8 jdk17 jdk21 jdk ]; })
           libreoffice
           libresprite
           wineWowPackages.waylandFull

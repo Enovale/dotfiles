@@ -3,6 +3,7 @@
   fetchurl ? pkgs.fetchurl,
   makeWrapper,
   jre,
+  inputs
 }:
 with pkgs;
 stdenv.mkDerivation rec {
@@ -11,10 +12,7 @@ stdenv.mkDerivation rec {
   dontUnpack = true;
 
   # sources that will be used for our derivation.
-  src = fetchurl {
-    url = "https://installer.jdownloader.org/JDownloader.jar";
-    hash = "sha256-DBiUEh1fXFF5/Qf3/+mQ34iVK9p7QOG1WefxSyC99t4=";
-  };
+  src = inputs.jdownloader;
 
   meta.mainProgram = "jdownloader2";
 

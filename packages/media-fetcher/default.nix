@@ -4,17 +4,13 @@
   dbus,
   fetchFromGitHub,
   rustPlatform,
+  inputs,
 }:
 rustPlatform.buildRustPackage (finalAttrs: rec {
   pname = "media-fetcher";
   version = "14.1.1";
 
-  src = fetchFromGitHub {
-    owner = "NotNite";
-    repo = "my-moonlight-extensions";
-    rev = "78f1a5d55c65f87426b112129e4b9125d6670b7c";
-    sha256 = "sha256-g+mGOcERHX3ZaIBS+0d3gRBxKyRxL9GyzGBP+2sAUIo=";
-  };
+  src = inputs.media-fetcher;
 
   nativeBuildInputs = [
     pkg-config
@@ -24,12 +20,16 @@ rustPlatform.buildRustPackage (finalAttrs: rec {
     dbus
   ];
 
-  sourceRoot = "${src.name}/src/mediaControls/media-fetcher";
+  sourceRoot = "./";
+  preUnpack = ''
+    cp -r ${src}/src/mediaControls/media-fetcher/* ./
+  '';
+
   cargoHash = "sha256-Hrn47kGCqgoAMgrEgpRj4a38+7vhVZFrLUR2vXU7Sb4=";
 
   meta = with lib; {
-    description = "Fast line-oriented regex search tool, similar to ag and ack";
-    homepage = "https://github.com/BurntSushi/ripgrep";
+    description = "Media fetcher for moonlight plugin";
+    homepage = "https://github.com/NotNite/my-moonlight-extensions";
     license = licenses.unlicense;
     maintainers = [ maintainers.enova ];
   };

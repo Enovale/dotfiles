@@ -267,12 +267,7 @@
       (final: prev: {
         qt6Packages = prev.qt6Packages // {
           qt6ct = prev.qt6Packages.qt6ct.overrideAttrs (finalAttrs: {
-            src = final.fetchFromGitHub {
-              owner = "ilya-fedin";
-              repo = "qt6ct";
-              rev = finalAttrs.version;
-              hash = "sha256-ePY+BEpEcAq11+pUMjQ4XG358x3bXFQWwI1UAi+KmLo=";
-            };
+            src = inputs.qt6ct-kde;
 
             buildInputs = with final.kdePackages; [
               kcolorscheme

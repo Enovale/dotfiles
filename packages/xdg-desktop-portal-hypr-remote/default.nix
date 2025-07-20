@@ -11,18 +11,14 @@
   libei,
   sdbus-cpp,
   systemd,
+  inputs,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "xdg-desktop-portal-hypr-remote";
   version = "1.0.0";
 
-  src = fetchFromGitHub {
-    owner = "gac3k";
-    repo = "xdg-desktop-portal-hypr-remote";
-    rev = "f463018129c5effd3b82b477d7f84fe0d0820a6b";
-    hash = "sha256-hbRlPcrPWOKWZvLlnsw37/s4P+bLRq59n+R9qtVbIXc=";
-  };
+  src = inputs.xdg-desktop-portal-hypr-remote;
 
   cmakeFlags = [
     "-DDEVELOPMENT_MODE=OFF"

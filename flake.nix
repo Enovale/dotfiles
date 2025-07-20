@@ -96,6 +96,32 @@
         flake-compact.follows = "";
       };
     };
+
+    jdownloader = {
+      url = "https://installer.jdownloader.org/JDownloader.jar";
+      flake = false;
+    };
+
+    media-fetcher = {
+      type = "github";
+      owner = "NotNite";
+      repo = "my-moonlight-extensions";
+      flake = false;
+    };
+
+    xdg-desktop-portal-hypr-remote = {
+      type = "github";
+      owner = "gac3k";
+      repo = "xdg-desktop-portal-hypr-remote";
+      flake = false;
+    };
+
+    qt6ct-kde = {
+      type = "github";
+      owner = "ilya-fedin";
+      repo = "qt6ct";
+      flake = false;
+    };
   };
 
   outputs =
@@ -111,7 +137,10 @@
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
-      customPkgs = import ./packages { inherit (pkgs) callPackage; };
+      customPkgs = import ./packages {
+        inherit (pkgs) callPackage;
+        inherit inputs;
+      };
     in
     {
       packages."x86_64-linux" = customPkgs;

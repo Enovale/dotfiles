@@ -44,6 +44,7 @@
   withCLI ? true,
   default ? "qt6",
   withPlugins ? true,
+  inputs,
 }:
 
 assert default != "qt6" -> default == "cli";
