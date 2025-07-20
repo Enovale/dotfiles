@@ -2,8 +2,6 @@
   description = "NixOS Configuration Flake";
 
   inputs = {
-    self.submodules = true;
-
     # This is pointing to an unstable release.
     # If you prefer a stable release instead, you can this to the latest number shown here: https://nixos.org/download
     # i.e. nixos-24.11
@@ -67,6 +65,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    gpu-screen-recorder-ui.url = "github:Enovale/gsrui-nix";
+
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -92,8 +92,6 @@
       url = "github:tgirlcloud/pkgs";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        # flakes users don't need to track flake-compact
-        flake-compact.follows = "";
       };
     };
 
@@ -128,6 +126,7 @@
     inputs@{
       self,
       nixpkgs,
+      tgirlpkgs,
       home-manager,
       nur,
       ...
@@ -185,7 +184,8 @@
           ./globals.nix
           ./qemu_check.nix
           ./configuration.nix
-          inputs.tgirlpkgs.nixosModules.default
+          inputs.gpu-screen-recorder-ui.nixosModules.default
+          tgirlpkgs.nixosModules.default
           nur.modules.nixos.default
           home-manager.nixosModules.home-manager
           {
@@ -195,14 +195,14 @@
               backupFileExtension = "hm-bak";
 
               sharedModules = [
-                inputs.nix-index-database.hmModules.nix-index
+                inputs.nix-index-database.homeModules.nix-index
                 inputs.nur.modules.homeManager.default
                 inputs.nixcord.homeModules.nixcord
                 inputs.nix-colors.homeManagerModules.default
                 inputs.plasma-manager.homeManagerModules.plasma-manager
                 inputs.kidex.homeModules.kidex
                 inputs.moonlight.homeModules.default
-                inputs.tgirlpkgs.homeManagerModules.default
+                inputs.tgirlpkgs.homeModules.default
               ];
 
               users.enova = import ./home/home.nix;

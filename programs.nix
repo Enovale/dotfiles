@@ -6,7 +6,6 @@
 }:
 {
   imports = [
-    ./gpu-screen-recorder-ui
     ./electron_flags.nix
   ];
 

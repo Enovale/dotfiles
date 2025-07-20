@@ -8,34 +8,22 @@
   services.xserver.videoDrivers = [ (if config.systemIsQemu then "qxl" else "amdgpu") ];
 
   systemd.tmpfiles.rules =
-    if !config.systemIsQemu then
-      let
-        rocmEnv = pkgs.symlinkJoin {
-          name = "rocm-combined";
-          paths = with pkgs.rocmPackages; [
-            rocblas
-            hipblas
-            clr
-          ];
-        };
-      in
-      [
-        "L+    /opt/rocm   -    -    -     -    ${rocmEnv}"
-      ]
-    else
-      [ ];
+    let
+      rocmEnv = pkgs.symlinkJoin {
+        name = "rocm-combined";
+        paths = with pkgs.rocmPackages; [
+          rocblas
+          hipblas
+          clr
+        ];
+      };
+    in
+    lib.optional (!config.systemIsQemu) "L+    /opt/rocm   -    -    -     -    ${rocmEnv}";
 
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages =
-      with pkgs;
-      if !config.systemIsQemu then
-        [
-          libvdpau-va-gl
-        ]
-      else
-        [ ];
+    extraPackages = lib.optional (!config.systemIsQemu) pkgs.libvdpau-va-gl;
   };
 
   programs.gamemode = {
@@ -49,16 +37,12 @@
     VDPAU_DRIVER = "radeonsi";
   };
 
-  hardware.amdgpu =
-    if !config.systemIsQemu then
-      {
-        initrd.enable = true;
-        overdrive.enable = true;
-        opencl.enable = true;
-        amdvlk.enable = false;
-      }
-    else
-      { };
+  hardware.amdgpu = lib.optionalAttrs (!config.systemIsQemu) {
+    initrd.enable = true;
+    overdrive.enable = true;
+    opencl.enable = true;
+    amdvlk.enable = false;
+  };
 
   environment.systemPackages = with pkgs; [
     clinfo

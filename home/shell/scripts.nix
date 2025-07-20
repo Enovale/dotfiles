@@ -27,7 +27,7 @@
       nixos-rebuild $1 --flake ~/nixos/ --sudo --impure --log-format internal-json ''${@:2} |& nom --json
       popd >& /dev/null
     '')
-    (writeShellScriptBin "inspect-nix" ''
+    (writeShellScriptBin "repl-nix" ''
       pushd ~/nixos/ >& /dev/null
       nix repl ~/nixos/#nixosConfigurations.crystalline $@
       popd >& /dev/null

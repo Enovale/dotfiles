@@ -45,14 +45,14 @@
       file
       signal-desktop
       cinny-desktop
-      #strawberry
+      strawberry
       #tauon
       zsh-powerlevel10k
       lutris
       josm
       lxqt.pavucontrol-qt
       tree
-      #gale
+      gale
       gamescope
       songrec
       avidemux
@@ -60,42 +60,47 @@
       linux-wallpaperengine
       jdownloader2
       media-fetcher
+      nix-inspect
     ]
-    ++ (
-      if !osConfig.systemIsQemu then
-        # Don't want to include very large packages in a light env
-        [
-          audacity
-          teamspeak6-client
-          ardour
-          easytag
-          kid3-kde
-          gimp3-with-plugins
-          inkscape
-          #scanmem
-          iaito
-          (prismlauncher.override { jdks = [ jdk8 jdk17 jdk21 jdk ]; })
-          libreoffice
-          libresprite
-          wineWowPackages.waylandFull
-          blender
-          godot-mono
-          #jetbrains.rider
-          #jetbrains.rust-rover
-          #jetbrains.clion
-          #jetbrains.pycharm-community
-          #jetbrains.idea-community
-          #android-studio
-          android-udev-rules
-          android-tools
-          scrcpy
-          osu-lazer-bin
-          vintagestory
-          wlx-overlay-s
-          (xivlauncher-rb.override { useGameMode = true; })
-        ]
-      else
-        [ ]
+    ++ (lib.optionals (!osConfig.systemIsQemu)
+      # Don't want to include very large packages in a light env
+      [
+        audacity
+        teamspeak6-client
+        ardour
+        easytag
+        kid3-kde
+        gimp3-with-plugins
+        inkscape
+        scanmem
+        iaito
+        (prismlauncher.override {
+          jdks = [
+            jdk8
+            jdk17
+            jdk21
+            jdk
+          ];
+        })
+        libreoffice
+        libresprite
+        wineWowPackages.waylandFull
+        blender
+        godot-mono
+        #jetbrains.rider
+        #jetbrains.rust-rover
+        #jetbrains.clion
+        #jetbrains.pycharm-community
+        #jetbrains.idea-community
+        #android-studio
+        android-udev-rules
+        android-tools
+        scrcpy
+        osu-lazer-bin
+        vintagestory
+        wlx-overlay-s
+        (xivlauncher-rb.override { useGameMode = true; })
+      ]
     );
 
   services.kdeconnect.enable = true;
