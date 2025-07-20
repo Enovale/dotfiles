@@ -802,18 +802,6 @@
         "type": "github"
       }
     },
-    "jdownloader": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-JMA9s3oM/SrYw17D+HHSg4ICQ/T3LPqxZ5oo8s2teog=",
-        "type": "file",
-        "url": "https://installer.jdownloader.org/JDownloader.jar"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://installer.jdownloader.org/JDownloader.jar"
-      }
-    },
     "kidex": {
       "inputs": {
         "flake-parts": "flake-parts_4",
@@ -831,22 +819,6 @@
       "original": {
         "owner": "Kirottu",
         "repo": "kidex",
-        "type": "github"
-      }
-    },
-    "media-fetcher": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1752190949,
-        "narHash": "sha256-EMCQFJELfU92bPjqytHDaj1kA+DLmBjLgTZ8psPkpcg=",
-        "owner": "NotNite",
-        "repo": "my-moonlight-extensions",
-        "rev": "033fbf68560b6000004b591d9570075bdc884a44",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NotNite",
-        "repo": "my-moonlight-extensions",
         "type": "github"
       }
     },
@@ -1254,11 +1226,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1753007208,
-        "narHash": "sha256-O3bHFcg8w7FYTlty+6/eG4vBOhWQxHnlpaDK+ihGOUA=",
+        "lastModified": 1753011846,
+        "narHash": "sha256-Njc3BIUu1wosqZXJpEs3TcIQvKRuRNkI5AKl6X1x/dM=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "0bf1467c24e91ef089e91438b73b585b6cc63a6a",
+        "rev": "9ebd6026f445b63a1442662acffeaebb5c8fad63",
         "type": "github"
       },
       "original": {
@@ -1400,9 +1372,7 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "import-tree": "import-tree",
-        "jdownloader": "jdownloader",
         "kidex": "kidex",
-        "media-fetcher": "media-fetcher",
         "millennium": "millennium",
         "moonlight": "moonlight",
         "nix-colors": "nix-colors",
@@ -1416,8 +1386,7 @@
         "qt6ct-kde": "qt6ct-kde",
         "rust-overlay": "rust-overlay",
         "tgirlpkgs": "tgirlpkgs",
-        "treefmt-nix": "treefmt-nix_2",
-        "xdg-desktop-portal-hypr-remote": "xdg-desktop-portal-hypr-remote"
+        "treefmt-nix": "treefmt-nix_2"
       }
     },
     "rust-analyzer-src": {
@@ -1590,22 +1559,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "xdg-desktop-portal-hypr-remote": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1749497819,
-        "narHash": "sha256-hbRlPcrPWOKWZvLlnsw37/s4P+bLRq59n+R9qtVbIXc=",
-        "owner": "gac3k",
-        "repo": "xdg-desktop-portal-hypr-remote",
-        "rev": "f463018129c5effd3b82b477d7f84fe0d0820a6b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gac3k",
-        "repo": "xdg-desktop-portal-hypr-remote",
         "type": "github"
       }
     },

@@ -20,6 +20,7 @@
     (writeShellScriptBin "update-nix" ''
       pushd ~/nixos/ >& /dev/null
       nix flake update --flake ~/nixos/
+      nix run ~/nixos#update
       popd >& /dev/null
     '')
     (writeShellScriptBin "build-nix" ''

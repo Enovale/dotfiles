@@ -11,14 +11,27 @@
   libei,
   sdbus-cpp,
   systemd,
+  nix-update-script,
   inputs,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "xdg-desktop-portal-hypr-remote";
-  version = "1.0.0";
+  version = "0-unstable-2025-06-09";
 
-  src = inputs.xdg-desktop-portal-hypr-remote;
+  src = fetchFromGitHub {
+    owner = "gac3k";
+    repo = "xdg-desktop-portal-hypr-remote";
+    rev = "f463018129c5effd3b82b477d7f84fe0d0820a6b";
+    hash = "sha256-hbRlPcrPWOKWZvLlnsw37/s4P+bLRq59n+R9qtVbIXc=";
+  };
+
+  passthru.updateScript = nix-update-script {
+    extraArgs = [
+      "--version"
+      "branch=HEAD"
+    ];
+  };
 
   cmakeFlags = [
     "-DDEVELOPMENT_MODE=OFF"

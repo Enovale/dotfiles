@@ -1,4 +1,4 @@
-{ pkgs, stdenv, fetchzip, ... }:
+{ pkgs, stdenv, fetchzip, nix-update-script, ... }:
 let
   protonVersion = "8-28";
 in
@@ -10,6 +10,8 @@ stdenv.mkDerivation {
     url = "https://github.com/R2NorthstarTools/NorthstarProton/releases/download/v${protonVersion}/NorthstarProton${protonVersion}.tar.gz";
     hash = "sha256-wCWFnirscv+oKs6v+ZNXVwM/ZnSZsjvMUt/ZKbKZnMg=";
   };
+
+  passthru.updateScript = nix-update-script { };
 
   outputs = [
     "out"

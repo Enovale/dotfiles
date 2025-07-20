@@ -95,25 +95,6 @@
       };
     };
 
-    jdownloader = {
-      url = "https://installer.jdownloader.org/JDownloader.jar";
-      flake = false;
-    };
-
-    media-fetcher = {
-      type = "github";
-      owner = "NotNite";
-      repo = "my-moonlight-extensions";
-      flake = false;
-    };
-
-    xdg-desktop-portal-hypr-remote = {
-      type = "github";
-      owner = "gac3k";
-      repo = "xdg-desktop-portal-hypr-remote";
-      flake = false;
-    };
-
     qt6ct-kde = {
       type = "github";
       owner = "ilya-fedin";
@@ -164,6 +145,7 @@
                         [ (lib.getExe pkgs.nix-update) ]
                         ++ (lib.tail pkg.updateScript)
                         ++ [
+                          "--flake"
                           "--commit"
                           name
                         ]

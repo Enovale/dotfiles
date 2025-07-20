@@ -4,13 +4,26 @@
   dbus,
   fetchFromGitHub,
   rustPlatform,
+  nix-update-script,
   inputs,
 }:
 rustPlatform.buildRustPackage (finalAttrs: rec {
   pname = "media-fetcher";
-  version = "14.1.1";
+  version = "media-fetcher-releases-unstable-2025-07-10";
 
-  src = inputs.media-fetcher;
+  src = fetchFromGitHub {
+    owner = "NotNite";
+    repo = "my-moonlight-extensions";
+    rev = "033fbf68560b6000004b591d9570075bdc884a44";
+    sha256 = "sha256-EMCQFJELfU92bPjqytHDaj1kA+DLmBjLgTZ8psPkpcg=";
+  };
+
+  passthru.updateScript = nix-update-script {
+    extraArgs = [
+      "--version"
+      "branch=HEAD"
+    ];
+  };
 
   nativeBuildInputs = [
     pkg-config
@@ -20,10 +33,7 @@ rustPlatform.buildRustPackage (finalAttrs: rec {
     dbus
   ];
 
-  sourceRoot = "./";
-  preUnpack = ''
-    cp -r ${src}/src/mediaControls/media-fetcher/* ./
-  '';
+  sourceRoot = "${src.name}/src/mediaControls/media-fetcher";
 
   cargoHash = "sha256-Hrn47kGCqgoAMgrEgpRj4a38+7vhVZFrLUR2vXU7Sb4=";
 
@@ -31,6 +41,5 @@ rustPlatform.buildRustPackage (finalAttrs: rec {
     description = "Media fetcher for moonlight plugin";
     homepage = "https://github.com/NotNite/my-moonlight-extensions";
     license = licenses.unlicense;
-    maintainers = [ maintainers.enova ];
   };
 })

@@ -1,5 +1,5 @@
-{ pkgs, stdenv, fetchzip, ... }:
-stdenv.mkDerivation {
+{ pkgs, stdenv, fetchzip, nix-update-script, ... }:
+stdenv.mkDerivation rec {
   pname = "boson-bin";
   version = "0.3.0";
 
@@ -8,6 +8,8 @@ stdenv.mkDerivation {
     hash = "sha256-1muEpuwVm0tRJirWTc2zIo2mE0lrhXUf74XLhUmkdnk=";
     nativeBuildInputs = [ pkgs.zstd ];
   };
+
+  passthru.updateScript = nix-update-script { };
 
   outputs = [
     "out"
