@@ -1,15 +1,14 @@
 { pkgs, stdenv, fetchzip, ... }:
 let
-  bosonVersion = "0.3.0";
+  protonVersion = "8-28";
 in
 stdenv.mkDerivation {
-  pname = "boson-${bosonVersion}-bin";
-  version = "1.0";
+  pname = "northstar-proton${protonVersion}-bin";
+  version = "8-28";
 
   src = fetchzip {
-    url = "https://github.com/FyraLabs/boson/releases/download/v${bosonVersion}/boson-${bosonVersion}-x86_64-musl.tar.zst";
-    hash = "sha256-1muEpuwVm0tRJirWTc2zIo2mE0lrhXUf74XLhUmkdnk=";
-    nativeBuildInputs = [ pkgs.zstd ];
+    url = "https://github.com/R2NorthstarTools/NorthstarProton/releases/download/v${protonVersion}/NorthstarProton${protonVersion}.tar.gz";
+    hash = "sha256-wCWFnirscv+oKs6v+ZNXVwM/ZnSZsjvMUt/ZKbKZnMg=";
   };
 
   outputs = [

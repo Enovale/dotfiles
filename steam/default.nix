@@ -31,8 +31,8 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     extraCompatPackages = with pkgs; [
       proton-ge-bin
-      (pkgs.callPackage ./northstar-proton.nix { })
-      (pkgs.callPackage ./boson.nix { })
+      boson-proton
+      northstar-proton
     ];
   };
 }
