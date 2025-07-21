@@ -497,11 +497,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752814804,
-        "narHash": "sha256-irfg7lnfEpJY+3Cffkluzp2MTVw1Uq9QGxFp6qadcXI=",
+        "lastModified": 1753056897,
+        "narHash": "sha256-AVVMBFcuOXqIgmShvRv9TED3fkiZhQ0ZvlhsPoFfkNE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "d0300c8808e41da81d6edfc202f3d3833c157daf",
+        "rev": "13a83d1b6545b7f0e8f7689bad62e7a3b1d63771",
         "type": "github"
       },
       "original": {
@@ -602,11 +602,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1753008021,
-        "narHash": "sha256-zqR4yde3OkXLdHzYL7iNF19WVSCmLMw8OZ5aDuiwYFg=",
+        "lastModified": 1753033360,
+        "narHash": "sha256-OwTaEBF/ZXl5RyVPmsCoomunVJdDzpOSFwfvwtzdNxY=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "b7a91e02e915c7a87835cad0809faa28c6c15fb7",
+        "rev": "462729d8655a3a37ba19fe254d8ecb6677963563",
         "type": "github"
       },
       "original": {
@@ -802,6 +802,18 @@
         "type": "github"
       }
     },
+    "jdownloader": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-JMA9s3oM/SrYw17D+HHSg4ICQ/T3LPqxZ5oo8s2teog=",
+        "type": "file",
+        "url": "https://installer.jdownloader.org/JDownloader.jar"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://installer.jdownloader.org/JDownloader.jar"
+      }
+    },
     "kidex": {
       "inputs": {
         "flake-parts": "flake-parts_4",
@@ -935,11 +947,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752999504,
+        "lastModified": 1753060485,
         "narHash": "sha256-RIlNdxD/2i48PlqnsJPQMaSQK3WcbDgFCFw5qSObGJQ=",
         "owner": "kaylorben",
         "repo": "nixcord",
-        "rev": "9bf33320541ee6df18985a7bd312f533c2141390",
+        "rev": "b765e51c33d8778cfe16c429b57d8ef21a2e7f67",
         "type": "github"
       },
       "original": {
@@ -1226,11 +1238,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1753011846,
-        "narHash": "sha256-Njc3BIUu1wosqZXJpEs3TcIQvKRuRNkI5AKl6X1x/dM=",
+        "lastModified": 1753061054,
+        "narHash": "sha256-cPmyoIcTPgQw14Z5BporbDqI6IKcIBfcxpZ0IR/cTqE=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "9ebd6026f445b63a1442662acffeaebb5c8fad63",
+        "rev": "6e38a3a3100fcb276753fc545e66240755619f2a",
         "type": "github"
       },
       "original": {
@@ -1372,6 +1384,7 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "import-tree": "import-tree",
+        "jdownloader": "jdownloader",
         "kidex": "kidex",
         "millennium": "millennium",
         "moonlight": "moonlight",
@@ -1386,7 +1399,8 @@
         "qt6ct-kde": "qt6ct-kde",
         "rust-overlay": "rust-overlay",
         "tgirlpkgs": "tgirlpkgs",
-        "treefmt-nix": "treefmt-nix_2"
+        "treefmt-nix": "treefmt-nix_2",
+        "xdg-desktop-portal-wlr": "xdg-desktop-portal-wlr"
       }
     },
     "rust-analyzer-src": {
@@ -1508,11 +1522,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752973103,
-        "narHash": "sha256-hvT0qyXxr7Pl04+WpUQE7YG2PJKeyQbcDczoGgklEVQ=",
+        "lastModified": 1753059335,
+        "narHash": "sha256-RjirS5WoipJJOKxCZP1icSa2MGCivg6RYd2BilkAn1M=",
         "owner": "tgirlcloud",
         "repo": "pkgs",
-        "rev": "d1129e1a9b8d8b2eb45e83c2b478483d8c6fd339",
+        "rev": "32899470083a34516ad8de70ee510c35838987ab",
         "type": "github"
       },
       "original": {
@@ -1559,6 +1573,22 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "xdg-desktop-portal-wlr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1752956246,
+        "narHash": "sha256-7O1K25GAT2clY7W9q78p4Zr/DoUdPc5fWiO9Pp/S9R0=",
+        "owner": "emersion",
+        "repo": "xdg-desktop-portal-wlr",
+        "rev": "a6551ae1cd42d525dad800653a99d87d3c9b492f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "emersion",
+        "repo": "xdg-desktop-portal-wlr",
         "type": "github"
       }
     },

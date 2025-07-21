@@ -95,10 +95,22 @@
       };
     };
 
+    jdownloader = {
+      url = "https://installer.jdownloader.org/JDownloader.jar";
+      flake = false;
+    };
+
     qt6ct-kde = {
       type = "github";
       owner = "ilya-fedin";
       repo = "qt6ct";
+      flake = false;
+    };
+
+    xdg-desktop-portal-wlr = {
+      type = "github";
+      owner = "emersion";
+      repo = "xdg-desktop-portal-wlr";
       flake = false;
     };
   };
@@ -117,19 +129,17 @@
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
-      customPkgs = import ./packages {
-        inherit (pkgs) callPackage;
-        inherit inputs;
-      };
+      customPkgs = pkgs.callPackage ./packages { inherit inputs; };
     in
     {
-      packages."x86_64-linux" = customPkgs;
+      packages.${pkgs.stdenv.hostPlatform.system} = customPkgs;
 
-      overlays.default = final: prev: customPkgs;
+      overlays.default =
+        final: prev: (pkgs.callPackage ./packages/overlay.nix { inherit final prev inputs; }) // customPkgs;
 
       # taken and slightly modified from
       # https://github.com/lilyinstarlight/nixos-cosmic/blob/0b0e62252fb3b4e6b0a763190413513be499c026/flake.nix#L81
-      apps."x86_64-linux" = with nixpkgs; {
+      apps.${pkgs.stdenv.hostPlatform.system} = with nixpkgs; {
         update = {
           type = "app";
           program = lib.getExe (
@@ -192,13 +202,6 @@
             };
           }
           inputs.nixos-xivlauncher-rb.nixosModules.default
-          (
-            { pkgs, ... }:
-            {
-              nixpkgs.overlays = [ inputs.rust-overlay.overlays.default ];
-              #environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
-            }
-          )
         ];
         specialArgs = { inherit inputs; };
       };

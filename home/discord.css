@@ -65,6 +65,8 @@ a[href="/store"],
     --blue-new-42-hsl: var(--green-300-hsl) !important;
     --blue-new-94: var(--green-900) !important;
 
+    --green-new-25: var(--green-300) !important;
+    --green-new-25-hsl: var(--green-300-hsl) !important;
     --green-new-40: var(--green-300) !important;
     --green-new-40-hsl: var(--green-300-hsl) !important;
     --green-new-50: var(--brand-400) !important;
@@ -185,6 +187,10 @@ a[href="/store"],
 
 .icon__8ac07 path {
     fill: hsl(var(--dark-accent-hsl)) !important;
+}
+
+.eventStatusContainer__29021 path {
+    fill: var(--green-300) !important;
 }
 
 /*

@@ -246,40 +246,10 @@
       permittedInsecurePackages = [ "dotnet-runtime-7.0.20" ];
     };
     overlays = [
-      inputs.self.overlays.default
       inputs.tgirlpkgs.overlays.default
       inputs.nur.overlays.default
-      (final: prev: {
-        xdg-desktop-portal-wlr = (
-          prev.xdg-desktop-portal-wlr.overrideAttrs (finalAttrs: {
-            src = final.fetchFromGitHub {
-              owner = "David96";
-              repo = "xdg-desktop-portal-wlr";
-              rev = "remotedesktop";
-              sha256 = "sha256-yokK0DyZOx13eHBc+dbJhouKp/xcR7NlHON3jSd5o+E=";
-            };
-            buildInputs = [
-              final.libxkbcommon
-            ] ++ finalAttrs.buildInputs;
-          })
-        );
-      })
-      # qt6ct-kde
-      (final: prev: {
-        qt6Packages = prev.qt6Packages // {
-          qt6ct = prev.qt6Packages.qt6ct.overrideAttrs (finalAttrs: {
-            src = inputs.qt6ct-kde;
-
-            buildInputs = with final.kdePackages; [
-              kcolorscheme
-              kconfig
-              kiconthemes
-              qqc2-desktop-style
-              qtdeclarative
-            ];
-          });
-        };
-      })
+      inputs.rust-overlay.overlays.default
+      inputs.self.overlays.default
     ];
   };
 

@@ -1,4 +1,9 @@
-{ callPackage, inputs, ... }:
+{
+  callPackage,
+  lib,
+  inputs,
+  ...
+}:
 {
   avidemux-qt6 = callPackage ./avidemux { inherit inputs; };
   jdownloader2 = callPackage ./jdownloader2 { inherit inputs; };
