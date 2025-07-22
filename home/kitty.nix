@@ -12,10 +12,17 @@
     };
 
     settings = {
+      hide_window_decorations = "yes";
+      scrollback_lines = 5000;
       #background_opacity = 0.75;
       mouse_hide_wait = 0; # disable mouse hiding
       enable_audio_bell = false;
       confirm_os_window_close = 0;
+      notify_on_cmd_finish = "invisible 30";
+
+      cursor_trail = 200;
+      cursor_trail_decay = "0.1 0.4";
+      cursor_trail_start_threshold = 2;
     };
 
     keybindings = {

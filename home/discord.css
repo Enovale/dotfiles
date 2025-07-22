@@ -3,6 +3,9 @@
 .premiumTab__581ea,
 .pulseGradient__11664,
 .artContainer_a55fdc,
+.videoAsset_cf1d1c,
+.videoInner_de2fa0,
+.bannerAsset__955a3,
 .nativePickerGuide_afdbcd,
 .headerImage__08bd2,
 .art__4ad81,
@@ -13,6 +16,10 @@ a[href="/shop"],
 a[href="/store"],
 .channelAppLauncher_e6e74f {
     display: none !important;
+}
+
+.container_b5b7aa {
+    height: 0px !important;
 }
 
 :root {
