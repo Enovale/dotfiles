@@ -33,9 +33,9 @@
       max-free = ${toString (10 * 1024 * 1024 * 1024)}
     '';
     settings = {
-      max-jobs = 1;
+      max-jobs = 2;
       max-substitution-jobs = 24;
-      cores = 10;
+      cores = 6;
       download-buffer-size = 524288000;
       warn-dirty = false;
       trusted-users = [ "@wheel" ];

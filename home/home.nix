@@ -6,6 +6,17 @@
   osConfig,
   ...
 }:
+let
+  oldJetbrainsPkgs =
+    (import (fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/tarball/9807714d6944a957c2e036f84b0ff8caf9930bc0";
+      sha256 = "sha256:1g9qc3n5zx16h129dqs5ixfrsff0dsws9lixfja94r208fq9219g";
+    }))
+      {
+        config.allowUnfree = true;
+        localSystem.system = "x86_64-linux";
+      };
+in
 {
   imports = [
     ./plasma.nix
@@ -26,6 +37,7 @@
       btrfs-assistant
       ripsecrets
       wget
+      icu
       mpv
       comma
       vlc
@@ -46,7 +58,7 @@
       signal-desktop
       cinny-desktop
       strawberry
-      #tauon
+      oldJetbrainsPkgs.tauon
       zsh-powerlevel10k
       lutris
       josm
@@ -57,6 +69,7 @@
       songrec
       avidemux
       fcast-receiver
+      hydroxide
       linux-wallpaperengine
       jdownloader2
       media-fetcher
@@ -87,12 +100,12 @@
         wineWowPackages.waylandFull
         blender
         godot-mono
-        #jetbrains.rider
-        #jetbrains.rust-rover
-        #jetbrains.clion
-        #jetbrains.pycharm-community
-        #jetbrains.idea-community
-        #android-studio
+        oldJetbrainsPkgs.jetbrains.rider
+        oldJetbrainsPkgs.jetbrains.rust-rover
+        oldJetbrainsPkgs.jetbrains.clion
+        oldJetbrainsPkgs.jetbrains.pycharm-community
+        oldJetbrainsPkgs.jetbrains.idea-community
+        oldJetbrainsPkgs.android-studio
         android-udev-rules
         android-tools
         scrcpy

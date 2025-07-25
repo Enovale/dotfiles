@@ -8,6 +8,8 @@
   home.packages = with pkgs.kdePackages; [
     knewstuff
     kio
+    kmail
+    kmail-account-wizard
     plasma-integration
     systemsettings
     polkit-kde-agent-1

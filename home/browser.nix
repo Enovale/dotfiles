@@ -142,7 +142,7 @@
         twitch-auto-points
         github-file-icons
         theater-mode-for-youtube
-        tweaks-for-youtube
+        #tweaks-for-youtube # Kinda sucks
         youtube-nonstop
         youtube-screenshot-button
       ];
