@@ -24,7 +24,7 @@
     git
     btrfs-progs
     pulseaudio
-    pkgsi686Linux.gperftoolsf
+    pkgsi686Linux.gperftools
     inputs.erosanix.packages.${system}.foobar2000
     #(inputs.nixpkgs_blender.legacyPackages.${pkgs.stdenv.hostPlatform.system}.blender.overrideAttrs (finalAttrs: {
     #  version = "3.3.21";

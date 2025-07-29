@@ -8,9 +8,10 @@
     enable = true;
     #package = pkgs.librewolf;
 
-    nativeMessagingHosts = [
-      pkgs.firefoxpwa
-      pkgs.kdePackages.plasma-browser-integration
+    nativeMessagingHosts = with pkgs; [
+      firefoxpwa
+      kdePackages.plasma-browser-integration
+      keepassxc
     ];
     profiles.default = {
       containersForce = true;
@@ -122,6 +123,7 @@
         ublock-origin
         duckduckgo-privacy-essentials
         bitwarden
+        keepassxc-browser
         pronoundb
         pwas-for-firefox
         darkreader

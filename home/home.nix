@@ -29,6 +29,7 @@ in
     ./kidex.nix
     ./browser.nix
     ./shell
+    ./syncthing.nix
   ];
 
   home.packages =
@@ -52,6 +53,7 @@ in
       acpi
       nixd
       schismtracker
+      keepassxc
       renoise
       feh
       file
@@ -70,6 +72,7 @@ in
       avidemux
       fcast-receiver
       hydroxide
+      nicotine-plus
       linux-wallpaperengine
       jdownloader2
       media-fetcher
@@ -78,7 +81,7 @@ in
     ++ (lib.optionals (!osConfig.systemIsQemu)
       # Don't want to include very large packages in a light env
       [
-        audacity
+        oldJetbrainsPkgs.audacity
         teamspeak6-client
         ardour
         easytag
@@ -100,12 +103,12 @@ in
         wineWowPackages.waylandFull
         blender
         godot-mono
-        oldJetbrainsPkgs.jetbrains.rider
-        oldJetbrainsPkgs.jetbrains.rust-rover
-        oldJetbrainsPkgs.jetbrains.clion
-        oldJetbrainsPkgs.jetbrains.pycharm-community
-        oldJetbrainsPkgs.jetbrains.idea-community
-        oldJetbrainsPkgs.android-studio
+        jetbrains.rider
+        jetbrains.rust-rover
+        jetbrains.clion
+        jetbrains.pycharm-community
+        jetbrains.idea-community
+        android-studio
         android-udev-rules
         android-tools
         scrcpy

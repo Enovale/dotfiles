@@ -23,7 +23,7 @@
 
   programs.steam = {
     enable = true;
-    #package = pkgs.steam-millennium;
+    package = pkgs.steam-millennium;
     protontricks.enable = true;
 
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play

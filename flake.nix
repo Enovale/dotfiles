@@ -100,6 +100,11 @@
       flake = false;
     };
 
+    qt5ct-kde = {
+      url = "https://downloads.sourceforge.net/project/qt5ct/qt5ct-1.9.tar.bz2";
+      flake = false;
+    };
+
     qt6ct-kde = {
       type = "github";
       owner = "ilya-fedin";

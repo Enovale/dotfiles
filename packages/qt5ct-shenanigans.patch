@@ -1,0 +1,350 @@
+Subject: [PATCH] Qt5ct KDE patches
+---
+Index: CMakeLists.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	(revision 6f245ac42e99c49215293cc932a5a87744a68c48)
++++ b/CMakeLists.txt	(date 1753604545258)
+@@ -27,8 +27,11 @@
+ 
+ ADD_DEFINITIONS(-DQT_DISABLE_DEPRECATED_BEFORE=0x050C00 -DUSE_WIDGETS)
+ 
+-find_package(Qt5 ${QT_MINIMUM_VERSION} COMPONENTS Widgets Concurrent LinguistTools REQUIRED)
++find_package(Qt5 ${QT_MINIMUM_VERSION} COMPONENTS Widgets Concurrent LinguistTools QuickControls2 REQUIRED)
+ find_package(Qt5Gui ${QT_MINIMUM_VERSION} CONFIG REQUIRED Private)
++find_package(KF5Config REQUIRED)
++find_package(KF5ConfigWidgets REQUIRED)
++find_package(KF5IconThemes REQUIRED)
+ 
+ if(NOT DISABLE_DBUS)
+     find_package(Qt5 ${QT_MINIMUM_VERSION} COMPONENTS DBus ThemeSupport REQUIRED)
+@@ -54,7 +57,9 @@
+     message(FATAL_ERROR "Could NOT find qtpaths executable")
+ endif()
+ 
+-execute_process(COMMAND ${QT_QTPATHS_EXECUTABLE} --plugin-dir OUTPUT_VARIABLE PLUGINDIR OUTPUT_STRIP_TRAILING_WHITESPACE)
++if (NOT PLUGINDIR)
++    execute_process(COMMAND ${QT_QTPATHS_EXECUTABLE} --plugin-dir OUTPUT_VARIABLE PLUGINDIR OUTPUT_STRIP_TRAILING_WHITESPACE)
++endif()
+ message(STATUS "Plugin path: " ${PLUGINDIR})
+ 
+ message(STATUS "Generating translations ...")
+Index: src/qt5ct-common/qt5ct.h
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/qt5ct-common/qt5ct.h b/src/qt5ct-common/qt5ct.h
+--- a/src/qt5ct-common/qt5ct.h	(revision 6f245ac42e99c49215293cc932a5a87744a68c48)
++++ b/src/qt5ct-common/qt5ct.h	(date 1753604837766)
+@@ -69,6 +69,7 @@
+     static QString styleColorSchemeFile();
+     static QStringList sharedColorSchemePaths();
+     static QString resolvePath(const QString &path);
++    static bool isKColorScheme(const QString &filePath);
+     static QPalette loadColorScheme(const QString &filePath, const QPalette &fallback);
+ 
+     static void registerStyleInstance(StyleInstance *instance);
+Index: src/qt5ct-common/qt5ct.cpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/qt5ct-common/qt5ct.cpp b/src/qt5ct-common/qt5ct.cpp
+--- a/src/qt5ct-common/qt5ct.cpp	(revision 6f245ac42e99c49215293cc932a5a87744a68c48)
++++ b/src/qt5ct-common/qt5ct.cpp	(date 1753604820610)
+@@ -34,6 +34,8 @@
+ #include <QFile>
+ #include <QSettings>
+ #include <QtDebug>
++#include <KSharedConfig>
++#include <KColorScheme>
+ #include "qt5ct.h"
+ 
+ #ifndef QT5CT_DATADIR
+@@ -118,6 +120,7 @@
+     for(const QString &p : QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation))
+     {
+         paths << (p + QLatin1String("/qt5ct/colors"));
++        paths << (p + QLatin1String("/color-schemes"));
+     }
+     paths << QLatin1String(QT5CT_DATADIR"/qt5ct/colors");
+     paths.removeDuplicates();
+@@ -145,8 +148,16 @@
+     return tmp;
+ }
+ 
++bool Qt5CT::isKColorScheme(const QString &filePath)
++{
++    return filePath.toLower().endsWith(".colors");
++}
++
+ QPalette Qt5CT::loadColorScheme(const QString &filePath, const QPalette &fallback)
+ {
++    if(isKColorScheme(filePath))
++        return KColorScheme::createApplicationPalette(KSharedConfig::openConfig(filePath));
++
+     QPalette customPalette;
+     QSettings settings(filePath, QSettings::IniFormat);
+     settings.beginGroup("ColorScheme");
+Index: src/qt5ct-common/CMakeLists.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/qt5ct-common/CMakeLists.txt b/src/qt5ct-common/CMakeLists.txt
+--- a/src/qt5ct-common/CMakeLists.txt	(revision 6f245ac42e99c49215293cc932a5a87744a68c48)
++++ b/src/qt5ct-common/CMakeLists.txt	(date 1753604745800)
+@@ -26,5 +26,5 @@
+ 
+ add_library(qt5ct-common SHARED ${app_SRCS})
+ set_target_properties(qt5ct-common PROPERTIES VERSION ${QT5CT_VERSION})
+-target_link_libraries(qt5ct-common PRIVATE Qt5::Core Qt5::Gui)
++target_link_libraries(qt5ct-common PRIVATE Qt5::Core Qt5::Gui KF5::ConfigCore KF5::ConfigWidgets)
+ install(TARGETS qt5ct-common DESTINATION ${CMAKE_INSTALL_LIBDIR})
+Index: src/qt5ct/CMakeLists.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/qt5ct/CMakeLists.txt b/src/qt5ct/CMakeLists.txt
+--- a/src/qt5ct/CMakeLists.txt	(revision 6f245ac42e99c49215293cc932a5a87744a68c48)
++++ b/src/qt5ct/CMakeLists.txt	(date 1753604566293)
+@@ -28,6 +28,6 @@
+ )
+ 
+ add_executable(qt5ct ${app_SRCS})
+-target_link_libraries(qt5ct PRIVATE Qt5::Widgets Qt5::Concurrent Qt5::WidgetsPrivate qt5ct-common)
++target_link_libraries(qt5ct PRIVATE Qt5::Widgets Qt5::Concurrent Qt5::WidgetsPrivate KF5::ConfigCore qt5ct-common)
+ install(TARGETS qt5ct DESTINATION ${CMAKE_INSTALL_BINDIR})
+ install(FILES qt5ct.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+Index: src/qt5ct/appearancepage.cpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/qt5ct/appearancepage.cpp b/src/qt5ct/appearancepage.cpp
+--- a/src/qt5ct/appearancepage.cpp	(revision 6f245ac42e99c49215293cc932a5a87744a68c48)
++++ b/src/qt5ct/appearancepage.cpp	(date 1753604711642)
+@@ -35,6 +35,8 @@
+ #include <QMenu>
+ #include <QIcon>
+ #include <QStringList>
++#include <KSharedConfig>
++#include <KConfigGroup>
+ #include <qpa/qplatformthemefactory_p.h>
+ #include <qpa/qplatformtheme.h>
+ #include "qt5ct.h"
+@@ -67,7 +69,7 @@
+     QMenu *menu = new QMenu(this);
+     menu->addAction(QIcon::fromTheme("document-new"), tr("Create"), this, SLOT(createColorScheme()));
+     m_changeColorSchemeAction = menu->addAction(QIcon::fromTheme("accessories-text-editor"), tr("Edit"), this, SLOT(changeColorScheme()));
+-    menu->addAction(QIcon::fromTheme("edit-copy"), tr("Create a Copy"), this, SLOT(copyColorScheme()));
++    m_copyColorSchemeAction = menu->addAction(QIcon::fromTheme("edit-copy"), tr("Create a Copy"), this, SLOT(copyColorScheme()));
+     m_renameColorSchemeAction = menu->addAction(tr("Rename"), this, SLOT(renameColorScheme()));
+     menu->addSeparator();
+     m_removeColorSchemeAction = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Remove"), this, SLOT(removeColorScheme()));
+@@ -332,6 +334,7 @@
+ 
+ void AppearancePage::updateActions()
+ {
++    m_copyColorSchemeAction->setVisible(!Qt5CT::isKColorScheme(m_ui->colorSchemeComboBox->currentData().toString()));
+     if(m_ui->colorSchemeComboBox->count() == 0 ||
+             !QFileInfo(m_ui->colorSchemeComboBox->currentData().toString()).isWritable())
+     {
+@@ -427,11 +430,20 @@
+ {
+     QDir dir(path);
+     dir.setFilter(QDir::Files);
+-    dir.setNameFilters(QStringList() << "*.conf");
++    dir.setNameFilters(QStringList() << "*.conf" << "*.colors");
+ 
+     for(const QFileInfo &info : dir.entryInfoList())
+     {
+         m_ui->colorSchemeComboBox->addItem(info.baseName(), info.filePath());
++        QString name = info.baseName();
++        QString path = info.filePath();
++        if(Qt5CT::isKColorScheme(path))
++        {
++            KSharedConfigPtr config = KSharedConfig::openConfig(path, KConfig::SimpleConfig);
++            KConfigGroup group(config, "General");
++            name = group.readEntry("Name", name) + " (KColorScheme)";
++        }
++        m_ui->colorSchemeComboBox->addItem(name, path);
+     }
+ }
+ 
+Index: src/qt5ct-qtplugin/qt5ctplatformtheme.cpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/qt5ct-qtplugin/qt5ctplatformtheme.cpp b/src/qt5ct-qtplugin/qt5ctplatformtheme.cpp
+--- a/src/qt5ct-qtplugin/qt5ctplatformtheme.cpp	(revision 6f245ac42e99c49215293cc932a5a87744a68c48)
++++ b/src/qt5ct-qtplugin/qt5ctplatformtheme.cpp	(date 1753605140714)
+@@ -45,6 +45,7 @@
+ #endif
+ #include <QFile>
+ #include <QFileSystemWatcher>
++#include <QQuickStyle>
+ 
+ #include "qt5ct.h"
+ #include "qt5ctplatformtheme.h"
+@@ -58,6 +59,9 @@
+ #include <QStringList>
+ #include <qpa/qplatformthemefactory_p.h>
+ 
++#include <KIconEngine>
++#include <KIconLoader>
++
+ Q_LOGGING_CATEGORY(lqt5ct, "qt5ct", QtWarningMsg)
+ 
+ //QT_QPA_PLATFORMTHEME=qt5ct
+@@ -73,12 +77,19 @@
+         QMetaObject::invokeMethod(this, "createFSWatcher", Qt::QueuedConnection);
+ #endif
+         QGuiApplication::setFont(m_generalFont);
++#ifdef QT_WIDGETS_LIB
++        if(hasWidgets())
++            //don't override the value explicitly set by the user
++            if(QQuickStyle::name().isEmpty() || QQuickStyle::name() == QLatin1String("Fusion"))
++                QQuickStyle::setStyle(QLatin1String("org.kde.desktop"));
++#endif
+     }
+     qCDebug(lqt5ct) << "using qt5ct plugin";
+ #ifdef QT_WIDGETS_LIB
+     if(!QStyleFactory::keys().contains("qt5ct-style"))
+         qCCritical(lqt5ct) << "unable to find qt5ct proxy style";
+ #endif
++    QCoreApplication::instance()->installEventFilter(this);
+ }
+ 
+ #ifdef GLOBAL_MENU
+@@ -182,6 +193,11 @@
+ }
+ #endif
+ 
++QIconEngine *Qt5CTPlatformTheme::createIconEngine(const QString &iconName) const
++{
++    return new KIconEngine(iconName, KIconLoader::global());
++}
++
+ void Qt5CTPlatformTheme::applySettings()
+ {
+     if(!QGuiApplication::desktopSettingsAware() || m_isIgnored)
+@@ -225,6 +241,11 @@
+         QGuiApplication::setPalette(QGuiApplication::palette()); //apply palette
+     }
+ 
++    if(Qt5CT::isKColorScheme(m_schemePath))
++        qApp->setProperty("KDE_COLOR_SCHEME_PATH", m_schemePath);
++    else if(m_update)
++        qApp->setProperty("KDE_COLOR_SCHEME_PATH", QVariant());
++
+ #ifdef QT_WIDGETS_LIB
+     if(hasWidgets())
+     {
+@@ -266,6 +287,7 @@
+ 
+ void Qt5CTPlatformTheme::readSettings()
+ {
++    m_schemePath.clear();
+     QSettings settings(Qt5CT::configFile(), QSettings::IniFormat);
+ 
+     settings.beginGroup("Appearance");
+@@ -275,6 +297,7 @@
+     if(!schemePath.isEmpty() && settings.value("custom_palette", false).toBool())
+     {
+         schemePath = Qt5CT::resolvePath(schemePath); //replace environment variables
++        m_schemePath = schemePath;
+         m_palette = Qt5CT::loadColorScheme(schemePath, m_palette);
+     }
+     m_iconTheme = settings.value("icon_theme").toString();
+@@ -388,3 +411,17 @@
+     content.replace(regExp, "\n");
+     return content;
+ }
++
++//There's such a thing as KColorSchemeManager that lets the user to change the color scheme
++//application-wide and we should re-apply the color scheme if KCSM resets it to the default
++//which leads KColorScheme to get the color scheme from kdeglobals which won't help us.
++bool Qt5CTPlatformTheme::eventFilter(QObject *obj, QEvent *e)
++{
++    if(obj == qApp &&
++            e->type() == QEvent::DynamicPropertyChange &&
++            static_cast<QDynamicPropertyChangeEvent*>(e)->propertyName() == "KDE_COLOR_SCHEME_PATH" &&
++            qApp->property("KDE_COLOR_SCHEME_PATH").toString().isEmpty() &&
++            Qt5CT::isKColorScheme(m_schemePath))
++        applySettings();
++    return QObject::eventFilter(obj, e);
++}
+\ No newline at end of file
+Index: src/qt5ct/appearancepage.h
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/qt5ct/appearancepage.h b/src/qt5ct/appearancepage.h
+--- a/src/qt5ct/appearancepage.h	(revision 6f245ac42e99c49215293cc932a5a87744a68c48)
++++ b/src/qt5ct/appearancepage.h	(date 1753604730115)
+@@ -73,7 +73,7 @@
+     QStyle *m_selectedStyle = nullptr;
+     QPalette m_customPalette;
+     QWidget *m_previewWidget;
+-    QAction *m_changeColorSchemeAction, *m_renameColorSchemeAction, *m_removeColorSchemeAction;
++    QAction *m_changeColorSchemeAction, *m_copyColorSchemeAction, *m_renameColorSchemeAction, *m_removeColorSchemeAction;
+     Ui::PreviewForm *m_previewUi;
+ };
+ 
+Index: src/qt5ct-qtplugin/CMakeLists.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/qt5ct-qtplugin/CMakeLists.txt b/src/qt5ct-qtplugin/CMakeLists.txt
+--- a/src/qt5ct-qtplugin/CMakeLists.txt	(revision 6f245ac42e99c49215293cc932a5a87744a68c48)
++++ b/src/qt5ct-qtplugin/CMakeLists.txt	(date 1753604856878)
+@@ -9,7 +9,7 @@
+ 
+ add_library(qt5ct-qtplugin MODULE ${app_SRCS})
+ set_target_properties(qt5ct-qtplugin PROPERTIES OUTPUT_NAME qt5ct)
+-target_link_libraries(qt5ct-qtplugin PRIVATE Qt5::Widgets Qt5::GuiPrivate qt5ct-common)
++target_link_libraries(qt5ct-qtplugin PRIVATE Qt5::Widgets Qt5::GuiPrivate Qt5::QuickControls2 KF5::IconThemes qt5ct-common)
+ if(NOT DISABLE_DBUS)
+     target_link_libraries(qt5ct-qtplugin PRIVATE Qt5::DBus Qt5::ThemeSupportPrivate)
+ endif()
+Index: src/qt5ct-qtplugin/qt5ctplatformtheme.h
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/qt5ct-qtplugin/qt5ctplatformtheme.h b/src/qt5ct-qtplugin/qt5ctplatformtheme.h
+--- a/src/qt5ct-qtplugin/qt5ctplatformtheme.h	(revision 6f245ac42e99c49215293cc932a5a87744a68c48)
++++ b/src/qt5ct-qtplugin/qt5ctplatformtheme.h	(date 1753605193772)
+@@ -84,10 +84,13 @@
+     //virtual QPixmap fileIconPixmap(const QFileInfo &fileInfo, const QSizeF &size,
+     //                               QPlatformTheme::IconOptions iconOptions = 0) const;
+ 
+-    //virtual QIconEngine *createIconEngine(const QString &iconName) const;
++    virtual QIconEngine *createIconEngine(const QString &iconName) const override;
+     //virtual QList<QKeySequence> keyBindings(QKeySequence::StandardKey key) const;
+     //virtual QString standardButtonText(int button) const;
+ 
++protected:
++    bool eventFilter(QObject *obj, QEvent *e) override;
++
+ private slots:
+     void applySettings();
+ #ifdef QT_WIDGETS_LIB
+@@ -101,7 +104,7 @@
+     bool hasWidgets();
+ #endif
+     QString loadStyleSheets(const QStringList &paths);
+-    QString m_style, m_iconTheme, m_userStyleSheet, m_prevStyleSheet;
++    QString m_style, m_schemePath, m_iconTheme, m_userStyleSheet, m_prevStyleSheet;
+     QPalette m_palette;
+     QFont m_generalFont, m_fixedFont;
+     int m_doubleClickInterval;

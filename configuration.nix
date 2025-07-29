@@ -26,7 +26,7 @@
     gc = {
       automatic = true;
       dates = "daily";
-      options = "--delete-older-than 4d";
+      options = "--delete-older-than 3d";
     };
     extraOptions = ''
       min-free = ${toString (5 * 1024 * 1024 * 1024)}
@@ -243,7 +243,7 @@
     config = {
       allowUnfree = true;
       android_sdk.accept_license = true;
-      permittedInsecurePackages = [ "dotnet-runtime-7.0.20" ];
+      permittedInsecurePackages = [ "libsoup-2.74.3" "dotnet-runtime-7.0.20" ];
     };
     overlays = [
       inputs.tgirlpkgs.overlays.default
