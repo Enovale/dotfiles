@@ -60,7 +60,7 @@ in
       signal-desktop
       cinny-desktop
       strawberry
-      oldJetbrainsPkgs.tauon
+      tauon
       zsh-powerlevel10k
       lutris
       josm

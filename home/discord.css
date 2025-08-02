@@ -73,6 +73,10 @@ a[href="/store"],
 
     --green-new-25: var(--green-300) !important;
     --green-new-25-hsl: var(--green-300-hsl) !important;
+    --green-new-30: var(--green-300) !important;
+    --green-new-30-hsl: var(--green-300-hsl) !important;
+    --green-new-34: var(--green-300) !important;
+    --green-new-34-hsl: var(--green-300-hsl) !important;
     --green-new-40: var(--green-300) !important;
     --green-new-40-hsl: var(--green-300-hsl) !important;
     --green-new-50: var(--brand-400) !important;
@@ -88,6 +92,8 @@ a[href="/store"],
     --green-new-62: var(--brand-600) !important;
     --green-new-62-hsl: var(--brand-600-hsl) !important;
     --green-new-94: var(--green-900) !important;
+
+    --opacity-green-12: var(--green-500) !important;
 
     --blurple-26: var(--green-260) !important;
     --blurple-26-hsl: var(--green-260-hsl) !important;
