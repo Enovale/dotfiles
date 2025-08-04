@@ -8,7 +8,7 @@
   inputs,
 }:
 rustPlatform.buildRustPackage (finalAttrs: rec {
-  pname = "media-fetcher";
+  pname = "moonlight-canary";
   version = "0.1.11-unstable-2025-07-13";
 
   src = fetchFromGitHub {
