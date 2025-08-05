@@ -13,8 +13,8 @@
 }:
 let
   rustPlatform = makeRustPlatform {
-    cargo = rust-bin.selectLatestNightlyWith (toolchain: toolchain.default);
-    rustc = rust-bin.selectLatestNightlyWith (toolchain: toolchain.default);
+    cargo = rust-bin.nightly."2025-03-01".default;
+    rustc = rust-bin.nightly."2025-03-01".default;
   };
 in
 rustPlatform.buildRustPackage (finalAttrs: rec {
@@ -33,15 +33,7 @@ rustPlatform.buildRustPackage (finalAttrs: rec {
       "--version"
       "branch=HEAD"
     ];
-  };
-
-  nativeBuildInputs = [
-    pkg-config
-  ];
-
-  buildInputs = [
-    dbus
-  ];
+  };  
 
   buildType = "release";
   #buildFlags = [
