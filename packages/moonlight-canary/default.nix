@@ -28,6 +28,8 @@ rustPlatform.buildRustPackage (finalAttrs: rec {
     sha256 = "sha256-wRl003T+MPP6/nkSJnS5kOEwMznzKVy8RGfMwnwgfaY=";
   };
 
+  cargoHash = "sha256-Yl467NU1H1GeuUUylMudLrrdg74uPs1CrMwp0S4VFZ0=";
+
   passthru.updateScript = nix-update-script {
     extraArgs = [
       "--version"
@@ -36,11 +38,7 @@ rustPlatform.buildRustPackage (finalAttrs: rec {
   };  
 
   buildType = "release";
-  #buildFlags = [
-  #  "--all"
-  #];
-
-  cargoHash = "sha256-Yl467NU1H1GeuUUylMudLrrdg74uPs1CrMwp0S4VFZ0=";
+  
 
   meta = with lib; {
     description = "Moonlight Launcher (Canary Ver)";
