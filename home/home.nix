@@ -30,6 +30,7 @@ in
     ./browser.nix
     ./shell
     ./syncthing.nix
+    ./obs.nix
   ];
 
   home.packages =
@@ -39,6 +40,7 @@ in
       ripsecrets
       wget
       icu
+      p7zip
       mpv
       comma
       vlc
@@ -50,6 +52,7 @@ in
       winetricks
       protonup-qt
       qpwgraph
+      raysession
       acpi
       nixd
       schismtracker
@@ -76,6 +79,7 @@ in
       linux-wallpaperengine
       jdownloader2
       media-fetcher
+      moonlight-canary
       nix-inspect
     ]
     ++ (lib.optionals (!osConfig.systemIsQemu)
@@ -202,7 +206,9 @@ in
             {
                 { "application.process.binary", "=", "electron" },
                 { "application.process.binary", "=", "chromium" },
-                { "application.process.binary", "=", "discord" }
+                { "application.process.binary", "=", "discord" },
+                { "application.process.binary", "=", "discord-canary" },
+                { "application.process.binary", "=", "com.discordapp.DiscordCanary" }
             }
         },
         default_permissions = "rx",

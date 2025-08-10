@@ -12,8 +12,7 @@
 button[aria-label="Send a gift"],
 button[aria-label="Start An Activity"],
 a[href="/shop"],
-a[href="/store"],
-.channelAppLauncher_e6e74f {
+a[href="/store"] {
     display: none !important;
 }
 
@@ -94,6 +93,7 @@ a[href="/store"],
     --green-new-94: var(--green-900) !important;
 
     --opacity-green-12: var(--green-500) !important;
+    --opacity-green-24: var(--green-700) !important;
 
     --blurple-26: var(--green-260) !important;
     --blurple-26-hsl: var(--green-260-hsl) !important;

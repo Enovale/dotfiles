@@ -65,6 +65,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    naersk.url = "github:nix-community/naersk";
+
     gpu-screen-recorder-ui.url = "github:Enovale/gsrui-nix";
 
     treefmt-nix = {
@@ -126,6 +128,7 @@
       nixpkgs,
       tgirlpkgs,
       home-manager,
+      rust-overlay,
       nur,
       ...
     }:
@@ -133,8 +136,12 @@
       pkgs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
+        overlays = [
+          rust-overlay.overlays.default
+        ];
       };
-      customPkgs = pkgs.callPackage ./packages { inherit inputs; };
+      naersk = pkgs.callPackage inputs.naersk {};
+      customPkgs = pkgs.callPackage ./packages { inherit inputs naersk; };
     in
     {
       packages.${pkgs.stdenv.hostPlatform.system} = customPkgs;

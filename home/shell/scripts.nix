@@ -20,6 +20,7 @@
     '')
     (writeShellScriptBin "update-nix" ''
       pushd ~/nixos/ >& /dev/null
+      flatpak update --noninteractive
       nix flake update --flake ~/nixos/
       nix run ~/nixos#update
       popd >& /dev/null

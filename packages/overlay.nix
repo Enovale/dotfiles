@@ -44,6 +44,12 @@
       ];
     });
   };
+
+  raysession = prev.raysession.overrideAttrs (finalAttrs: {
+    dependencies = with final; [
+      python313Packages.legacy-cgi
+    ];
+  });
   
   # Currently doesn't work
   /*
