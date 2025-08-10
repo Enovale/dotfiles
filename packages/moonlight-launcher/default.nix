@@ -5,6 +5,7 @@
   dbus,
   fetchFromGitHub,
   rustPlatform,
+  makeWrapper,
   nix-update-script,
   inputs,
   rust-bin,
@@ -18,7 +19,7 @@ let
   };
 in
 rustPlatform.buildRustPackage (finalAttrs: rec {
-  pname = "moonlight-canary";
+  pname = "moonlight-launcher";
   version = "0.1.11-unstable-2025-07-13";
 
   src = fetchFromGitHub {
@@ -29,6 +30,8 @@ rustPlatform.buildRustPackage (finalAttrs: rec {
   };
 
   cargoHash = "sha256-Yl467NU1H1GeuUUylMudLrrdg74uPs1CrMwp0S4VFZ0=";
+
+  nativeBuildInputs = [ makeWrapper ];
 
   passthru.updateScript = nix-update-script {
     extraArgs = [

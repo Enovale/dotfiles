@@ -79,7 +79,7 @@ in
       linux-wallpaperengine
       jdownloader2
       media-fetcher
-      moonlight-canary
+      moonlight-launcher
       nix-inspect
     ]
     ++ (lib.optionals (!osConfig.systemIsQemu)

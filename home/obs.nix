@@ -1,13 +1,7 @@
 { config, pkgs, ... }:
 {
-  home.packages = with pkgs.python312Packages; [
-    aiohttp
-    typing-extensions
-    dbus-next
-  ];
-
   programs.obs-studio = {
-    enable = true;
+    enable = false;
 
     # optional Nvidia hardware acceleration
     package = (

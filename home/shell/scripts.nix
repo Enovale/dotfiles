@@ -85,6 +85,7 @@
     };
   };
 
+/*
   systemd.user.services.mediamtx = {
     Unit = {
       Description = "MediaMTX Service.";
@@ -99,4 +100,5 @@
       ExecStart = "${pkgs.mediamtx}/bin/mediamtx";
     };
   };
+  */
 }
