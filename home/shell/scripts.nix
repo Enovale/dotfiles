@@ -84,4 +84,19 @@
       ExecStart = "/usr/bin/env bash ${config.home.homeDirectory}/SkinPeek/SkinPeek-nix.sh";
     };
   };
+
+  systemd.user.services.mediamtx = {
+    Unit = {
+      Description = "MediaMTX Service.";
+      After = [ "network.target" ];
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+    Service = {
+      Type = "simple";
+      Environment = "MTX_SRT=no MTX_RTSP=no MTX_WEBRTC=no MTX_HLSADDRESS=0.0.0.0:8889 MTX_PATHS_ALL_OTHERS_SOURCE=publisher";
+      ExecStart = "${pkgs.mediamtx}/bin/mediamtx";
+    };
+  };
 }

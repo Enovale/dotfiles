@@ -1,5 +1,11 @@
 { config, pkgs, ... }:
 {
+  home.packages = with pkgs.python312Packages; [
+    aiohttp
+    typing-extensions
+    dbus-next
+  ];
+
   programs.obs-studio = {
     enable = true;
 
@@ -18,6 +24,8 @@
       obs-vaapi #optional AMD hardware acceleration
       obs-gstreamer
       obs-vkcapture
+      obs-tuna
+      obs-multi-rtmp
     ];
   };
 }
