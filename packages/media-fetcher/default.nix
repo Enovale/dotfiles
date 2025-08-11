@@ -9,13 +9,13 @@
 }:
 rustPlatform.buildRustPackage (finalAttrs: rec {
   pname = "media-fetcher";
-  version = "media-fetcher-releases-unstable-2025-07-27";
+  version = "media-fetcher-releases-unstable-2025-08-10";
 
   src = fetchFromGitHub {
     owner = "NotNite";
     repo = "my-moonlight-extensions";
-    rev = "a1d0e9871f8c2c289f0a9b33ac365cbaf1fc92bc";
-    sha256 = "sha256-N8+AiqouA1bcTs7hW/TMSNAsujOUdxodLgrz41wYfHA=";
+    rev = "d35b5d7f10554c42d467a008132b5618c77acee3";
+    sha256 = "sha256-HBakcjdVLE/GnomTSUjfv2FeOzYKp2P7Y7rYjOI2wpA=";
   };
 
   passthru.updateScript = nix-update-script {
