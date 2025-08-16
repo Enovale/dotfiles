@@ -29,6 +29,11 @@ rustPlatform.buildRustPackage (finalAttrs: rec {
     sha256 = "sha256-wRl003T+MPP6/nkSJnS5kOEwMznzKVy8RGfMwnwgfaY=";
   };
 
+  prePatch = ''
+    substituteInPlace ./Cargo.toml \
+      --replace 'electron-hook = "0.2.1"' 'electron-hook = { path = "${./electron-hook}" }'
+  '';
+
   cargoHash = "sha256-Yl467NU1H1GeuUUylMudLrrdg74uPs1CrMwp0S4VFZ0=";
 
   nativeBuildInputs = [ makeWrapper ];
