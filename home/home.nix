@@ -60,8 +60,10 @@ in
       renoise
       feh
       file
+      alsa-oss
+      hyfetch
       signal-desktop
-      cinny-desktop
+      #cinny-desktop
       strawberry
       tauon
       zsh-powerlevel10k
@@ -70,7 +72,6 @@ in
       lxqt.pavucontrol-qt
       tree
       gale
-      gamescope
       songrec
       avidemux
       fcast-receiver
@@ -137,6 +138,8 @@ in
     EDITOR = "kate";
     MOZ_USE_XINPUT2 = "1";
     _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=lcd";
+    __GL_THREADED_OPTIMIZATIONS="1";
+    mesa_glthread="true";
   };
 
   xdg.portal = {

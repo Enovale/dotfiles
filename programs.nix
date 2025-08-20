@@ -51,6 +51,11 @@
 
   programs.nix-ld.enable = true;
 
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
+
   programs.gpu-screen-recorder = {
     enable = true;
     ui = {

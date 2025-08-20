@@ -20,6 +20,7 @@
       obs-vkcapture
       obs-tuna
       obs-multi-rtmp
+      input-overlay
     ];
   };
 }

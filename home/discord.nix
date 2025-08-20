@@ -11,6 +11,7 @@
     enable = true;
     discord = {
       enable = true;
+      branch = "canary";
       autoscroll.enable = true;
       openASAR.enable = true;
       vencord.enable = false;
